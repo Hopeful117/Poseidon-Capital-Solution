@@ -1,0 +1,8 @@
+com/nnk/repositories/RuleTests.class
+com/nnk/repositories/BidTests.class
+com/nnk/ApplicationTest.class
+com/nnk/repositories/RatingTests.class
+com/nnk/services/RatingServiceTest.class
+com/nnk/repositories/CurvePointTests.class
+com/nnk/repositories/PasswordEncodeTest.class
+com/nnk/repositories/TradeTests.class

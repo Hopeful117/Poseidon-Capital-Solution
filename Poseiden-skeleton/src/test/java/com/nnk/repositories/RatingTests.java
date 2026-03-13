@@ -1,11 +1,13 @@
-package com.nnk;
+package com.nnk.repositories;
 
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.domain.Rating;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 
 import java.util.List;
@@ -14,7 +16,9 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@SpringBootTest
+@DataJpaTest
+@ActiveProfiles("test")
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class RatingTests {
 
 	@Autowired
@@ -27,16 +31,16 @@ public class RatingTests {
 		// Save
 		rating = ratingRepository.save(rating);
 		assertNotNull(rating.getId());
-		assertTrue(rating.getOrderNumber() == 10);
+        assertEquals(10, (int) rating.getOrderNumber());
 
 		// Update
 		rating.setOrderNumber(20);
 		rating = ratingRepository.save(rating);
-		assertTrue(rating.getOrderNumber() == 20);
+        assertEquals(20, (int) rating.getOrderNumber());
 
 		// Find
 		List<Rating> listResult = ratingRepository.findAll();
-		assertTrue(listResult.size() > 0);
+        assertFalse(listResult.isEmpty());
 
 		// Delete
 		Integer id = rating.getId();

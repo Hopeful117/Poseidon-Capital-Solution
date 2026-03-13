@@ -19,3 +19,5 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/RuleNameRepository.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/TradeRepository.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/UserRepository.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/RatingService.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/RatingServiceImpl.java
