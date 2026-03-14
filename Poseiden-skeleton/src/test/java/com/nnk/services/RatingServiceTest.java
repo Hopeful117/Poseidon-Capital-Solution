@@ -14,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,29 +35,30 @@ public class RatingServiceTest {
             "2, 20, 4, 'Good rating'",
             "3, 30, 3, 'Average rating'"
     })
-  public void testAddRating(int orderNumber, int moodysRating, int sandPRating, String fitchRating) {
+    public void testAddRating(int orderNumber, int moodysRating, int sandPRating, String fitchRating) {
 
 
         // When
         ratingService.addRating(String.valueOf(moodysRating), String.valueOf(sandPRating), fitchRating, orderNumber);
-        ArgumentCaptor<Rating> captor= ArgumentCaptor.forClass(Rating.class);
+        ArgumentCaptor<Rating> captor = ArgumentCaptor.forClass(Rating.class);
 
         // Then
         verify(ratingRepository).save(captor.capture());
         Rating savedRating = captor.getValue();
-        assertEquals(savedRating.getMoodysRating(),String.valueOf(moodysRating));
-        assertEquals(savedRating.getSandPRating(),String.valueOf(sandPRating));
-        assertEquals(savedRating.getFitchRating(),String.valueOf(fitchRating));
+        assertEquals(savedRating.getMoodysRating(), String.valueOf(moodysRating));
+        assertEquals(savedRating.getSandPRating(), String.valueOf(sandPRating));
+        assertEquals(savedRating.getFitchRating(), String.valueOf(fitchRating));
 
 
     }
+
     @ParameterizedTest
     @CsvSource(value = {
             "null, 10, 5, 'Excellent rating'",
             "2, null, 4, 'Good rating'",
             "3, 30, null, 'Average rating'",
 
-    },nullValues = "null")
+    }, nullValues = "null")
     public void testAddRatingShouldThrowExceptionWhenInvalidOrMissingParameters(
             Integer orderNumber,
             Integer moodysRating,
@@ -80,6 +81,7 @@ public class RatingServiceTest {
                         exception.getMessage().contains("Order number must be unique")
         );
     }
+
     @Test
     public void testGetAllRatings() {
         //Given
@@ -97,11 +99,12 @@ public class RatingServiceTest {
         assert (ratings.size() == 2);
         assert (ratings.get(0).getMoodysRating().equals("Aaa"));
         assert (ratings.get(1).getSandPRating().equals("BBB"));
-        assert(ratings.get(0).getFitchRating().equals("AAA"));
-        assert(ratings.get(1).getOrderNumber() == 2);
+        assert (ratings.get(0).getFitchRating().equals("AAA"));
+        assert (ratings.get(1).getOrderNumber() == 2);
 
 
     }
+
     @Test
     public void testGetRatingById() {
         // Given

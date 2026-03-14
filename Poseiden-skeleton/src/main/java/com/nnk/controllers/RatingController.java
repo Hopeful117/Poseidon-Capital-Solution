@@ -2,6 +2,7 @@ package com.nnk.controllers;
 
 import com.nnk.domain.Rating;
 import com.nnk.services.RatingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -22,8 +21,7 @@ public class RatingController {
     private RatingService ratingService;
 
     @RequestMapping("/rating/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         List<Rating> ratings = ratingService.getAllRatings();
         model.addAttribute("ratings", ratings);
 
@@ -38,11 +36,12 @@ public class RatingController {
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Rating list
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "rating/add";
-        }try {
+        }
+        try {
             ratingService.addRating(rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/add";
         }
@@ -56,7 +55,7 @@ public class RatingController {
             Rating rating = ratingService.getRatingById(id);
             model.addAttribute("rating", rating);
             return "rating/update";
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "redirect:/rating/list";
         }
@@ -64,14 +63,14 @@ public class RatingController {
 
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
-                             BindingResult result, Model model) {
+                               BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "rating/update";
         }
         try {
-            ratingService.updateRating(id,rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
-        }catch (Exception e){
+            ratingService.updateRating(id, rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
+        } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/update";
         }
@@ -83,7 +82,7 @@ public class RatingController {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         try {
             ratingService.deleteRating(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/rating/list";

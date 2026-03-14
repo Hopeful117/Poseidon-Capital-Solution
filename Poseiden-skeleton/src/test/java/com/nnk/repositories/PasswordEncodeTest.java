@@ -1,10 +1,7 @@
 package com.nnk.repositories;
 
 
-
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
@@ -15,12 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Time: 11:26 AM
  */
 
-@SpringBootTest
+
 public class PasswordEncodeTest {
     @Test
     public void testPassword() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String pw = encoder.encode("123456");
-        System.out.println("[ "+ pw + " ]");
+        System.out.println("[ " + pw + " ]");
     }
 }
