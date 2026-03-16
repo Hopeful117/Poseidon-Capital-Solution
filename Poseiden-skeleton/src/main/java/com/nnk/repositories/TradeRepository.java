@@ -1,7 +1,6 @@
 package com.nnk.repositories;
 
 import com.nnk.domain.Trade;
-import com.nnk.domain.Trade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

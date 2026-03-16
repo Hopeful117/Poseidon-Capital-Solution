@@ -1,7 +1,6 @@
 package com.nnk.controllers;
 
 import com.nnk.domain.Trade;
-import com.nnk.domain.Trade;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

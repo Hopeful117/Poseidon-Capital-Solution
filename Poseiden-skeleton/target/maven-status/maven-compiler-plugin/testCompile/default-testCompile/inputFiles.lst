@@ -1,4 +1,5 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/ApplicationTest.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/controllers/RatingControllerTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/BidTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/CurvePointTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/PasswordEncodeTest.java

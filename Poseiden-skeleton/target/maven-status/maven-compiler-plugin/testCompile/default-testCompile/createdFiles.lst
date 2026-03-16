@@ -1,5 +1,6 @@
 com/nnk/repositories/RuleTests.class
 com/nnk/repositories/BidTests.class
+com/nnk/controllers/RatingControllerTest.class
 com/nnk/ApplicationTest.class
 com/nnk/repositories/RatingTests.class
 com/nnk/services/RatingServiceTest.class

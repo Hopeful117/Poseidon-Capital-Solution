@@ -1,14 +1,12 @@
 package com.nnk.repositories;
 
 import com.nnk.domain.Trade;
-import com.nnk.domain.Trade;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,10 +35,10 @@ public class TradeTests {
         assertEquals("Trade Account Update", trade.getAccount());
 
         // Find
-       Optional<Trade> found = tradeRepository.findById(trade.getTradeId());
-       assertTrue(found.isPresent());
+        Optional<Trade> found = tradeRepository.findById(trade.getTradeId());
+        assertTrue(found.isPresent());
         //Find all
-         assertFalse(tradeRepository.findAll().isEmpty());
+        assertFalse(tradeRepository.findAll().isEmpty());
 
         // Delete
         Integer id = trade.getTradeId();

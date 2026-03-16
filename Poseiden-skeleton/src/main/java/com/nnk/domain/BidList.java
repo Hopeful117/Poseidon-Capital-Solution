@@ -1,4 +1,4 @@
-package com.nnk.springboot.domain;
+package com.nnk.domain;
 
 
 import jakarta.persistence.*;

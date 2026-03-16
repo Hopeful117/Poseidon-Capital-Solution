@@ -7,7 +7,6 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,8 +35,8 @@ public class RatingTests {
         assertEquals(20, (int) rating.getOrderNumber());
 
         // Find
-      Optional<Rating> found = ratingRepository.findById(rating.getId());
-      assertTrue(found.isPresent());
+        Optional<Rating> found = ratingRepository.findById(rating.getId());
+        assertTrue(found.isPresent());
         //Find all
         assertFalse(ratingRepository.findAll().isEmpty());
 

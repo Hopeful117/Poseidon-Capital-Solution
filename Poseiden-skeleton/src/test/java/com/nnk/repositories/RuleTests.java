@@ -7,7 +7,6 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,8 +35,8 @@ public class RuleTests {
         assertEquals("Rule Name Update", rule.getName());
 
         // Find
-       Optional<RuleName> found = ruleNameRepository.findById(rule.getId());
-       assertTrue(found.isPresent());
+        Optional<RuleName> found = ruleNameRepository.findById(rule.getId());
+        assertTrue(found.isPresent());
         //Find all
         assertFalse(ruleNameRepository.findAll().isEmpty());
 

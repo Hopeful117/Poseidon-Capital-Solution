@@ -8,7 +8,6 @@ import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabas
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,10 +37,10 @@ public class BidTests {
         assertEquals(new BigDecimal(20), bid.getBidQuantity());
 
         // Find
-       Optional<BidList> found = bidListRepository.findById(bid.getBidListId());
-       assertTrue(found.isPresent());
+        Optional<BidList> found = bidListRepository.findById(bid.getBidListId());
+        assertTrue(found.isPresent());
 
-       //Find all
+        //Find all
         assertFalse(bidListRepository.findAll().isEmpty());
 
         // Delete
