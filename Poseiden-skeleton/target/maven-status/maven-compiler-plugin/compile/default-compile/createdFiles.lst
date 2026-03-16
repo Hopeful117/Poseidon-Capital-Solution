@@ -1,5 +1,4 @@
 com/nnk/domain/RuleName.class
-com/nnk/springboot/domain/BidList.class
 com/nnk/domain/Rating.class
 com/nnk/config/SpringSecurityConfig.class
 com/nnk/domain/Trade.class
@@ -7,8 +6,10 @@ com/nnk/controllers/TradeController.class
 com/nnk/domain/CurvePoint.class
 com/nnk/repositories/TradeRepository.class
 com/nnk/controllers/RuleNameController.class
+com/nnk/services/BidListService.class
 com/nnk/Application.class
 com/nnk/config/CustomAuthenticationSuccessHandler.class
+com/nnk/domain/BidList.class
 com/nnk/repositories/BidListRepository.class
 com/nnk/repositories/RuleNameRepository.class
 com/nnk/repositories/UserRepository.class

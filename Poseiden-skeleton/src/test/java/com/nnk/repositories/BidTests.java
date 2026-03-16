@@ -1,6 +1,7 @@
 package com.nnk.repositories;
 
-import com.nnk.springboot.domain.BidList;
+import com.nnk.domain.BidList;
+import com.nnk.domain.BidList;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;

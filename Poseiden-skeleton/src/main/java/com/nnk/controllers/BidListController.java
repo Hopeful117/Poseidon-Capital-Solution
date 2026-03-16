@@ -1,6 +1,6 @@
 package com.nnk.controllers;
 
-import com.nnk.springboot.domain.BidList;
+import com.nnk.domain.BidList;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
