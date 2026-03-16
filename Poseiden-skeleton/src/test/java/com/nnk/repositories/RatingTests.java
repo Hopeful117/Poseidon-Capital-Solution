@@ -36,8 +36,10 @@ public class RatingTests {
         assertEquals(20, (int) rating.getOrderNumber());
 
         // Find
-        List<Rating> listResult = ratingRepository.findAll();
-        assertFalse(listResult.isEmpty());
+      Optional<Rating> found = ratingRepository.findById(rating.getId());
+      assertTrue(found.isPresent());
+        //Find all
+        assertFalse(ratingRepository.findAll().isEmpty());
 
         // Delete
         Integer id = rating.getId();

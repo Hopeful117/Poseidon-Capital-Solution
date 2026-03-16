@@ -28,16 +28,18 @@ public class RuleTests {
         // Save
         rule = ruleNameRepository.save(rule);
         assertNotNull(rule.getId());
-        assertTrue(rule.getName().equals("Rule Name"));
+        assertEquals("Rule Name", rule.getName());
 
         // Update
         rule.setName("Rule Name Update");
         rule = ruleNameRepository.save(rule);
-        assertTrue(rule.getName().equals("Rule Name Update"));
+        assertEquals("Rule Name Update", rule.getName());
 
         // Find
-        List<RuleName> listResult = ruleNameRepository.findAll();
-        assertTrue(listResult.size() > 0);
+       Optional<RuleName> found = ruleNameRepository.findById(rule.getId());
+       assertTrue(found.isPresent());
+        //Find all
+        assertFalse(ruleNameRepository.findAll().isEmpty());
 
         // Delete
         Integer id = rule.getId();

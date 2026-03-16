@@ -38,8 +38,11 @@ public class BidTests {
         assertEquals(new BigDecimal(20), bid.getBidQuantity());
 
         // Find
-        List<BidList> listResult = bidListRepository.findAll();
-        assertFalse(listResult.isEmpty());
+       Optional<BidList> found = bidListRepository.findById(bid.getBidListId());
+       assertTrue(found.isPresent());
+
+       //Find all
+        assertFalse(bidListRepository.findAll().isEmpty());
 
         // Delete
         Integer id = bid.getBidListId();

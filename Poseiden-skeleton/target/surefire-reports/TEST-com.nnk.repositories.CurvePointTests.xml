@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.nnk.repositories.CurvePointTests" time="2.965" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.nnk.repositories.CurvePointTests" time="3.952" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -14,7 +14,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="FR"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire/surefirebooter-20260314061303132_3.jar /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire 2026-03-14T06-13-03_053-jvmRun1 surefire-20260314061303132_1tmp surefire_0-20260314061303132_2tmp"/>
+    <property name="sun.java.command" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire/surefirebooter-20260316095627304_3.jar /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire 2026-03-16T09-56-27_242-jvmRun1 surefire-20260316095627304_1tmp surefire_0-20260316095627304_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/test-classes:/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/classes:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-h2console/4.0.3/spring-boot-h2console-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot/4.0.3/spring-boot-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-context/7.0.5/spring-context-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/spring-expression/7.0.5/spring-expression-7.0.5.jar:/home/ludo/.m2/repository/io/micrometer/micrometer-observation/1.16.3/micrometer-observation-1.16.3.jar:/home/ludo/.m2/repository/io/micrometer/micrometer-commons/1.16.3/micrometer-commons-1.16.3.jar:/home/ludo/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/4.0.3/spring-boot-starter-data-jpa-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter/4.0.3/spring-boot-starter-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-logging/4.0.3/spring-boot-starter-logging-4.0.3.jar:/home/ludo/.m2/repository/ch/qos/logback/logback-classic/1.5.32/logback-classic-1.5.32.jar:/home/ludo/.m2/repository/ch/qos/logback/logback-core/1.5.32/logback-core-1.5.32.jar:/home/ludo/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.25.3/log4j-to-slf4j-2.25.3.jar:/home/ludo/.m2/repository/org/apache/logging/log4j/log4j-api/2.25.3/log4j-api-2.25.3.jar:/home/ludo/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/4.0.3/spring-boot-autoconfigure-4.0.3.jar:/home/ludo/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0/jakarta.annotation-api-3.0.0.jar:/home/ludo/.m2/repository/org/yaml/snakeyaml/2.5/snakeyaml-2.5.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/4.0.3/spring-boot-starter-jdbc-4.0.3.jar:/home/ludo/.m2/repository/com/zaxxer/HikariCP/7.0.2/HikariCP-7.0.2.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-data-jpa/4.0.3/spring-boot-data-jpa-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-data-commons/4.0.3/spring-boot-data-commons-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-persistence/4.0.3/spring-boot-persistence-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/data/spring-data-commons/4.0.3/spring-data-commons-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-hibernate/4.0.3/spring-boot-hibernate-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-jpa/4.0.3/spring-boot-jpa-4.0.3.jar:/home/ludo/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.2.0/jakarta.persistence-api-3.2.0.jar:/home/ludo/.m2/repository/org/hibernate/orm/hibernate-core/7.2.4.Final/hibernate-core-7.2.4.Final.jar:/home/ludo/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/home/ludo/.m2/repository/org/hibernate/models/hibernate-models/1.0.1/hibernate-models-1.0.1.jar:/home/ludo/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.6/jaxb-runtime-4.0.6.jar:/home/ludo/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.6/jaxb-core-4.0.6.jar:/home/ludo/.m2/repository/org/eclipse/angus/angus-activation/2.0.3/angus-activation-2.0.3.jar:/home/ludo/.m2/repository/org/glassfish/jaxb/txw2/4.0.6/txw2-4.0.6.jar:/home/ludo/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/home/ludo/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/home/ludo/.m2/repository/org/springframework/spring-orm/7.0.5/spring-orm-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/data/spring-data-jpa/4.0.3/spring-data-jpa-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-tx/7.0.5/spring-tx-7.0.5.jar:/home/ludo/.m2/repository/org/antlr/antlr4-runtime/4.13.2/antlr4-runtime-4.13.2.jar:/home/ludo/.m2/repository/org/springframework/spring-aspects/7.0.5/spring-aspects-7.0.5.jar:/home/ludo/.m2/repository/org/aspectj/aspectjweaver/1.9.25.1/aspectjweaver-1.9.25.1.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-jdbc/4.0.3/spring-boot-jdbc-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-sql/4.0.3/spring-boot-sql-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-transaction/4.0.3/spring-boot-transaction-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-jdbc/7.0.5/spring-jdbc-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-security/4.0.3/spring-boot-starter-security-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-security/4.0.3/spring-boot-security-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/security/spring-security-config/7.0.3/spring-security-config-7.0.3.jar:/home/ludo/.m2/repository/org/springframework/security/spring-security-core/7.0.3/spring-security-core-7.0.3.jar:/home/ludo/.m2/repository/org/springframework/security/spring-security-crypto/7.0.3/spring-security-crypto-7.0.3.jar:/home/ludo/.m2/repository/org/springframework/security/spring-security-web/7.0.3/spring-security-web-7.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-aop/7.0.5/spring-aop-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/spring-beans/7.0.5/spring-beans-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/4.0.3/spring-boot-starter-thymeleaf-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-thymeleaf/4.0.3/spring-boot-thymeleaf-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-web/7.0.5/spring-web-7.0.5.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-validation/4.0.3/spring-boot-starter-validation-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-validation/4.0.3/spring-boot-validation-4.0.3.jar:/home/ludo/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/11.0.18/tomcat-embed-el-11.0.18.jar:/home/ludo/.m2/repository/org/hibernate/validator/hibernate-validator/9.0.1.Final/hibernate-validator-9.0.1.Final.jar:/home/ludo/.m2/repository/jakarta/validation/jakarta.validation-api/3.1.1/jakarta.validation-api-3.1.1.jar:/home/ludo/.m2/repository/org/jboss/logging/jboss-logging/3.6.2.Final/jboss-logging-3.6.2.Final.jar:/home/ludo/.m2/repository/com/fasterxml/classmate/1.7.3/classmate-1.7.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-webmvc/4.0.3/spring-boot-starter-webmvc-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-jackson/4.0.3/spring-boot-starter-jackson-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-jackson/4.0.3/spring-boot-jackson-4.0.3.jar:/home/ludo/.m2/repository/tools/jackson/core/jackson-databind/3.0.4/jackson-databind-3.0.4.jar:/home/ludo/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.20/jackson-annotations-2.20.jar:/home/ludo/.m2/repository/tools/jackson/core/jackson-core/3.0.4/jackson-core-3.0.4.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/4.0.3/spring-boot-starter-tomcat-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat-runtime/4.0.3/spring-boot-starter-tomcat-runtime-4.0.3.jar:/home/ludo/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.18/tomcat-embed-core-11.0.18.jar:/home/ludo/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/11.0.18/tomcat-embed-websocket-11.0.18.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-tomcat/4.0.3/spring-boot-tomcat-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-http-converter/4.0.3/spring-boot-http-converter-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-webmvc/4.0.3/spring-boot-webmvc-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-servlet/4.0.3/spring-boot-servlet-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/spring-webmvc/7.0.5/spring-webmvc-7.0.5.jar:/home/ludo/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-springsecurity6/3.1.3.RELEASE/thymeleaf-extras-springsecurity6-3.1.3.RELEASE.jar:/home/ludo/.m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.3.RELEASE/thymeleaf-spring6-3.1.3.RELEASE.jar:/home/ludo/.m2/repository/org/thymeleaf/thymeleaf/3.1.3.RELEASE/thymeleaf-3.1.3.RELEASE.jar:/home/ludo/.m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar:/home/ludo/.m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar:/home/ludo/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/home/ludo/.m2/repository/com/h2database/h2/2.4.240/h2-2.4.240.jar:/home/ludo/.m2/repository/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar:/home/ludo/.m2/repository/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa-test/4.0.3/spring-boot-starter-data-jpa-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc-test/4.0.3/spring-boot-starter-jdbc-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-jdbc-test/4.0.3/spring-boot-jdbc-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-data-jpa-test/4.0.3/spring-boot-data-jpa-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-jpa-test/4.0.3/spring-boot-jpa-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-security-test/4.0.3/spring-boot-starter-security-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-security-test/4.0.3/spring-boot-security-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/security/spring-security-test/7.0.3/spring-security-test-7.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf-test/4.0.3/spring-boot-starter-thymeleaf-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-validation-test/4.0.3/spring-boot-starter-validation-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-webmvc-test/4.0.3/spring-boot-starter-webmvc-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-jackson-test/4.0.3/spring-boot-starter-jackson-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-webmvc-test/4.0.3/spring-boot-webmvc-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-web-server/4.0.3/spring-boot-web-server-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-resttestclient/4.0.3/spring-boot-resttestclient-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-starter-test/4.0.3/spring-boot-starter-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-test/4.0.3/spring-boot-test-4.0.3.jar:/home/ludo/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/4.0.3/spring-boot-test-autoconfigure-4.0.3.jar:/home/ludo/.m2/repository/com/jayway/jsonpath/json-path/2.10.0/json-path-2.10.0.jar:/home/ludo/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.4/jakarta.xml.bind-api-4.0.4.jar:/home/ludo/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.4/jakarta.activation-api-2.1.4.jar:/home/ludo/.m2/repository/net/minidev/json-smart/2.6.0/json-smart-2.6.0.jar:/home/ludo/.m2/repository/net/minidev/accessors-smart/2.6.0/accessors-smart-2.6.0.jar:/home/ludo/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/home/ludo/.m2/repository/org/assertj/assertj-core/3.27.7/assertj-core-3.27.7.jar:/home/ludo/.m2/repository/net/bytebuddy/byte-buddy/1.17.8/byte-buddy-1.17.8.jar:/home/ludo/.m2/repository/org/awaitility/awaitility/4.3.0/awaitility-4.3.0.jar:/home/ludo/.m2/repository/org/hamcrest/hamcrest/3.0/hamcrest-3.0.jar:/home/ludo/.m2/repository/org/junit/jupiter/junit-jupiter/6.0.3/junit-jupiter-6.0.3.jar:/home/ludo/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.0.3/junit-jupiter-api-6.0.3.jar:/home/ludo/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/ludo/.m2/repository/org/junit/platform/junit-platform-commons/6.0.3/junit-platform-commons-6.0.3.jar:/home/ludo/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/ludo/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.0.3/junit-jupiter-params-6.0.3.jar:/home/ludo/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.0.3/junit-jupiter-engine-6.0.3.jar:/home/ludo/.m2/repository/org/junit/platform/junit-platform-engine/6.0.3/junit-platform-engine-6.0.3.jar:/home/ludo/.m2/repository/org/mockito/mockito-core/5.20.0/mockito-core-5.20.0.jar:/home/ludo/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar:/home/ludo/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/ludo/.m2/repository/org/mockito/mockito-junit-jupiter/5.20.0/mockito-junit-jupiter-5.20.0.jar:/home/ludo/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/home/ludo/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/ludo/.m2/repository/org/springframework/spring-core/7.0.5/spring-core-7.0.5.jar:/home/ludo/.m2/repository/commons-logging/commons-logging/1.3.5/commons-logging-1.3.5.jar:/home/ludo/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/ludo/.m2/repository/org/springframework/spring-test/7.0.5/spring-test-7.0.5.jar:/home/ludo/.m2/repository/org/xmlunit/xmlunit-core/2.10.4/xmlunit-core-2.10.4.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire/surefirebooter-20260314061303132_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/target/surefire/surefirebooter-20260316095627304_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.9+10-Ubuntu-122.04"/>
     <property name="user.name" value="ludo"/>
@@ -49,7 +49,7 @@
     <property name="user.dir" value="/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="683337"/>
+    <property name="PID" value="1198973"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
@@ -60,117 +60,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="curvePointTest" classname="com.nnk.repositories.CurvePointTests" time="0.361">
-    <error message="Could not prepare statement [Table &quot;CURVEPOINT&quot; non trouvée&#10;Table &quot;CURVEPOINT&quot; not found; SQL statement:&#10;insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default) [42102-240]] [insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)]; SQL [insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)]" type="org.springframework.dao.InvalidDataAccessResourceUsageException"><![CDATA[org.springframework.dao.InvalidDataAccessResourceUsageException: 
-Could not prepare statement [Table "CURVEPOINT" non trouvée
-Table "CURVEPOINT" not found; SQL statement:
-insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default) [42102-240]] [insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)]; SQL [insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)]
-	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:156)
-	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:131)
-	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:105)
-	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:576)
-	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
-	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:346)
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:157)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:166)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:222)
-	at jdk.proxy2/jdk.proxy2.$Proxy159.save(Unknown Source)
-	at com.nnk.repositories.CurvePointTests.curvePointTest(CurvePointTests.java:30)
-Caused by: org.hibernate.exception.SQLGrammarException: Could not prepare statement [Table "CURVEPOINT" non trouvée
-Table "CURVEPOINT" not found; SQL statement:
-insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default) [42102-240]] [insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)]
-	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:64)
-	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34)
-	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115)
-	at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$StatementPreparationTemplate.prepareStatement(MutationStatementPreparerImpl.java:107)
-	at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl.prepareStatement(MutationStatementPreparerImpl.java:57)
-	at org.hibernate.id.insert.GetGeneratedKeysDelegate.prepareStatement(GetGeneratedKeysDelegate.java:82)
-	at org.hibernate.engine.jdbc.mutation.internal.ModelMutationHelper.delegateStatementPreparation(ModelMutationHelper.java:129)
-	at org.hibernate.engine.jdbc.mutation.internal.ModelMutationHelper.lambda$standardPreparation$0(ModelMutationHelper.java:119)
-	at org.hibernate.engine.jdbc.mutation.internal.PreparedStatementDetailsStandard.resolveStatement(PreparedStatementDetailsStandard.java:92)
-	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performMutation(GetGeneratedKeysDelegate.java:100)
-	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:45)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:66)
-	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)
-	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.doStaticInserts(InsertCoordinatorStandard.java:180)
-	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.coordinateInsert(InsertCoordinatorStandard.java:120)
-	at org.hibernate.persister.entity.mutation.InsertCoordinatorStandard.insert(InsertCoordinatorStandard.java:84)
-	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:85)
-	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:667)
-	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291)
-	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:270)
-	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322)
-	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:371)
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:285)
-	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:215)
-	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:133)
-	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:145)
-	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:89)
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:73)
-	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:49)
-	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138)
-	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:689)
-	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:672)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityHandlerInvocationHandler.invokeMethod(SharedEntityManagerCreator.java:240)
-	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:386)
-	at jdk.proxy2/jdk.proxy2.$Proxy149.persist(Unknown Source)
-	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:664)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:278)
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:169)
-	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)
-	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:545)
-	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:290)
-	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:690)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:171)
-	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:146)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:135)
-	... 6 more
-Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CURVEPOINT" non trouvée
-Table "CURVEPOINT" not found; SQL statement:
-insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default) [42102-240]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-	at org.h2.message.DbException.get(DbException.java:223)
-	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8049)
-	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8030)
-	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8014)
-	at org.h2.command.Parser.readTableOrView(Parser.java:7999)
-	at org.h2.command.Parser.readTableOrView(Parser.java:7961)
-	at org.h2.command.Parser.parseInsert(Parser.java:1524)
-	at org.h2.command.Parser.parsePrepared(Parser.java:701)
-	at org.h2.command.Parser.parse(Parser.java:584)
-	at org.h2.command.Parser.parse(Parser.java:559)
-	at org.h2.command.Parser.prepareCommand(Parser.java:487)
-	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647)
-	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160)
-	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
-	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:1089)
-	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:335)
-	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
-	at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$2.doPrepare(MutationStatementPreparerImpl.java:55)
-	at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$StatementPreparationTemplate.prepareStatement(MutationStatementPreparerImpl.java:96)
-	... 60 more
-]]></error>
-    <system-out><![CDATA[06:13:03.910 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.nnk.repositories.CurvePointTests]: CurvePointTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-06:13:04.031 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.nnk.Application for test class com.nnk.repositories.CurvePointTests
+  <testcase name="curvePointTest" classname="com.nnk.repositories.CurvePointTests" time="0.486">
+    <system-out><![CDATA[09:56:28.090 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.nnk.repositories.CurvePointTests]: CurvePointTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:56:28.195 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.nnk.Application for test class com.nnk.repositories.CurvePointTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -181,214 +73,50 @@ insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) va
 
  :: Spring Boot ::                (v4.0.3)
 
-2026-03-14T06:13:04.290+01:00  INFO 683337 --- [           main] com.nnk.repositories.CurvePointTests     : Starting CurvePointTests using Java 21.0.9 with PID 683337 (started by ludo in /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton)
-2026-03-14T06:13:04.291+01:00  INFO 683337 --- [           main] com.nnk.repositories.CurvePointTests     : The following 1 profile is active: "test"
-2026-03-14T06:13:04.538+01:00  INFO 683337 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-14T06:13:04.590+01:00  INFO 683337 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 6 JPA repository interfaces.
-2026-03-14T06:13:04.814+01:00  INFO 683337 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-03-14T06:13:04.846+01:00  INFO 683337 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
-2026-03-14T06:13:05.148+01:00  INFO 683337 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-14T06:13:05.172+01:00  INFO 683337 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-03-14T06:13:05.308+01:00  INFO 683337 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:demo user=SA
-2026-03-14T06:13:05.309+01:00  INFO 683337 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-03-14T06:13:05.326+01:00  WARN 683337 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-03-14T06:13:05.341+01:00  INFO 683337 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [jdbc:h2:mem:demo]
-	Database driver: H2 JDBC Driver
-	Database dialect: H2Dialect
-	Database version: 2.4.240
-	Default catalog/schema: DEMO/PUBLIC
+2026-03-16T09:56:28.455+01:00  INFO 1198973 --- [           main] com.nnk.repositories.CurvePointTests     : Starting CurvePointTests using Java 21.0.9 with PID 1198973 (started by ludo in /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton)
+2026-03-16T09:56:28.456+01:00  INFO 1198973 --- [           main] com.nnk.repositories.CurvePointTests     : No active profile set, falling back to 1 default profile: "default"
+2026-03-16T09:56:28.704+01:00  INFO 1198973 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-16T09:56:28.757+01:00  INFO 1198973 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 6 JPA repository interfaces.
+2026-03-16T09:56:28.964+01:00  INFO 1198973 --- [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-03-16T09:56:28.998+01:00  INFO 1198973 --- [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.4.Final
+2026-03-16T09:56:29.298+01:00  INFO 1198973 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-16T09:56:29.319+01:00  INFO 1198973 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-03-16T09:56:29.565+01:00  INFO 1198973 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2bc59ab7
+2026-03-16T09:56:29.567+01:00  INFO 1198973 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-03-16T09:56:29.617+01:00  INFO 1198973 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/demo]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.44
+	Default catalog/schema: demo/undefined
 	Autocommit mode: undefined/unknown
-	Isolation level: READ_COMMITTED [default READ_COMMITTED]
-	JDBC fetch size: 100
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-Hibernate: create global temporary table demo.HTE_users(id integer, rn_ integer not null, fullname varchar(255), password varchar(255), role varchar(255), username varchar(255), primary key (rn_)) transactional
-2026-03-14T06:13:06.032+01:00  INFO 683337 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: drop table if exists demo.bidlist cascade 
-Hibernate: drop table if exists demo.curvepoint cascade 
-Hibernate: drop table if exists demo.rating cascade 
-Hibernate: drop table if exists demo.rulename cascade 
-Hibernate: drop table if exists demo.trade cascade 
-Hibernate: drop table if exists demo.users cascade 
-Hibernate: drop sequence if exists demo.users_seq
-Hibernate: create sequence demo.users_seq start with 1 increment by 50
-Hibernate: create table demo.bidlist (ask numeric(12,2), ask_quantity numeric(12,2), bid numeric(12,2), bid_list_id integer generated by default as identity, bid_quantity numeric(12,2), bid_list_date timestamp(6), creation_date timestamp(6), revision_date timestamp(6), status varchar(10), account varchar(30) not null, type varchar(30) not null, benchmark varchar(125), book varchar(125), commentary varchar(125), deal_name varchar(125), deal_type varchar(125), revision_name varchar(125), security varchar(125), side varchar(125), source_list_id varchar(125), trader varchar(125), creation_name varchar(255), primary key (bid_list_id))
-Hibernate: create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))
-2026-03-14T06:13:06.058+01:00  WARN 683337 --- [           main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))" via JDBC [Erreur de syntaxe dans l'instruction SQL "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; attendu "identifier"
-Syntax error in SQL statement "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; expected "identifier";]
-
-org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))" via JDBC [Erreur de syntaxe dans l'instruction SQL "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; attendu "identifier"
-Syntax error in SQL statement "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; expected "identifier";]
-	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:81) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:218) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:204) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createTables(SchemaCreatorImpl.java:404) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createSequencesTablesConstraints(SchemaCreatorImpl.java:320) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:215) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:151) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:97) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:239) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$1(SchemaManagementToolCoordinator.java:101) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:100) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:323) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.internal.SessionFactoryRegistry.instantiateSessionFactory(SessionFactoryRegistry.java:64) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:437) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1456) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93) ~[spring-orm-7.0.5.jar:7.0.5]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443) ~[spring-orm-7.0.5.jar:7.0.5]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436) ~[spring-orm-7.0.5.jar:7.0.5]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411) ~[spring-orm-7.0.5.jar:7.0.5]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419) ~[spring-orm-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.5.jar:7.0.5]
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.5.jar:7.0.5]
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.5.jar:7.0.5]
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.3.jar:4.0.3]
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.3.jar:4.0.3]
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.3.jar:4.0.3]
-	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:156) ~[spring-boot-test-4.0.3.jar:4.0.3]
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-7.0.5.jar:7.0.5]
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-7.0.5.jar:7.0.5]
-	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465) ~[spring-boot-4.0.3.jar:4.0.3]
-	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:605) ~[spring-boot-test-4.0.3.jar:4.0.3]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:156) ~[spring-boot-test-4.0.3.jar:4.0.3]
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:115) ~[spring-boot-test-4.0.3.jar:4.0.3]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:155) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:111) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:210) ~[spring-test-7.0.5.jar:7.0.5]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
-	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
-	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
-	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125) ~[surefire-api-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68) ~[surefire-junit-platform-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54) ~[surefire-junit-platform-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203) ~[surefire-junit-platform-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168) ~[surefire-junit-platform-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136) ~[surefire-junit-platform-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.4.jar:3.5.4]
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.4.jar:3.5.4]
-Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; attendu "identifier"
-Syntax error in SQL statement "create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), [*]value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id))"; expected "identifier"; SQL statement:
-create table demo.curvepoint (curve_id integer, id integer generated by default as identity, term numeric(12,2), value numeric(12,2), as_of_date timestamp(6), creation_date timestamp(6), primary key (id)) [42001-240]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.message.DbException.getSyntaxError(DbException.java:261) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.readIdentifier(Parser.java:5568) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8978) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parseCreateTable(Parser.java:8926) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parseCreate(Parser.java:6483) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parsePrepared(Parser.java:648) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parse(Parser.java:584) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.parse(Parser.java:559) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.command.Parser.prepareCommand(Parser.java:487) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:647) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:563) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1160) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245) ~[h2-2.4.240.jar:2.4.240]
-	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231) ~[h2-2.4.240.jar:2.4.240]
-	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-7.0.2.jar:na]
-	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-7.0.2.jar:na]
-	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:76) ~[hibernate-core-7.2.4.Final.jar:7.2.4.Final]
-	... 131 common frames omitted
-
-Hibernate: create table demo.rating (id integer generated by default as identity, order_number integer, fitch_rating varchar(125), moodys_rating varchar(125), sandprating varchar(125), primary key (id))
-Hibernate: create table demo.rulename (id integer generated by default as identity, description varchar(125), json varchar(125), name varchar(125), sql_part varchar(125), sql_str varchar(125), template varchar(512), primary key (id))
-Hibernate: create table demo.trade (buy_price numeric(12,2), buy_quantity numeric(12,2), sell_price numeric(12,2), sell_quantity numeric(12,2), trade_id integer generated by default as identity, creation_date timestamp(6), revision_date timestamp(6), trade_date timestamp(6), status varchar(10), account varchar(30) not null, type varchar(30) not null, benchmark varchar(125), book varchar(125), creation_name varchar(125), deal_name varchar(125), deal_type varchar(125), revision_name varchar(125), security varchar(125), side varchar(125), source_list_id varchar(125), trader varchar(125), primary key (trade_id))
-Hibernate: create table demo.users (id integer not null, fullname varchar(255) not null, password varchar(255) not null, role varchar(255) not null, username varchar(255) not null, primary key (id))
-2026-03-14T06:13:06.071+01:00  INFO 683337 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-14T06:13:06.146+01:00  INFO 683337 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-14T06:13:06.350+01:00  INFO 683337 --- [           main] com.nnk.repositories.CurvePointTests     : Started CurvePointTests in 2.271 seconds (process running for 3.148)
-Hibernate: insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default)
-2026-03-14T06:13:06.701+01:00  WARN 683337 --- [           main] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 42102, SQLState: 42S02
-2026-03-14T06:13:06.701+01:00  WARN 683337 --- [           main] org.hibernate.orm.jdbc.error             : Table "CURVEPOINT" non trouvée
-Table "CURVEPOINT" not found; SQL statement:
-insert into demo.curvepoint (as_of_date,creation_date,curve_id,term,value,id) values (?,?,?,?,?,default) [42102-240]
+2026-03-16T09:56:30.305+01:00  INFO 1198973 --- [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists bidlist
+Hibernate: drop table if exists curvepoint
+Hibernate: drop table if exists rating
+Hibernate: drop table if exists rulename
+Hibernate: drop table if exists trade
+Hibernate: drop table if exists users
+Hibernate: drop table if exists users_seq
+Hibernate: create table bidlist (ask decimal(12,2), ask_quantity decimal(12,2), bid decimal(12,2), bid_list_id integer not null auto_increment, bid_quantity decimal(12,2), bid_list_date datetime(6), creation_date datetime(6), revision_date datetime(6), status varchar(10), account varchar(30) not null, type varchar(30) not null, benchmark varchar(125), book varchar(125), commentary varchar(125), deal_name varchar(125), deal_type varchar(125), revision_name varchar(125), security varchar(125), side varchar(125), source_list_id varchar(125), trader varchar(125), creation_name varchar(255), primary key (bid_list_id)) engine=InnoDB
+Hibernate: create table curvepoint (curve_id integer, id integer not null auto_increment, term decimal(12,2), value decimal(12,2), as_of_date datetime(6), creation_date datetime(6), primary key (id)) engine=InnoDB
+Hibernate: create table rating (id integer not null auto_increment, order_number integer, fitch_rating varchar(125), moodys_rating varchar(125), sandprating varchar(125), primary key (id)) engine=InnoDB
+Hibernate: create table rulename (id integer not null auto_increment, description varchar(125), json varchar(125), name varchar(125), sql_part varchar(125), sql_str varchar(125), template varchar(512), primary key (id)) engine=InnoDB
+Hibernate: create table trade (buy_price decimal(12,2), buy_quantity decimal(12,2), sell_price decimal(12,2), sell_quantity decimal(12,2), trade_id integer not null auto_increment, creation_date datetime(6), revision_date datetime(6), trade_date datetime(6), status varchar(10), account varchar(30) not null, type varchar(30) not null, benchmark varchar(125), book varchar(125), creation_name varchar(125), deal_name varchar(125), deal_type varchar(125), revision_name varchar(125), security varchar(125), side varchar(125), source_list_id varchar(125), trader varchar(125), primary key (trade_id)) engine=InnoDB
+Hibernate: create table users (id integer not null, fullname varchar(255) not null, password varchar(255) not null, role varchar(255) not null, username varchar(255) not null, primary key (id)) engine=InnoDB
+Hibernate: create table users_seq (next_val bigint) engine=InnoDB
+Hibernate: insert into users_seq ( next_val ) values ( 1 )
+2026-03-16T09:56:31.131+01:00  INFO 1198973 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-16T09:56:31.196+01:00  INFO 1198973 --- [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-16T09:56:31.380+01:00  INFO 1198973 --- [           main] com.nnk.repositories.CurvePointTests     : Started CurvePointTests in 3.138 seconds (process running for 4.018)
+Hibernate: insert into curvepoint (as_of_date,creation_date,curve_id,term,value) values (?,?,?,?,?)
+Hibernate: update curvepoint set as_of_date=?,creation_date=?,curve_id=?,term=?,value=? where id=?
+Hibernate: select cp1_0.id,cp1_0.as_of_date,cp1_0.creation_date,cp1_0.curve_id,cp1_0.term,cp1_0.value from curvepoint cp1_0
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (/home/ludo/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar)

@@ -37,8 +37,10 @@ public class TradeTests {
         assertEquals("Trade Account Update", trade.getAccount());
 
         // Find
-        List<Trade> listResult = tradeRepository.findAll();
-        assertFalse(listResult.isEmpty());
+       Optional<Trade> found = tradeRepository.findById(trade.getTradeId());
+       assertTrue(found.isPresent());
+        //Find all
+         assertFalse(tradeRepository.findAll().isEmpty());
 
         // Delete
         Integer id = trade.getTradeId();
