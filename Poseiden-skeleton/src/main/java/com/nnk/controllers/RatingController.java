@@ -4,6 +4,7 @@ import com.nnk.domain.Rating;
 import com.nnk.services.RatingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
+
     @Autowired
     private RatingService ratingService;
 
@@ -34,29 +36,32 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model) {
+    public String validate(@Valid Rating rating, BindingResult result, Model model,RedirectAttributes redirectAttributes) {
         // TODO: check data valid and save to db, after saving return Rating list
         if (result.hasErrors()) {
-            return "rating/add";
+            List<String>errors=result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage",errors);
+            return "redirect:/rating/add";
         }
         try {
             ratingService.addRating(rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
+            return "redirect:/rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/add";
         }
-        return "rating/add";
+
     }
 
     @GetMapping("/rating/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
         // TODO: get Rating by Id and to model then show to the form
         try {
             Rating rating = ratingService.getRatingById(id);
             model.addAttribute("rating", rating);
             return "rating/update";
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/rating/list";
         }
     }
