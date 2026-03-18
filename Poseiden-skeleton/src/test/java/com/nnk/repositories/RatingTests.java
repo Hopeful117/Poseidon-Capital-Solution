@@ -37,6 +37,7 @@ public class RatingTests {
         // Find
         Optional<Rating> found = ratingRepository.findById(rating.getId());
         assertTrue(found.isPresent());
+
         //Find all
         assertFalse(ratingRepository.findAll().isEmpty());
 

@@ -42,9 +42,7 @@ public class RatingServiceImpl implements RatingService {
         if (orderNumber < 0) {
             throw new IllegalArgumentException("Order number must be non-negative");
         }
-        if (ratingRepository.existsByOrderNumber(orderNumber)) {
-            throw new IllegalArgumentException("Order number must be unique");
-        }
+
         final Rating rating = new Rating(moodysRating, sandPRating, fitchRating, orderNumber);
         ratingRepository.save(rating);
     }
@@ -61,12 +59,9 @@ public class RatingServiceImpl implements RatingService {
         if (orderNumber < 0) {
             throw new IllegalArgumentException("Order number must be non-negative");
         }
-        if (ratingRepository.existsByOrderNumber(orderNumber)) {
-            throw new IllegalArgumentException("Order number must be unique");
-        }
 
 
-        Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Rating not found with id: " + id));
+        final Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Rating not found with id: " + id));
         rating.setMoodysRating(moodysRating);
         rating.setSandPRating(sandPRating);
         rating.setFitchRating(fitchRating);

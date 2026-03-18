@@ -22,23 +22,23 @@ public class User {
 
     @NotBlank(message = "Username is mandatory")
     @Column(name = "username", unique = true)
-    @Size(max=125, message = "Username must not exceed 125 characters")
+    @Size(max = 125, message = "Username must not exceed 125 characters")
     private String username;
 
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
-    @Size(max=125, message = "Password must not exceed 125 characters")
+    @Size(max = 125, message = "Password must not exceed 125 characters")
     private String password;
 
 
     @NotBlank(message = "FullName is mandatory")
     @Column(name = "fullname")
-    @Size(max=125, message = "FullName must not exceed 125 characters")
+    @Size(max = 125, message = "FullName must not exceed 125 characters")
     private String fullname;
 
     @NotBlank(message = "Role is mandatory")
     @Column(name = "role")
-    @Size(max=125, message = "Role must not exceed 125 characters")
+    @Size(max = 125, message = "Role must not exceed 125 characters")
     private String role;
 
     public User(String username, String password, String fullname, String role) {

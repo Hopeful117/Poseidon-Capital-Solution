@@ -2,7 +2,6 @@ package com.nnk.config;
 
 import com.nnk.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +16,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private final UserRepository userRepository; // ton repository User
-
 
 
     @Override

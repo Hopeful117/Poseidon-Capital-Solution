@@ -46,8 +46,6 @@ public class RatingControllerTest {
     }
 
 
-
-
     @Test
     @WithMockUser(username = "user")
     void shouldReturnRatingList() throws Exception {
@@ -79,7 +77,9 @@ public class RatingControllerTest {
                         .param("fitchRating", "1")
                         .param("orderNumber", "5")
                 )
-                .andExpect(status().is3xxRedirection());
+                .andExpect(status().isOk())
+                .andExpect(view().name("rating/list"));
+
 
     }
 
@@ -97,37 +97,19 @@ public class RatingControllerTest {
                 .andExpect(flash().attributeExists("errorMessage"));
 
 
-
-
-
-    }
-    @Test
-    @WithMockUser(username="user")
-    void shouldReturnFormWithErrorIfExceptionIsThrown() throws Exception {
-        mockMvc.perform(post("/rating/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "5")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "1")
-                )
-
-                .andExpect(model().attributeExists("errorMessage"))
-                .andExpect(status().is2xxSuccessful());
-
-
     }
 
+
     @Test
-    @WithMockUser(username="user")
+    @WithMockUser(username = "user")
     void shouldReturnUpdateForm() throws Exception {
         Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
         int id = rating.get().getId();
 
-        mockMvc.perform(get("/rating/update/"+ id)
-                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/rating/update/" + id)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
 
-        .andExpect(status().is2xxSuccessful())
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(model().attributeExists("rating"))
                 .andExpect(view().name("rating/update"));
 
@@ -136,7 +118,7 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/rating/update/"+ 5)
+        mockMvc.perform(get("/rating/update/" + 5)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
 
                 .andExpect(status().is3xxRedirection())
@@ -144,4 +126,73 @@ public class RatingControllerTest {
 
 
     }
+
+    @Test
+    @WithMockUser(username = "user")
+    void shouldUpdateRating() throws Exception {
+        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
+        int id = rating.get().getId();
+        mockMvc.perform(post("/rating/update/" + id)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
+                        .param("moodysRating", "5")
+                        .param("sandPRating", "1")
+                        .param("fitchRating", "1")
+                        .param("orderNumber", "1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("rating/list"));
+
+    }
+
+    @Test
+    @WithMockUser(username = "user")
+    void shouldRedirectWithErrorIfBindingFails() throws Exception {
+        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
+        int id = rating.get().getId();
+        mockMvc.perform(post("/rating/update/" + id)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
+                        .param("moodysRating", "5")
+                        .param("sandPRating", "1")
+                        .param("fitchRating", "1")
+                        .param("orderNumber", "-1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attributeExists("errorMessage"));
+
+    }
+
+    @Test
+    @WithMockUser(username = "user")
+    void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
+        mockMvc.perform(post("/rating/update/" + 111)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
+                        .param("moodysRating", "5")
+                        .param("sandPRating", "1")
+                        .param("fitchRating", "1")
+                        .param("orderNumber", "1"))
+
+                .andExpect(model().attributeExists("errorMessage"))
+                .andExpect(view().name("rating/update"));
+
+
+    }
+
+    @Test
+    @WithMockUser(username = "user")
+    void shouldDeleteRating() throws Exception {
+        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
+        int id = rating.get().getId();
+        mockMvc.perform(get("/rating/delete/" + id)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+                .andExpect(model().attributeDoesNotExist("errorMessage"));
+    }
+
+    @Test
+    @WithMockUser(username = "user")
+    void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
+        mockMvc.perform(get("/rating/delete/" + 111)
+                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+                .andExpect(model().attributeExists("errorMessage"));
+
+    }
+
+
 }

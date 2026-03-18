@@ -36,16 +36,16 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model,RedirectAttributes redirectAttributes) {
+    public String validate(@Valid Rating rating, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check data valid and save to db, after saving return Rating list
         if (result.hasErrors()) {
-            List<String>errors=result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage",errors);
+            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage", errors);
             return "redirect:/rating/add";
         }
         try {
             ratingService.addRating(rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
-            return "redirect:/rating/list";
+            return "rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/add";
@@ -54,7 +54,7 @@ public class RatingController {
     }
 
     @GetMapping("/rating/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         // TODO: get Rating by Id and to model then show to the form
         try {
             Rating rating = ratingService.getRatingById(id);
@@ -68,18 +68,20 @@ public class RatingController {
 
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
-                               BindingResult result, Model model) {
+                               BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
         if (result.hasErrors()) {
-            return "rating/update";
+            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage", errors);
+            return "redirect:/update";
         }
         try {
             ratingService.updateRating(id, rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
+            return "rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/update";
         }
-        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/delete/{id}")
@@ -87,9 +89,10 @@ public class RatingController {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         try {
             ratingService.deleteRating(id);
+
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        return "redirect:/rating/list";
+        return "rating/list";
     }
 }

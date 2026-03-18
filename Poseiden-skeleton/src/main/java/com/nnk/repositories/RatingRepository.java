@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface RatingRepository extends JpaRepository<Rating, Integer> {
 
-    Optional <Rating> findByOrderNumber(Integer orderNumber);
+    Optional<Rating> findByOrderNumber(Integer orderNumber);
 
     boolean existsById(Integer id);
 

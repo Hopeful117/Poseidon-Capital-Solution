@@ -20,8 +20,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         if (authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
             redirectUrl = "/admin/home";
-        }
-        else if (authentication.getAuthorities().stream()
+        } else if (authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
             redirectUrl = "bidList/list";
         }
