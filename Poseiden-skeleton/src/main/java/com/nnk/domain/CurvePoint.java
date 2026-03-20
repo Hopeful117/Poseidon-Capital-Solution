@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CurvePoint {
+public class CurvePoint implements DomainEntity <CurvePoint> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id")
@@ -48,4 +48,8 @@ public class CurvePoint {
         this.value = value;
     }
 
+    @Override
+    public CurvePoint update(CurvePoint domainEntity) {
+        return this;
+    }
 }

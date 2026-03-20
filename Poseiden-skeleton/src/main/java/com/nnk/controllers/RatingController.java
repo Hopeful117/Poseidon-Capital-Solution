@@ -1,7 +1,7 @@
 package com.nnk.controllers;
 
 import com.nnk.domain.Rating;
-import com.nnk.services.RatingService;
+import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -20,11 +20,11 @@ import java.util.List;
 public class RatingController {
 
     @Autowired
-    private RatingService ratingService;
+    private CrudService<Rating> service;
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
-        List<Rating> ratings = ratingService.getAllRatings();
+        List<Rating> ratings = service.findAll();
         model.addAttribute("ratings", ratings);
 
         return "rating/list";
@@ -44,7 +44,8 @@ public class RatingController {
             return "redirect:/rating/add";
         }
         try {
-            ratingService.addRating(rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
+
+            service.create(rating);
             return "rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -57,7 +58,7 @@ public class RatingController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         // TODO: get Rating by Id and to model then show to the form
         try {
-            Rating rating = ratingService.getRatingById(id);
+            Rating rating = service.findById(id);
             model.addAttribute("rating", rating);
             return "rating/update";
         } catch (Exception e) {
@@ -76,7 +77,8 @@ public class RatingController {
             return "redirect:/update";
         }
         try {
-            ratingService.updateRating(id, rating.getMoodysRating(), rating.getSandPRating(), rating.getFitchRating(), rating.getOrderNumber());
+
+            service.update(rating);
             return "rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -88,7 +90,7 @@ public class RatingController {
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         try {
-            ratingService.deleteRating(id);
+            service.deleteById(id);
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());

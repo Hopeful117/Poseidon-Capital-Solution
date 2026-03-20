@@ -19,14 +19,14 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class BidList {
+public class BidList implements DomainEntity<BidList> {
     // TODO: Map columns in data table BIDLIST with corresponding java fields
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "BidListId")
     @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
-    Integer BidListId;
+    Integer bidListId;
 
     @Column(name = "account")
     @NotNull(message = "Account is mandatory")
@@ -120,5 +120,14 @@ public class BidList {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
+    }
+
+    public Integer getId(){
+        return bidListId;
+    }
+
+    public BidList update( BidList bidList){
+
+        return this;
     }
 }

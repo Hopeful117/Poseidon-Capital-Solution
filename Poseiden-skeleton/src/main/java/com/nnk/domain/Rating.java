@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Rating {
+public class Rating implements DomainEntity<Rating>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +42,10 @@ public class Rating {
         this.sandPRating = sandPRating;
         this.fitchRating = fitchRating;
         this.orderNumber = orderNumber;
+    }
+
+    @Override
+    public Rating update(Rating rating){
+        return this;
     }
 }

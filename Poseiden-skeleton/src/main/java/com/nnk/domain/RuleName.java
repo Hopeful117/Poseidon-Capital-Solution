@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class RuleName {
+public class RuleName implements DomainEntity<RuleName>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -53,4 +53,8 @@ public class RuleName {
     }
 
 
+    @Override
+    public RuleName update(RuleName domainEntity) {
+        return this;
+    }
 }

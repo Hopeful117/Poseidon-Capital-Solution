@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 @RequiredArgsConstructor
-public class User {
+public class User implements DomainEntity <User>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
@@ -48,4 +48,8 @@ public class User {
         this.role = role;
     }
 
+    @Override
+    public User update(User domainEntity) {
+        return this;
+    }
 }
