@@ -34,7 +34,7 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     @Digits(integer = 10, fraction = 2, message = "Term must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal term;
 
-    @Column(name = "value")
+    @Column(name = "curveValue")
     @Digits(integer = 10, fraction = 2, message = "Value must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal value;
 

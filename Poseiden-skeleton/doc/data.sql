@@ -57,7 +57,7 @@ CREATE TABLE curvePoint (
   CurveId tinyint,
   asOfDate TIMESTAMP,
   term DECIMAL ,
-  value DECIMAL ,
+  curveValue DECIMAL ,
   creationDate TIMESTAMP ,
 
   PRIMARY KEY (Id)
