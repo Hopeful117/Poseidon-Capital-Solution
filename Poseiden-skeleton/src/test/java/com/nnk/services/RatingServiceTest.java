@@ -16,7 +16,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -73,7 +72,7 @@ public class RatingServiceTest {
         assert (ratings.get(0).getMoodysRating().equals("Aaa"));
         assert (ratings.get(1).getSandPRating().equals("BBB"));
         assert (ratings.get(0).getFitchRating().equals("AAA"));
-        assert (ratings.get(1).getOrderNumber() == 2;
+        assert (ratings.get(1).getOrderNumber() == 2);
 
 
     }

@@ -21,9 +21,8 @@ import java.sql.Timestamp;
 @Setter
 public class BidList implements DomainEntity<BidList> {
     // TODO: Map columns in data table BIDLIST with corresponding java fields
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
     @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer bidListId;

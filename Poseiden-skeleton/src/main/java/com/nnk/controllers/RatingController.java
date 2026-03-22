@@ -78,6 +78,7 @@ public class RatingController {
         }
         try {
 
+            rating.setId(id);
             service.update(rating);
             return "rating/list";
         } catch (Exception e) {

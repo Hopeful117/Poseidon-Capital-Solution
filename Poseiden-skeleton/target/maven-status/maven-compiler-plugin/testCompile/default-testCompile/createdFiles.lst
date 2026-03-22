@@ -7,3 +7,5 @@ com/nnk/services/RatingServiceTest.class
 com/nnk/repositories/CurvePointTests.class
 com/nnk/repositories/PasswordEncodeTest.class
 com/nnk/repositories/TradeTests.class
+com/nnk/services/BidListServiceTest.class
+com/nnk/controllers/BidListControllerTest.class

@@ -1,8 +1,8 @@
 package com.nnk.controllers;
 
-import com.nnk.domain.Rating;
+import com.nnk.domain.BidList;
 import com.nnk.domain.User;
-import com.nnk.repositories.RatingRepository;
+import com.nnk.repositories.BidListRepository;
 import com.nnk.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +13,10 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,12 +27,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Transactional
 @ActiveProfiles("test")
-public class RatingControllerTest {
+public class BidListControllerTest {
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    RatingRepository ratingRepository;
+    BidListRepository bidListRepository;
 
 
     @Autowired
@@ -40,58 +43,53 @@ public class RatingControllerTest {
         User user = new User("user", "password", "User", "USER");
         userRepository.save(user);
 
-        Rating rating = new Rating("1", "1", "1", 1);
-        ratingRepository.save(rating);
+        BidList bidList = new BidList("Account1", "Type1", BigDecimal.valueOf(100.0));
+        bidListRepository.save(bidList);
 
     }
 
 
     @Test
     @WithMockUser(username = "user")
-    void shouldReturnRatingList() throws Exception {
-        mockMvc.perform(get("/rating/list")
+    void shouldReturnBidListList() throws Exception {
+        mockMvc.perform(get("/bidList/list")
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
                 .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"))
-                .andExpect(model().attributeExists("ratings"));
+                .andExpect(view().name("bidList/list"));
 
     }
 
     @Test
     @WithMockUser(username = "user")
-    void shouldReturnAddRatingForm() throws Exception {
-        mockMvc.perform(get("/rating/add")
+    void shouldReturnAddBidListForm() throws Exception {
+        mockMvc.perform(get("/bidList/add")
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/add"));
+                .andExpect(status().isOk());
 
     }
 
     @Test
     @WithMockUser(username = "user")
-    void shouldValidateRating() throws Exception {
-        mockMvc.perform(post("/rating/validate")
+    void shouldValidateBidList() throws Exception {
+        mockMvc.perform(post("/bidList/validate")
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "1")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "5")
+                        .param("account", "Account2")
+                        .param("type", "Type2")
+                        .param("bidQuantity", "200.0")
                 )
                 .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"));
-
+                .andExpect(view().name("bidList/list"));
 
     }
 
     @Test
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfBindingFails() throws Exception {
-        mockMvc.perform(post("/rating/validate")
+        mockMvc.perform(post("/bidList/validate")
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "5")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "-1")
+                        .param("account", "")
+                        .param("type", "Type1")
+                        .param("bidQuantity", "100.0")
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
@@ -103,22 +101,21 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnUpdateForm() throws Exception {
-        Optional<Rating> rating = ratingRepository.findAll().stream().findFirst();
-        int id = rating.get().getId();
+        Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
+        int id = bidList.get().getId();
 
-        mockMvc.perform(get("/rating/update/" + id)
+        mockMvc.perform(get("/bidList/update/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
 
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeExists("rating"))
-                .andExpect(view().name("rating/update"));
+                .andExpect(view().name("bidList/update"));
 
     }
 
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/rating/update/" + 5)
+        mockMvc.perform(get("/bidList/update/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
 
                 .andExpect(status().is3xxRedirection())
@@ -129,31 +126,30 @@ public class RatingControllerTest {
 
     @Test
     @WithMockUser(username = "user")
-    void shouldUpdateRating() throws Exception {
-        Optional<Rating> rating = ratingRepository.findAll().stream().findFirst();
-        int id = rating.get().getId();
-        mockMvc.perform(post("/rating/update/" + id)
+    void shouldUpdateBidList() throws Exception {
+        Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
+        int id = bidList.get().getId();
+        mockMvc.perform(post("/bidList/update/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "5")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"));
+                        .param("account", "UpdatedAccount")
+                        .param("type", "UpdatedType")
+                        .param("bidQuantity", "150.0"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/bidList/list"));
 
     }
 
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectWithErrorIfBindingFails() throws Exception {
-        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
-        int id = rating.get().getId();
-        mockMvc.perform(post("/rating/update/" + id)
+        Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
+        int id = bidList.get().getId();
+
+        mockMvc.perform(post("/bidList/update/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "5")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "-1"))
+                        .param("account", "")
+                        .param("type", "Type1")
+                        .param("bidQuantity", "100.0"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
 
@@ -162,25 +158,23 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
-        mockMvc.perform(post("/rating/update/" + 111)
+        mockMvc.perform(post("/bidList/update/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
-                        .param("moodysRating", "5")
-                        .param("sandPRating", "1")
-                        .param("fitchRating", "1")
-                        .param("orderNumber", "1"))
-
+                        .param("account", "Account")
+                        .param("type", "Type")
+                        .param("bidQuantity", "100.0"))
                 .andExpect(model().attributeExists("errorMessage"))
-                .andExpect(view().name("rating/update"));
+                .andExpect(view().name("bidList/update"));
 
 
     }
 
     @Test
     @WithMockUser(username = "user")
-    void shouldDeleteRating() throws Exception {
-        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
-        int id = rating.get().getId();
-        mockMvc.perform(get("/rating/delete/" + id)
+    void shouldDeleteBidList() throws Exception {
+        Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
+        int id = bidList.get().getId();
+        mockMvc.perform(get("/bidList/delete/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
                 .andExpect(model().attributeDoesNotExist("errorMessage"));
     }
@@ -188,9 +182,10 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/rating/delete/" + 111)
+         mockMvc.perform(get("/bidList/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
                 .andExpect(model().attributeExists("errorMessage"));
+
 
     }
 
