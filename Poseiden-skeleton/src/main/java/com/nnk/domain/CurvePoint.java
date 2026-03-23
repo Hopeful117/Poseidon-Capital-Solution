@@ -50,6 +50,9 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
 
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
+        term = domainEntity.getTerm();
+        value=domainEntity.getValue();
+
         return this;
     }
 }

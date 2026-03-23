@@ -30,4 +30,5 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/CrudService.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/CurvePointServiceImpl.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/RatingServiceImpl.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/RuleNameServiceImpl.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/services/TradeServiceImpl.java

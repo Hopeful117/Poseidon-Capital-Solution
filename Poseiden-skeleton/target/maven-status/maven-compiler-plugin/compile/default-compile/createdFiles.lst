@@ -28,6 +28,7 @@ com/nnk/controllers/LoginController.class
 com/nnk/config/CustomUserDetailsService.class
 com/nnk/repositories/RatingRepository.class
 com/nnk/services/RatingServiceImpl.class
+com/nnk/services/RuleNameServiceImpl.class
 com/nnk/controllers/BidListController.class
 com/nnk/services/BidListServiceImpl.class
 com/nnk/controllers/UserController.class

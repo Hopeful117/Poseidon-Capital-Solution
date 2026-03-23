@@ -45,7 +45,12 @@ public class Rating implements DomainEntity<Rating>{
     }
 
     @Override
-    public Rating update(Rating rating){
+    public Rating update(Rating domainEntity){
+        moodysRating=domainEntity.getMoodysRating();
+        sandPRating=domainEntity.getSandPRating();
+        fitchRating=domainEntity.getFitchRating();
+        orderNumber=domainEntity.getOrderNumber();
+
         return this;
     }
 }

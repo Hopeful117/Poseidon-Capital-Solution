@@ -125,8 +125,13 @@ public class BidList implements DomainEntity<BidList> {
         return bidListId;
     }
 
-    public BidList update( BidList bidList){
+    public BidList update( BidList domainEntity){
+
+        account=domainEntity.getAccount();
+        type=domainEntity.getType();
+        bidQuantity=domainEntity.getBidQuantity();
 
         return this;
+
     }
 }

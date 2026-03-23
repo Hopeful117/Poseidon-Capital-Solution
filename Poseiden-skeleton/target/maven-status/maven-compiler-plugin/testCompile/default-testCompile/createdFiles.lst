@@ -1,12 +1,15 @@
 com/nnk/repositories/BidTests.class
 com/nnk/controllers/RatingControllerTest.class
 com/nnk/ApplicationTest.class
+com/nnk/services/CurvePointServiceTest.class
 com/nnk/repositories/CurvePointTests.class
 com/nnk/repositories/TradeTests.class
 com/nnk/services/BidListServiceTest.class
 com/nnk/controllers/CurveControllerTest.class
 com/nnk/controllers/BidListControllerTest.class
 com/nnk/repositories/RuleTests.class
+com/nnk/services/RuleNameServiceTest.class
 com/nnk/repositories/RatingTests.class
+com/nnk/controllers/RuleNameControllerTest.class
 com/nnk/services/RatingServiceTest.class
 com/nnk/repositories/PasswordEncodeTest.class

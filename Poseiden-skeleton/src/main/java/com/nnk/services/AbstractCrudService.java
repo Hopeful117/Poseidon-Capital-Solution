@@ -48,9 +48,10 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
         Assert.notNull(model, "Objet is null");
         Assert.notNull(model.getId() , "Id can not be null");
 
-        repository.findById(model.getId())
+       M oldModel= repository.findById(model.getId())
                 .orElseThrow(()-> new EntityNotFoundException("Id not found"));
+       M newModel=oldModel.update(model);
 
-        repository.save(model);
+        repository.save(newModel);
     }
 }
