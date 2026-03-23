@@ -111,9 +111,10 @@ public class Trade implements DomainEntity<Trade>{
     @Size(max = 125, message = "Side must not exceed 125 characters")
     String side;
 
-    public Trade(String account, String type) {
+    public Trade(String account, String type, BigDecimal buyQuantity) {
         this.account = account;
         this.type = type;
+        this.buyQuantity=buyQuantity;
     }
     // TODO: Map columns in data table TRADE with corresponding java fields
 
@@ -126,6 +127,8 @@ public class Trade implements DomainEntity<Trade>{
     public Trade update(Trade domainEntity) {
         account = domainEntity.getAccount();
         type = domainEntity.getType();
+        buyQuantity=domainEntity.buyQuantity;
+
 
         return this;
     }

@@ -42,8 +42,7 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Timestamp creationDate;
 
-    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {
-        this.curveId = curveId;
+    public CurvePoint(BigDecimal term, BigDecimal value) {
         this.term = term;
         this.value = value;
     }

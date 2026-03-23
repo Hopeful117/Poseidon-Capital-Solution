@@ -7,6 +7,7 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,7 +23,7 @@ public class TradeTests {
 
     @Test
     public void tradeTest() {
-        Trade trade = new Trade("Trade Account", "Type");
+        Trade trade = new Trade("Trade Account", "Type", BigDecimal.valueOf(25));
 
         // Save
         trade = tradeRepository.save(trade);

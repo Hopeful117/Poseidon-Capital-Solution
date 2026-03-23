@@ -39,7 +39,7 @@ public class CurvePointServiceTest {
     })
     public void testAddCurvePoint(int curveId, BigDecimal term, BigDecimal value) {
 
-        CurvePoint curvePoint = new CurvePoint(curveId, term, value);
+        CurvePoint curvePoint = new CurvePoint(term, value);
         // When
         curvePointService.create(curvePoint);
         ArgumentCaptor<CurvePoint> captor = ArgumentCaptor.forClass(CurvePoint.class);
@@ -47,7 +47,7 @@ public class CurvePointServiceTest {
         // Then
         verify(curvePointRepository).save(captor.capture());
         CurvePoint savedCurvePoint = captor.getValue();
-        assertEquals(savedCurvePoint.getCurveId(), curveId);
+
         assertEquals(savedCurvePoint.getTerm(), term);
         assertEquals(savedCurvePoint.getValue(), value);
 
@@ -60,8 +60,8 @@ public class CurvePointServiceTest {
         //Given
 
         List<CurvePoint> mockCurvePoints = List.of(
-                new CurvePoint(1, BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0)),
-                new CurvePoint(2, BigDecimal.valueOf(20.0), BigDecimal.valueOf(4.0))
+                new CurvePoint( BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0)),
+                new CurvePoint( BigDecimal.valueOf(20.0), BigDecimal.valueOf(4.0))
         );
         when(curvePointRepository.findAll()).thenReturn(mockCurvePoints);
         // When
@@ -70,10 +70,10 @@ public class CurvePointServiceTest {
 
         // Then
         assert (curvePoints.size() == 2);
-        assert (curvePoints.get(0).getCurveId() == 1);
+
         assert (curvePoints.get(1).getTerm().equals(BigDecimal.valueOf(20.0)));
         assert (curvePoints.get(0).getValue().equals(BigDecimal.valueOf(5.0)));
-        assert (curvePoints.get(1).getCurveId() == 2);
+
 
 
     }
@@ -81,14 +81,14 @@ public class CurvePointServiceTest {
     @Test
     public void testGetCurvePointById() {
         // Given
-        CurvePoint mockCurvePoint = new CurvePoint(1, BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
+        CurvePoint mockCurvePoint = new CurvePoint( BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
         when(curvePointRepository.findById(anyInt())).thenReturn(java.util.Optional.of(mockCurvePoint));
 
         // When
         CurvePoint curvePoint = curvePointService.findById(1);
 
         // Then
-        assert (curvePoint.getCurveId() == 1);
+
         assert (curvePoint.getTerm().equals(BigDecimal.valueOf(10.0)));
         assert (curvePoint.getValue().equals(BigDecimal.valueOf(5.0)));
     }
@@ -114,10 +114,10 @@ public class CurvePointServiceTest {
     public void testUpdateCurvePoint(int id, int curveId, BigDecimal originalTerm, BigDecimal originalValue, 
                                 BigDecimal newTerm, BigDecimal newValue) {
         // Given
-        CurvePoint existingCurvePoint = new CurvePoint(curveId, originalTerm, originalValue);
+        CurvePoint existingCurvePoint = new CurvePoint(originalTerm, originalValue);
         existingCurvePoint.setId(id);
         
-        CurvePoint updatedCurvePoint = new CurvePoint(curveId, newTerm, newValue);
+        CurvePoint updatedCurvePoint = new CurvePoint(newTerm, newValue);
         updatedCurvePoint.setId(id);
         
         when(curvePointRepository.findById(id)).thenReturn(java.util.Optional.of(existingCurvePoint));
@@ -133,15 +133,15 @@ public class CurvePointServiceTest {
         // Les champs term et value sont mis à jour
         assertEquals(newTerm, savedCurvePoint.getTerm());
         assertEquals(newValue, savedCurvePoint.getValue());
-        // Mais curveId et id ne changent pas
-        assertEquals(curveId, savedCurvePoint.getCurveId());
+
+
         assertEquals(id, savedCurvePoint.getId());
     }
 
     @Test
     public void testUpdateCurvePointShouldThrowExceptionWhenCurvePointNotFound() {
         // Given
-        CurvePoint curvePointToUpdate = new CurvePoint(1, BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
+        CurvePoint curvePointToUpdate = new CurvePoint( BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
         curvePointToUpdate.setId(999);
         
         when(curvePointRepository.findById(999)).thenReturn(java.util.Optional.empty());

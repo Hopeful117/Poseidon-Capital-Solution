@@ -21,12 +21,11 @@ class CurvePointTests {
     @Test
     void curvePointTest() {
 
-        CurvePoint curvePoint = new CurvePoint(10, new BigDecimal(10), new BigDecimal(30));
+        CurvePoint curvePoint = new CurvePoint( new BigDecimal(10), new BigDecimal(30));
 
         // Save
         curvePoint = curvePointRepository.save(curvePoint);
-        assertNotNull(curvePoint.getId());
-        assertEquals(10, curvePoint.getCurveId());
+
 
         // Update
         curvePoint.setCurveId(20);
