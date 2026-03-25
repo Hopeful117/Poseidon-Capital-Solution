@@ -37,7 +37,7 @@ public class RatingControllerTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("user", "password", "User", "USER");
+        User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
         Rating rating = new Rating("1", "1", "1", 1);

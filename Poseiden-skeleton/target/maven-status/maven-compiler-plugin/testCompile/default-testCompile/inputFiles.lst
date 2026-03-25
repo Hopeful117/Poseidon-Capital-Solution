@@ -4,14 +4,17 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/controllers/RatingControllerTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/controllers/RuleNameControllerTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/controllers/TradeControllerTest.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/controllers/UserControllerTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/BidTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/CurvePointTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/PasswordEncodeTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/RatingTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/RuleTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/TradeTests.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/repositories/UserTests.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/BidListServiceTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/CurvePointServiceTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/RatingServiceTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/RuleNameServiceTest.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/TradeServiceTest.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/test/java/com/nnk/services/UserServiceTest.java

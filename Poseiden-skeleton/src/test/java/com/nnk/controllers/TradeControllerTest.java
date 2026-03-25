@@ -37,7 +37,7 @@ public class TradeControllerTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("user", "password", "User", "USER");
+        User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
         Trade trade = new Trade("Account1", "Type1", BigDecimal.valueOf(100.50));
@@ -156,8 +156,8 @@ public class TradeControllerTest {
         int id = trade.get().getTradeId();
         mockMvc.perform(get("/trade/delete/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("trade/list"));
     }
 
     @Test
@@ -165,8 +165,8 @@ public class TradeControllerTest {
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
         mockMvc.perform(get("/trade/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(view().name("trade/list"));
     }
 }
 

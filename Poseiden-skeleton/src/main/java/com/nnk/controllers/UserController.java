@@ -3,8 +3,10 @@ package com.nnk.controllers;
 import com.nnk.domain.User;
 import com.nnk.exceptions.EntityNotFoundException;
 import com.nnk.repositories.UserRepository;
+import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+   private CrudService<User> service;
 
     @RequestMapping("/user/list")
     public String home(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", service.findAll());
         return "user/list";
     }
 
@@ -31,20 +36,28 @@ public class UserController {
     }
 
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
-            model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
+    public String validate(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage", errors);
+            return "redirect:/user/add";
         }
-        return "user/add";
+        try {
+
+            service.create(user);
+            model.addAttribute("users", service.findAll());
+            return "redirect:/user/list";
+        }catch(Exception e){
+            model.addAttribute("errors",e.getMessage());
+            return "user/add";
+        }
+
+
     }
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Invalid user Id:" + id));
+       User user = service.findById(id);
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
@@ -52,24 +65,36 @@ public class UserController {
 
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model,RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
+            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage", errors);
             return "user/update";
         }
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        try {
+
+            user.setId(id);
+            service.update(user);
+            model.addAttribute("users", service.findAll());
+            return "redirect:/user/list";
+        } catch (Exception e) {
+            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
+            redirectAttributes.addFlashAttribute("errorMessage", errors);
+            return "user/update";
+        }
     }
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Invalid user Id:" + id));
-        userRepository.delete(user);
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        try {
+            service.deleteById(id);
+            model.addAttribute("users", service.findAll());
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+
+        }
+        return "/user/list";
     }
 }

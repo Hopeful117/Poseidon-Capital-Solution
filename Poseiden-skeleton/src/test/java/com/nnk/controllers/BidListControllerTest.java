@@ -40,7 +40,7 @@ public class BidListControllerTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("user", "password", "User", "USER");
+        User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
         BidList bidList = new BidList("Account1", "Type1", BigDecimal.valueOf(100.0));

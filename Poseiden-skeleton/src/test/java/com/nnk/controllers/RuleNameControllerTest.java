@@ -36,7 +36,7 @@ public class RuleNameControllerTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("user", "password", "User", "USER");
+        User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
         RuleName ruleName = new RuleName("Rule1", "Description1", "json1", "template1", "sql1", "part1");

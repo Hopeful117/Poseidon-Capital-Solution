@@ -22,6 +22,7 @@ com/nnk/services/TradeServiceImpl.class
 com/nnk/services/AbstractCrudService.class
 com/nnk/domain/User.class
 com/nnk/services/CurvePointServiceImpl.class
+com/nnk/services/UserServiceImpl.class
 com/nnk/controllers/RatingController.class
 com/nnk/repositories/CurvePointRepository.class
 com/nnk/controllers/LoginController.class

@@ -38,7 +38,7 @@ public class CurveControllerTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("user", "password", "User", "USER");
+        User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
         CurvePoint curvePoint = new CurvePoint(BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));

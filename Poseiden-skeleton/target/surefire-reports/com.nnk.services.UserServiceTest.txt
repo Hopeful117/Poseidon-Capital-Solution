@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.nnk.repositories.TradeTests
+Test set: com.nnk.services.UserServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.nnk.repositories.TradeTests
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.587 s -- in com.nnk.services.UserServiceTest

@@ -3,10 +3,12 @@ package com.nnk.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
 
 @Setter
 @Getter
@@ -28,6 +30,10 @@ public class User implements DomainEntity <User>{
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
     @Size(max = 125, message = "Password must not exceed 125 characters")
+    @Pattern(
+            regexp= "^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,}$",
+            message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un symbole."
+    )
     private String password;
 
 
@@ -50,6 +56,10 @@ public class User implements DomainEntity <User>{
 
     @Override
     public User update(User domainEntity) {
+        fullname=domainEntity.getFullname();
+        password=domainEntity.getPassword();
+        username=domainEntity.getUsername();
+        role=domainEntity.getRole();
         return this;
     }
 }

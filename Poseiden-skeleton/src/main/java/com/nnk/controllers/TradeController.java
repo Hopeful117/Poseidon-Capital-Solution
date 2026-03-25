@@ -90,6 +90,6 @@ public class TradeController {
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
-        return "redirect:/trade/list";
+        return "trade/list";
     }
 }
