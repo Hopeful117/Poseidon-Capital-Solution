@@ -22,7 +22,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             redirectUrl = "/admin/home";
         } else if (authentication.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
-            redirectUrl = "bidList/list";
+            redirectUrl = "/bidList/list";
         }
 
         response.sendRedirect(redirectUrl);

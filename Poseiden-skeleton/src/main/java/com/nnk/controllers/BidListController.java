@@ -46,7 +46,7 @@ public class BidListController {
         }
         try{
             service.create(bid);
-            return "bidList/list";
+            return "redirect:/bidList/list";
         } catch (Exception e) {
             model.addAttribute("errors",e.getMessage());
             return "bidList/add";

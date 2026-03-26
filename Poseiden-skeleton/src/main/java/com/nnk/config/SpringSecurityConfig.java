@@ -37,6 +37,10 @@ public class SpringSecurityConfig {
                         .usernameParameter("username")
                         .successHandler(successHandler)
                         .permitAll()
+                ).logout((logout)->logout
+                        .logoutUrl("/app/logout")
+                        .logoutSuccessUrl("/app/login?logout")
+                        .permitAll()
                 );
 
 

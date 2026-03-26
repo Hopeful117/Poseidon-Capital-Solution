@@ -77,8 +77,8 @@ public class BidListControllerTest {
                         .param("type", "Type2")
                         .param("bidQuantity", "200.0")
                 )
-                .andExpect(status().isOk())
-                .andExpect(view().name("bidList/list"));
+                .andExpect(status().is3xxRedirection());
+
 
     }
 
