@@ -71,9 +71,8 @@ public class BidListController {
                             BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check required fields, if valid call service to update Bid and return list Bid
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/bidList/update";
+
+            return "bidList/update";
         }
         try {
             bidList.setBidListId(id);
