@@ -40,9 +40,8 @@ public class BidListController {
     public String validate(@Valid BidList bid, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check data valid and save to db, after saving return bid list
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/bidList/add";
+
+            return "bidList/add";
         }
         try{
             service.create(bid);

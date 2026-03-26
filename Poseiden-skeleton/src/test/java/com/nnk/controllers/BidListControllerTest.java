@@ -91,8 +91,8 @@ public class BidListControllerTest {
                         .param("type", "Type1")
                         .param("bidQuantity", "100.0")
                 )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("bidList","account"));
 
 
     }
