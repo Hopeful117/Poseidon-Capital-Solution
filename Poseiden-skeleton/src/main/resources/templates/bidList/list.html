@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Home</title>
@@ -13,21 +12,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <div class="row  justify-content-between">
-        <div class="col-6">
-            <a th:href="@{/bidList/list}">Bid List</a>&nbsp;|&nbsp;
-            <a th:href="@{/curvePoint/list}">Curve Points</a>&nbsp;|&nbsp;
-            <a th:href="@{/rating/list}">Ratings</a>&nbsp;|&nbsp;
-            <a th:href="@{/trade/list}">Trade</a>&nbsp;|&nbsp;
-            <a th:href="@{/ruleName/list}">Rule</a>
-        </div>
-        <div class="col-6 d-flex flex-column align-items-end">
-           <div> Logged in user: <span sec:authentication="name"></span></div>
-            <form method="POST" th:action="@{/app/logout}">
-                <input type="submit" value="Logout"/>
-            </form>
-        </div>
-    </div>
+    <div th:replace="~{header :: header}"></div>
     <div class="row"><h2 style="padding-left:0">Bid List</h2></div>
     <div class="row">
         <a class="btn btn-primary btn-sm" style="width:100px" th:href="@{/bidList/add}">Add New</a>
@@ -55,6 +40,7 @@
             </tbody>
         </table>
     </div>
+    <div th:replace="~{messages :: messages}"></div>
 </div>
 </body>
 </html>

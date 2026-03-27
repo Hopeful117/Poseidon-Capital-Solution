@@ -1,38 +1,36 @@
 package com.nnk.services;
 
 import com.nnk.domain.User;
-import com.nnk.exceptions.EntityNotFoundException;
 import com.nnk.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 @Service
 public class UserServiceImpl extends AbstractCrudService<User> {
+
+    private final PasswordEncoder encoder = new BCryptPasswordEncoder();
+
     protected UserServiceImpl(UserRepository repository) {
         super(repository);
+
     }
 
     @Override
-    public void create(User user) {
-        Assert.notNull(user, "Objet is null");
-        Assert.isNull(user.getId(), "Id can not be defined");
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-
-        repository.save(user);
+    public void create(final User user) {
+        encryptPassword(user);
+        super.create(user);
     }
 
     @Override
-    public void update(User user) {
-        Assert.notNull(user, "Objet is null");
-        Assert.notNull(user.getId(), "Id can not be null");
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        User oldUser = repository.findById(user.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Id not found"));
-        User newUser = oldUser.update(user);
+    public void update(final User user) {
+        encryptPassword(user);
+        super.update(user);
+    }
 
-        repository.save(newUser);
+    private void encryptPassword(User user) {
+        Assert.notNull(user, "Objet is null");
+        user.setPassword(encoder.encode(user.getPassword()));
     }
 }

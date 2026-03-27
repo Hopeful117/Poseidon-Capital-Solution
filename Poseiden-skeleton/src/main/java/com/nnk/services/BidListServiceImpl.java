@@ -12,7 +12,4 @@ public class BidListServiceImpl extends AbstractCrudService<BidList>  {
     protected BidListServiceImpl(BidListRepository repository){
         super(repository);
     }
-
-
-
 }

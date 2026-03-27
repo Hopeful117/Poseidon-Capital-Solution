@@ -3,6 +3,7 @@ package com.nnk.controllers;
 import com.nnk.domain.Rating;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class RatingController {
 
-    @Autowired
-    private CrudService<Rating> service;
+
+    private final CrudService<Rating> service;
 
     @RequestMapping("/rating/list")
     public String home(Model model) {

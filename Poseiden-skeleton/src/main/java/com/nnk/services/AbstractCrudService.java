@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public abstract class AbstractCrudService<M extends DomainEntity<M>> implements CrudService<M> {
 
-
     protected final JpaRepository<M, Integer> repository;
     
     protected AbstractCrudService(JpaRepository<M, Integer> repository ){
@@ -19,7 +18,7 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
     }
 
     @Override
-    public M findById(Integer id) {
+    public M findById(final Integer id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Id not found"));
     }
 
@@ -29,14 +28,16 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
     }
 
     @Override
-    public void deleteById(Integer id) {
-        repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Id not found"));
+    public void deleteById(final Integer id) {
+        if (!repository.existsById(id)){
+            throw new EntityNotFoundException("Id not found");
+        }
+
         repository.deleteById(id);
     }
 
     @Override
-    public void create(M model) {
+    public void create(final M model) {
         Assert.notNull(model, "Objet is null");
         Assert.isNull(model.getId() , "Id can not be defined");
 
@@ -44,14 +45,14 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
     }
 
     @Override
-    public void update(M model) {
+    public void update(final M model) {
         Assert.notNull(model, "Objet is null");
         Assert.notNull(model.getId() , "Id can not be null");
 
-       M oldModel= repository.findById(model.getId())
-                .orElseThrow(()-> new EntityNotFoundException("Id not found"));
-       M newModel=oldModel.update(model);
+        final M updatedModel = repository.findById(model.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Id not found"))
+                .update(model);
 
-        repository.save(newModel);
+        repository.save(updatedModel);
     }
 }

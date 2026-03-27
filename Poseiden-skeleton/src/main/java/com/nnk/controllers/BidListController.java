@@ -3,8 +3,9 @@ package com.nnk.controllers;
 import com.nnk.domain.BidList;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @Controller
 public class BidListController {
 
-    @Autowired
-    private CrudService<BidList> service;
+
+    private final  CrudService<BidList> service;
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
@@ -37,7 +38,7 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid BidList bid, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return bid list
         if (result.hasErrors()) {
 
@@ -47,7 +48,7 @@ public class BidListController {
             service.create(bid);
             return "redirect:/bidList/list";
         } catch (Exception e) {
-            model.addAttribute("errors",e.getMessage());
+            model.addAttribute("errorMessage",e.getMessage());
             return "bidList/add";
         }
 

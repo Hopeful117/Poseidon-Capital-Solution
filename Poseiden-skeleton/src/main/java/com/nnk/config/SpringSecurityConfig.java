@@ -31,6 +31,7 @@ public class SpringSecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().authenticated()
+
                 )
                 .formLogin(form -> form
                         .loginPage("/app/login")
@@ -41,7 +42,11 @@ public class SpringSecurityConfig {
                         .logoutUrl("/app/logout")
                         .logoutSuccessUrl("/app/login?logout")
                         .permitAll()
-                );
+                ).exceptionHandling((ex->
+                        ex.authenticationEntryPoint((request, response, authException) ->
+                        {response.sendRedirect("/app/login");}).accessDeniedHandler(((request, response, accessDeniedException) ->
+                        {response.sendRedirect("/403");}))
+                        ));
 
 
         return http.build();

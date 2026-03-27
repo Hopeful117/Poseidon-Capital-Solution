@@ -3,6 +3,7 @@ package com.nnk.controllers;
 import com.nnk.domain.CurvePoint;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CurveController {
 
-    @Autowired
-    private CrudService<CurvePoint> service;
+    private final CrudService<CurvePoint> service;
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {

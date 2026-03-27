@@ -7,6 +7,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -18,10 +19,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String redirectUrl = "/";
 
         if (authentication.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                .anyMatch(a -> Objects.equals(a.getAuthority(), "ROLE_ADMIN"))) {
             redirectUrl = "/admin/home";
         } else if (authentication.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
+                .anyMatch(a -> Objects.equals(a.getAuthority(), "ROLE_USER"))) {
             redirectUrl = "/bidList/list";
         }
 

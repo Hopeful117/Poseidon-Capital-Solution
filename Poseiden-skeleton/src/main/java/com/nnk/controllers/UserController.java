@@ -5,6 +5,7 @@ import com.nnk.exceptions.EntityNotFoundException;
 import com.nnk.repositories.UserRepository;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,9 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-   private CrudService<User> service;
+
+
+   private final  CrudService<User> service;
 
     @RequestMapping("/user/list")
     public String home(Model model) {

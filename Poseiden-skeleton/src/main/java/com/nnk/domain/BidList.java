@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "bidlist")

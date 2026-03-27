@@ -56,10 +56,10 @@ public class User implements DomainEntity <User>{
 
     @Override
     public User update(User domainEntity) {
-        fullname=domainEntity.getFullname();
-        password=domainEntity.getPassword();
-        username=domainEntity.getUsername();
-        role=domainEntity.getRole();
+        fullname = domainEntity.getFullname();
+        password = domainEntity.getPassword();
+        username = domainEntity.getUsername();
+        role = domainEntity.getRole();
         return this;
     }
 }
