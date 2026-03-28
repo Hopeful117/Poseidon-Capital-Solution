@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+
+@Setter
+@Getter
+@Entity
+@Table(name = &quot;users&quot;)
+@RequiredArgsConstructor
+public class User implements DomainEntity &lt;User&gt;{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = &quot;Id&quot;)
+    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
+    private Integer id;
+
+    @NotBlank(message = &quot;Username is mandatory&quot;)
+    @Column(name = &quot;username&quot;, unique = true)
+    @Size(max = 125, message = &quot;Username must not exceed 125 characters&quot;)
+    private String username;
+
+    @NotBlank(message = &quot;Password is mandatory&quot;)
+    @Column(name = &quot;password&quot;)
+    @Size(max = 125, message = &quot;Password must not exceed 125 characters&quot;)
+    @Pattern(
+            regexp= &quot;^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,}$&quot;,
+            message = &quot;Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un symbole.&quot;
+    )
+    private String password;
+
+
+    @NotBlank(message = &quot;FullName is mandatory&quot;)
+    @Column(name = &quot;fullname&quot;)
+    @Size(max = 125, message = &quot;FullName must not exceed 125 characters&quot;)
+    private String fullname;
+
+    @NotBlank(message = &quot;Role is mandatory&quot;)
+    @Column(name = &quot;role&quot;)
+    @Size(max = 125, message = &quot;Role must not exceed 125 characters&quot;)
+    private String role;
+
+<span class="fc" id="L50">    public User(String username, String password, String fullname, String role) {</span>
+<span class="fc" id="L51">        this.username = username;</span>
+<span class="fc" id="L52">        this.password = password;</span>
+<span class="fc" id="L53">        this.fullname = fullname;</span>
+<span class="fc" id="L54">        this.role = role;</span>
+<span class="fc" id="L55">    }</span>
+
+    @Override
+    public User update(User domainEntity) {
+<span class="fc" id="L59">        fullname = domainEntity.getFullname();</span>
+<span class="fc" id="L60">        password = domainEntity.getPassword();</span>
+<span class="fc" id="L61">        username = domainEntity.getUsername();</span>
+<span class="fc" id="L62">        role = domainEntity.getRole();</span>
+<span class="fc" id="L63">        return this;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

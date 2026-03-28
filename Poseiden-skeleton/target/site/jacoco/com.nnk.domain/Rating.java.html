@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rating.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">Rating.java</span></div><h1>Rating.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Table(name = &quot;rating&quot;)
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class Rating implements DomainEntity&lt;Rating&gt;{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;Id&quot;)
+    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
+    Integer id;
+
+    @Column(name = &quot; moodysRating&quot;)
+    @Size(max = 125, message = &quot;Moody's Rating must not exceed 125 characters&quot;)
+    String moodysRating;
+
+    @Column(name = &quot; sandPRating&quot;)
+    @Size(max = 125, message = &quot;S&amp;P Rating must not exceed 125 characters&quot;)
+    String sandPRating;
+
+    @Column(name = &quot;fitchRating&quot;)
+    @Size(max = 125, message = &quot;Fitch Rating must not exceed 125 characters&quot;)
+    String fitchRating;
+
+    @Column(name = &quot;orderNumber&quot;)
+    @Positive(message = &quot;Order Number must be positive&quot;)
+    Integer orderNumber;
+
+<span class="fc" id="L40">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
+<span class="fc" id="L41">        this.moodysRating = moodysRating;</span>
+<span class="fc" id="L42">        this.sandPRating = sandPRating;</span>
+<span class="fc" id="L43">        this.fitchRating = fitchRating;</span>
+<span class="fc" id="L44">        this.orderNumber = orderNumber;</span>
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    public Rating update(Rating domainEntity){
+<span class="fc" id="L49">        moodysRating=domainEntity.getMoodysRating();</span>
+<span class="fc" id="L50">        sandPRating=domainEntity.getSandPRating();</span>
+<span class="fc" id="L51">        fitchRating=domainEntity.getFitchRating();</span>
+<span class="fc" id="L52">        orderNumber=domainEntity.getOrderNumber();</span>
+
+<span class="fc" id="L54">        return this;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

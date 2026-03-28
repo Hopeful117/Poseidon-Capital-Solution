@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Trade.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">Trade.java</span></div><h1>Trade.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+
+@Entity
+@Table(name = &quot;trade&quot;)
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class Trade implements DomainEntity&lt;Trade&gt;{
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = &quot;trade_id&quot;)
+    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
+    Integer tradeId;
+
+    @Column(name = &quot;account&quot;)
+    @NotNull(message = &quot;Account must not be null&quot;)
+    @NotBlank(message = &quot;Account must not be blank&quot;)
+    @Size(max = 30, message = &quot;Account must not exceed 30 characters&quot;)
+    String account;
+
+    @Column(name = &quot;type&quot;)
+    @NotNull(message = &quot;Type must not be null&quot;)
+    @NotBlank(message = &quot;Type must not be blank&quot;)
+    @Size(max = 30, message = &quot;Type must not exceed 30 characters&quot;)
+    String type;
+
+    @Column(name = &quot;buyQuantity&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Buy Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal buyQuantity;
+
+    @Column(name = &quot;sellQuantity&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Sell Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal sellQuantity;
+
+    @Column(name = &quot;buyPrice&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Buy Price must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal buyPrice;
+
+    @Column(name = &quot;sellPrice&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Sell Price must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal sellPrice;
+
+    @Column(name = &quot;benchmark&quot;)
+    @Size(max = 125, message = &quot;Benchmark must not exceed 125 characters&quot;)
+    String benchmark;
+
+    @Column(name = &quot;tradeDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp tradeDate;
+
+    @Column(name = &quot;security&quot;)
+    @Size(max = 125, message = &quot;Security must not exceed 125 characters&quot;)
+    String security;
+
+    @Column(name = &quot;status&quot;)
+    @Size(max = 10, message = &quot;Status must not exceed 10 characters&quot;)
+    String status;
+
+    @Column(name = &quot;trader&quot;)
+    @Size(max = 125, message = &quot;Trader must not exceed 125 characters&quot;)
+    String trader;
+
+    @Column(name = &quot;book&quot;)
+    @Size(max = 125, message = &quot;Book must not exceed 125 characters&quot;)
+    String book;
+
+    @Column(name = &quot;creationName&quot;)
+    @Size(max = 125, message = &quot;Creation Name must not exceed 125 characters&quot;)
+    String creationName;
+
+    @Column(name = &quot;creationDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp creationDate;
+
+    @Column(name = &quot;revisionName&quot;)
+    @Size(max = 125, message = &quot;Revision Name must not exceed 125 characters&quot;)
+    String revisionName;
+
+    @Column(name = &quot;revisionDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp revisionDate;
+
+    @Column(name = &quot;dealName&quot;)
+    @Size(max = 125, message = &quot;Deal Name must not exceed 125 characters&quot;)
+    String dealName;
+
+    @Column(name = &quot;dealType&quot;)
+    @Size(max = 125, message = &quot;Deal Type must not exceed 125 characters&quot;)
+    String dealType;
+
+    @Column(name = &quot;sourceListId&quot;)
+    @Size(max = 125, message = &quot;Source List Id must not exceed 125 characters&quot;)
+    String sourceListId;
+
+    @Column(name = &quot;side&quot;)
+    @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
+    String side;
+
+<span class="fc" id="L114">    public Trade(String account, String type, BigDecimal buyQuantity) {</span>
+<span class="fc" id="L115">        this.account = account;</span>
+<span class="fc" id="L116">        this.type = type;</span>
+<span class="fc" id="L117">        this.buyQuantity=buyQuantity;</span>
+<span class="fc" id="L118">    }</span>
+    // TODO: Map columns in data table TRADE with corresponding java fields
+
+
+    public Integer getId(){
+<span class="fc" id="L123">        return tradeId;</span>
+    }
+
+    @Override
+    public Trade update(Trade domainEntity) {
+<span class="fc" id="L128">        account = domainEntity.getAccount();</span>
+<span class="fc" id="L129">        type = domainEntity.getType();</span>
+<span class="fc" id="L130">        buyQuantity=domainEntity.buyQuantity;</span>
+
+
+<span class="fc" id="L133">        return this;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

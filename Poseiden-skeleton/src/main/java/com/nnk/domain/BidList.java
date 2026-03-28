@@ -2,10 +2,7 @@ package com.nnk.domain;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -25,6 +22,7 @@ public class BidList implements DomainEntity<BidList> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
+    @Positive
     @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer bidListId;
 
@@ -41,18 +39,22 @@ public class BidList implements DomainEntity<BidList> {
     String type;
 
     @Column(name = "bidQuantity")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Bid Quantity must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal bidQuantity;
 
     @Column(name = "askQuantity")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Ask Quantity must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal askQuantity;
 
     @Column(name = "bid")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Bid must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal bid;
 
     @Column(name = "ask")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Ask must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal ask;
 

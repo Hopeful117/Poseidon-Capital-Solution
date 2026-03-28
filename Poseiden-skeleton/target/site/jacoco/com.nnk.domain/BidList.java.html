@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BidList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">BidList.java</span></div><h1>BidList.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
+
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.HashMap;
+
+@Entity
+@Table(name = &quot;bidlist&quot;)
+@RequiredArgsConstructor
+@Getter
+@Setter
+public class BidList implements DomainEntity&lt;BidList&gt; {
+    // TODO: Map columns in data table BIDLIST with corresponding java fields
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = &quot;BidListId&quot;)
+    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
+    Integer bidListId;
+
+    @Column(name = &quot;account&quot;)
+    @NotNull(message = &quot;Account is mandatory&quot;)
+    @NotBlank(message = &quot;Account must not be blank&quot;)
+    @Size(max = 30, message = &quot;Account must not exceed 30 characters&quot;)
+    String account;
+
+    @Column(name = &quot;type&quot;)
+    @NotNull(message = &quot;Type is mandatory&quot;)
+    @NotBlank(message = &quot;Type must not be blank&quot;)
+    @Size(max = 30, message = &quot;Type must not exceed 30 characters&quot;)
+    String type;
+
+    @Column(name = &quot;bidQuantity&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Bid Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal bidQuantity;
+
+    @Column(name = &quot;askQuantity&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Ask Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal askQuantity;
+
+    @Column(name = &quot;bid&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Bid must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal bid;
+
+    @Column(name = &quot;ask&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Ask must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal ask;
+
+    @Column(name = &quot;benchmark&quot;)
+    @Size(max = 125, message = &quot;Benchmark must not exceed 125 characters&quot;)
+    String benchmark;
+
+    @Column(name = &quot;bidListDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp bidListDate;
+
+    @Column(name = &quot;commentary&quot;)
+    @Size(max = 125, message = &quot;Commentary must not exceed 125 characters&quot;)
+
+    String commentary;
+
+    @Column(name = &quot;security&quot;)
+    @Size(max = 125, message = &quot;Security must not exceed 125 characters&quot;)
+    String security;
+
+    @Column(name = &quot;status&quot;)
+    @Size(max = 10, message = &quot;Status must not exceed 10 characters&quot;)
+    String status;
+
+    @Column(name = &quot;trader&quot;)
+    @Size(max = 125, message = &quot;Trader must not exceed 125 characters&quot;)
+    String trader;
+
+    @Column(name = &quot;book&quot;)
+    @Size(max = 125, message = &quot;Book must not exceed 125 characters&quot;)
+    String book;
+
+    @Column(name = &quot;creationName&quot;)
+    String creationName;
+
+    @Column(name = &quot;creationDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp creationDate;
+
+    @Column(name = &quot;revisionName&quot;)
+    @Size(max = 125, message = &quot;Revision Name must not exceed 125 characters&quot;)
+    String revisionName;
+
+    @Column(name = &quot;revisionDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp revisionDate;
+
+    @Column(name = &quot;dealName&quot;)
+    @Size(max = 125, message = &quot;Deal Name must not exceed 125 characters&quot;)
+    String dealName;
+
+    @Column(name = &quot;dealType&quot;)
+    @Size(max = 125, message = &quot;Deal Type must not exceed 125 characters&quot;)
+    String dealType;
+
+    @Column(name = &quot;sourceListId&quot;)
+    @Size(max = 125, message = &quot;Source List Id must not exceed 125 characters&quot;)
+    String sourceListId;
+
+    @Column(name = &quot;side&quot;)
+    @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
+    String sid;
+
+<span class="fc" id="L119">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
+<span class="fc" id="L120">        this.account = account;</span>
+<span class="fc" id="L121">        this.type = type;</span>
+<span class="fc" id="L122">        this.bidQuantity = bidQuantity;</span>
+<span class="fc" id="L123">    }</span>
+
+    public Integer getId(){
+<span class="fc" id="L126">        return bidListId;</span>
+    }
+
+    public BidList update( BidList domainEntity){
+
+<span class="fc" id="L131">        account=domainEntity.getAccount();</span>
+<span class="fc" id="L132">        type=domainEntity.getType();</span>
+<span class="fc" id="L133">        bidQuantity=domainEntity.getBidQuantity();</span>
+
+<span class="fc" id="L135">        return this;</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

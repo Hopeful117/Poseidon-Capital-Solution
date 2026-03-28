@@ -2,6 +2,8 @@ package com.nnk.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,10 +22,13 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id")
+    @Positive
     @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer id;
 
     @Column(name = "CurveId")
+    @Positive
+    @NotNull
     Integer curveId;
 
     @Column(name = "asOfDate")
@@ -31,6 +36,7 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     Timestamp asOfDate;
 
     @Column(name = "term")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Term must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal term;
 
@@ -42,13 +48,15 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Timestamp creationDate;
 
-    public CurvePoint(BigDecimal term, BigDecimal value) {
+    public CurvePoint(Integer curveId,BigDecimal term, BigDecimal value) {
+        this.curveId=curveId;
         this.term = term;
         this.value = value;
     }
 
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
+        curveId=domainEntity.getCurveId();
         term = domainEntity.getTerm();
         value=domainEntity.getValue();
 

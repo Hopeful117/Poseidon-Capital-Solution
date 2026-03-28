@@ -41,7 +41,7 @@ public class CurveControllerTest {
         User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
-        CurvePoint curvePoint = new CurvePoint(BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));
+        CurvePoint curvePoint = new CurvePoint(10,BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));
         savedCurvePoint = curvePointRepository.save(curvePoint);
     }
 
@@ -84,8 +84,8 @@ public class CurveControllerTest {
                         .param("curveId", "1")
                         .param("term", "a")
                         .param("value", "1.0"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("curvePoint","term"));
     }
 
     @Test

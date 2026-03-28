@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CurvePoint.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">CurvePoint.java</span></div><h1>CurvePoint.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
+
+@Entity
+@Table(name = &quot;curvepoint&quot;)
+@Getter
+@Setter
+@RequiredArgsConstructor
+public class CurvePoint implements DomainEntity &lt;CurvePoint&gt; {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = &quot;Id&quot;)
+    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
+    Integer id;
+
+    @Column(name = &quot;CurveId&quot;)
+    @NotNull
+    Integer curveId;
+
+    @Column(name = &quot;asOfDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp asOfDate;
+
+    @Column(name = &quot;term&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Term must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal term;
+
+    @Column(name = &quot;curveValue&quot;)
+    @Digits(integer = 10, fraction = 2, message = &quot;Value must be a valid number with up to 10 digits and 2 decimal places&quot;)
+    BigDecimal value;
+
+    @Column(name = &quot;creationDate&quot;)
+    @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
+    Timestamp creationDate;
+
+<span class="fc" id="L47">    public CurvePoint(Integer curveId,BigDecimal term, BigDecimal value) {</span>
+<span class="fc" id="L48">        this.curveId=curveId;</span>
+<span class="fc" id="L49">        this.term = term;</span>
+<span class="fc" id="L50">        this.value = value;</span>
+<span class="fc" id="L51">    }</span>
+
+    @Override
+    public CurvePoint update(CurvePoint domainEntity) {
+<span class="fc" id="L55">        curveId=domainEntity.getCurveId();</span>
+<span class="fc" id="L56">        term = domainEntity.getTerm();</span>
+<span class="fc" id="L57">        value=domainEntity.getValue();</span>
+
+<span class="fc" id="L59">        return this;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
