@@ -5,7 +5,7 @@ import com.nnk.repositories.RatingRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RatingServiceImpl extends AbstractCrudService<Rating>{
+public class RatingServiceImpl extends AbstractCrudService<Rating> {
 
     protected RatingServiceImpl(RatingRepository repository) {
         super(repository);

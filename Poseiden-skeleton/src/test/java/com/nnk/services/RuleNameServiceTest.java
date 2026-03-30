@@ -14,7 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -99,7 +100,6 @@ public class RuleNameServiceTest {
     }
 
 
-
     @Test
     public void testGetRuleNameByIdShouldThrowExceptionWhenRuleNameNotFound() {
         // Given
@@ -112,19 +112,19 @@ public class RuleNameServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'Rule1', 'Desc1', 'json1', 'temp1', 'sql1', 'part1', 'UpdatedRule', 'UpdatedDesc', 'updatedJson', 'updatedTemp', 'updatedSql', 'updatedPart'",
-        "2, 'Rule2', 'Desc2', 'json2', 'temp2', 'sql2', 'part2', 'UpdatedRule2', 'UpdatedDesc2', 'updatedJson2', 'updatedTemp2', 'updatedSql2', 'updatedPart2'",
-        "3, 'Rule3', 'Desc3', 'json3', 'temp3', 'sql3', 'part3', 'UpdatedRule3', 'UpdatedDesc3', 'updatedJson3', 'updatedTemp3', 'updatedSql3', 'updatedPart3'"
+            "1, 'Rule1', 'Desc1', 'json1', 'temp1', 'sql1', 'part1', 'UpdatedRule', 'UpdatedDesc', 'updatedJson', 'updatedTemp', 'updatedSql', 'updatedPart'",
+            "2, 'Rule2', 'Desc2', 'json2', 'temp2', 'sql2', 'part2', 'UpdatedRule2', 'UpdatedDesc2', 'updatedJson2', 'updatedTemp2', 'updatedSql2', 'updatedPart2'",
+            "3, 'Rule3', 'Desc3', 'json3', 'temp3', 'sql3', 'part3', 'UpdatedRule3', 'UpdatedDesc3', 'updatedJson3', 'updatedTemp3', 'updatedSql3', 'updatedPart3'"
     })
     public void testUpdateRuleName(int id, String originalName, String originalDesc, String originalJson, String originalTemp, String originalSql, String originalPart,
-                                String newName, String newDesc, String newJson, String newTemp, String newSql, String newPart) {
+                                   String newName, String newDesc, String newJson, String newTemp, String newSql, String newPart) {
         // Given
         RuleName existingRuleName = new RuleName(originalName, originalDesc, originalJson, originalTemp, originalSql, originalPart);
         existingRuleName.setId(id);
-        
+
         RuleName updatedRuleName = new RuleName(newName, newDesc, newJson, newTemp, newSql, newPart);
         updatedRuleName.setId(id);
-        
+
         when(ruleNameRepository.findById(id)).thenReturn(java.util.Optional.of(existingRuleName));
 
         // When
@@ -134,7 +134,7 @@ public class RuleNameServiceTest {
         ArgumentCaptor<RuleName> captor = ArgumentCaptor.forClass(RuleName.class);
         verify(ruleNameRepository).save(captor.capture());
         RuleName savedRuleName = captor.getValue();
-        
+
         assertEquals(newName, savedRuleName.getName());
         assertEquals(newDesc, savedRuleName.getDescription());
         assertEquals(newJson, savedRuleName.getJson());
@@ -149,7 +149,7 @@ public class RuleNameServiceTest {
         // Given
         RuleName ruleNameToUpdate = new RuleName("Rule1", "Desc1", "json1", "temp1", "sql1", "part1");
         ruleNameToUpdate.setId(999);
-        
+
         when(ruleNameRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

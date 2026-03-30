@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-      xmlns:th="http://www.thymeleaf.org">
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Home</title>
@@ -22,22 +22,25 @@
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="account">Account</label>
                 <div class="col-sm-10">
-                    <input class="col-12  form-control px-4 my-2" id="account" placeholder="Account" th:field="*{account}" type="text">
+                    <input class="col-12  form-control px-4 my-2" id="account" placeholder="Account"
+                           th:field="*{account}" type="text">
                     <p class="text-danger" th:errors="*{account}" th:if="${#fields.hasErrors('account')}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="type">Type</label>
                 <div class="col-sm-10">
-                    <input class="col-12  form-control px-4 my-2" id="type" placeholder="Type" th:field="*{type}" type="text">
+                    <input class="col-12  form-control px-4 my-2" id="type" placeholder="Type" th:field="*{type}"
+                           type="text">
                     <p class="text-danger" th:errors="*{type}" th:if="${#fields.hasErrors('type')}"></p>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-4 control-label" for="bidQuantity">Bid Quantity</label>
                 <div class="col-sm-10">
-                    <input class="col-12  form-control px-4 my-2" id="bidQuantity" placeholder="Bid Quantity" th:field="*{bidQuantity}"
-                           type="number" step="0.01">
+                    <input class="col-12  form-control px-4 my-2" id="bidQuantity" placeholder="Bid Quantity"
+                           step="0.01"
+                           th:field="*{bidQuantity}" type="number">
                     <p class="text-danger" th:errors="*{bidQuantity}" th:if="${#fields.hasErrors('bidQuantity')}"></p>
                 </div>
             </div>

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    
+
     /**
      * Gère les exceptions EntityNotFoundException
      * Redirige avec un message d'erreur

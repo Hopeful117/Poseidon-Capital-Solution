@@ -2,19 +2,17 @@ package com.nnk.services;
 
 import com.nnk.domain.DomainEntity;
 import com.nnk.exceptions.EntityNotFoundException;
-import jakarta.validation.constraints.AssertTrue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Optional;
 
 public abstract class AbstractCrudService<M extends DomainEntity<M>> implements CrudService<M> {
 
     protected final JpaRepository<M, Integer> repository;
-    
-    protected AbstractCrudService(JpaRepository<M, Integer> repository ){
-        this.repository= repository;
+
+    protected AbstractCrudService(JpaRepository<M, Integer> repository) {
+        this.repository = repository;
     }
 
     @Override
@@ -29,7 +27,7 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
 
     @Override
     public void deleteById(final Integer id) {
-        if (!repository.existsById(id)){
+        if (!repository.existsById(id)) {
             throw new EntityNotFoundException("Id not found");
         }
 
@@ -39,7 +37,7 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
     @Override
     public void create(final M model) {
         Assert.notNull(model, "Objet is null");
-        Assert.isNull(model.getId() , "Id can not be defined");
+        Assert.isNull(model.getId(), "Id can not be defined");
 
         repository.save(model);
     }
@@ -47,7 +45,7 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
     @Override
     public void update(final M model) {
         Assert.notNull(model, "Objet is null");
-        Assert.notNull(model.getId() , "Id can not be null");
+        Assert.notNull(model.getId(), "Id can not be null");
 
         final M updatedModel = repository.findById(model.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Id not found"))

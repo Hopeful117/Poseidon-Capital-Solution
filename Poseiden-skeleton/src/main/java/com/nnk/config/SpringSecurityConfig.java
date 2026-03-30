@@ -38,15 +38,19 @@ public class SpringSecurityConfig {
                         .usernameParameter("username")
                         .successHandler(successHandler)
                         .permitAll()
-                ).logout((logout)->logout
+                ).logout((logout) -> logout
                         .logoutUrl("/app/logout")
                         .logoutSuccessUrl("/app/login?logout")
                         .permitAll()
-                ).exceptionHandling((ex->
+                ).exceptionHandling((ex ->
                         ex.authenticationEntryPoint((request, response, authException) ->
-                        {response.sendRedirect("/app/login");}).accessDeniedHandler(((request, response, accessDeniedException) ->
-                        {response.sendRedirect("/403");}))
-                        ));
+                        {
+                            response.sendRedirect("/app/login");
+                        }).accessDeniedHandler(((request, response, accessDeniedException) ->
+                        {
+                            response.sendRedirect("/403");
+                        }))
+                ));
 
 
         return http.build();

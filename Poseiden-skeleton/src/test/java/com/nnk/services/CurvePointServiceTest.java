@@ -15,7 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,7 +40,7 @@ public class CurvePointServiceTest {
     })
     public void testAddCurvePoint(int curveId, BigDecimal term, BigDecimal value) {
 
-        CurvePoint curvePoint = new CurvePoint(curveId,term, value);
+        CurvePoint curvePoint = new CurvePoint(curveId, term, value);
         // When
         curvePointService.create(curvePoint);
         ArgumentCaptor<CurvePoint> captor = ArgumentCaptor.forClass(CurvePoint.class);
@@ -48,7 +49,7 @@ public class CurvePointServiceTest {
         verify(curvePointRepository).save(captor.capture());
         CurvePoint savedCurvePoint = captor.getValue();
 
-        assertEquals(savedCurvePoint.getCurveId(),curveId);
+        assertEquals(savedCurvePoint.getCurveId(), curveId);
         assertEquals(savedCurvePoint.getTerm(), term);
         assertEquals(savedCurvePoint.getValue(), value);
 
@@ -62,7 +63,7 @@ public class CurvePointServiceTest {
 
         List<CurvePoint> mockCurvePoints = List.of(
                 new CurvePoint(10, BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0)),
-                new CurvePoint( 11,BigDecimal.valueOf(20.0), BigDecimal.valueOf(4.0))
+                new CurvePoint(11, BigDecimal.valueOf(20.0), BigDecimal.valueOf(4.0))
         );
         when(curvePointRepository.findAll()).thenReturn(mockCurvePoints);
         // When
@@ -74,7 +75,6 @@ public class CurvePointServiceTest {
 
         assert (curvePoints.get(1).getTerm().equals(BigDecimal.valueOf(20.0)));
         assert (curvePoints.get(0).getValue().equals(BigDecimal.valueOf(5.0)));
-
 
 
     }
@@ -89,11 +89,10 @@ public class CurvePointServiceTest {
         CurvePoint curvePoint = curvePointService.findById(1);
 
         // Then
-        assert(curvePoint.getCurveId().equals(12));
+        assert (curvePoint.getCurveId().equals(12));
         assert (curvePoint.getTerm().equals(BigDecimal.valueOf(10.0)));
         assert (curvePoint.getValue().equals(BigDecimal.valueOf(5.0)));
     }
-
 
 
     @Test
@@ -108,19 +107,19 @@ public class CurvePointServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 1, 10.0, 5.0, 20.0, 6.0",
-        "2, 2, 20.0, 4.0, 30.0, 5.0",
-        "3, 3, 30.0, 3.0, 40.0, 4.0"
+            "1, 1, 10.0, 5.0, 20.0, 6.0",
+            "2, 2, 20.0, 4.0, 30.0, 5.0",
+            "3, 3, 30.0, 3.0, 40.0, 4.0"
     })
-    public void testUpdateCurvePoint(int id, int curveId, BigDecimal originalTerm, BigDecimal originalValue, 
-                                BigDecimal newTerm, BigDecimal newValue) {
+    public void testUpdateCurvePoint(int id, int curveId, BigDecimal originalTerm, BigDecimal originalValue,
+                                     BigDecimal newTerm, BigDecimal newValue) {
         // Given
-        CurvePoint existingCurvePoint = new CurvePoint(curveId,originalTerm, originalValue);
+        CurvePoint existingCurvePoint = new CurvePoint(curveId, originalTerm, originalValue);
         existingCurvePoint.setId(id);
-        
-        CurvePoint updatedCurvePoint = new CurvePoint(curveId,newTerm, newValue);
+
+        CurvePoint updatedCurvePoint = new CurvePoint(curveId, newTerm, newValue);
         updatedCurvePoint.setId(id);
-        
+
         when(curvePointRepository.findById(id)).thenReturn(java.util.Optional.of(existingCurvePoint));
 
         // When
@@ -130,7 +129,7 @@ public class CurvePointServiceTest {
         ArgumentCaptor<CurvePoint> captor = ArgumentCaptor.forClass(CurvePoint.class);
         verify(curvePointRepository).save(captor.capture());
         CurvePoint savedCurvePoint = captor.getValue();
-        
+
         // Les champs term et value sont mis à jour
         assertEquals(newTerm, savedCurvePoint.getTerm());
         assertEquals(newValue, savedCurvePoint.getValue());
@@ -142,9 +141,9 @@ public class CurvePointServiceTest {
     @Test
     public void testUpdateCurvePointShouldThrowExceptionWhenCurvePointNotFound() {
         // Given
-        CurvePoint curvePointToUpdate = new CurvePoint(12 ,BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
+        CurvePoint curvePointToUpdate = new CurvePoint(12, BigDecimal.valueOf(10.0), BigDecimal.valueOf(5.0));
         curvePointToUpdate.setId(999);
-        
+
         when(curvePointRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Trade implements DomainEntity<Trade>{
+public class Trade implements DomainEntity<Trade> {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -114,12 +114,12 @@ public class Trade implements DomainEntity<Trade>{
     public Trade(String account, String type, BigDecimal buyQuantity) {
         this.account = account;
         this.type = type;
-        this.buyQuantity=buyQuantity;
+        this.buyQuantity = buyQuantity;
     }
     // TODO: Map columns in data table TRADE with corresponding java fields
 
 
-    public Integer getId(){
+    public Integer getId() {
         return tradeId;
     }
 
@@ -127,7 +127,7 @@ public class Trade implements DomainEntity<Trade>{
     public Trade update(Trade domainEntity) {
         account = domainEntity.getAccount();
         type = domainEntity.getType();
-        buyQuantity=domainEntity.buyQuantity;
+        buyQuantity = domainEntity.buyQuantity;
 
 
         return this;

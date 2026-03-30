@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class CurvePoint implements DomainEntity <CurvePoint> {
+public class CurvePoint implements DomainEntity<CurvePoint> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id")
@@ -48,17 +48,17 @@ public class CurvePoint implements DomainEntity <CurvePoint> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Timestamp creationDate;
 
-    public CurvePoint(Integer curveId,BigDecimal term, BigDecimal value) {
-        this.curveId=curveId;
+    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {
+        this.curveId = curveId;
         this.term = term;
         this.value = value;
     }
 
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
-        curveId=domainEntity.getCurveId();
+        curveId = domainEntity.getCurveId();
         term = domainEntity.getTerm();
-        value=domainEntity.getValue();
+        value = domainEntity.getValue();
 
         return this;
     }

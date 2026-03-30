@@ -1,14 +1,10 @@
 package com.nnk.controllers;
 
 import com.nnk.domain.User;
-import com.nnk.exceptions.EntityNotFoundException;
-import com.nnk.repositories.UserRepository;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +21,7 @@ import java.util.List;
 public class UserController {
 
 
-   private final  CrudService<User> service;
+    private final CrudService<User> service;
 
     @RequestMapping("/user/list")
     public String home(Model model) {
@@ -50,8 +46,8 @@ public class UserController {
             service.create(user);
             model.addAttribute("users", service.findAll());
             return "redirect:/user/list";
-        }catch(Exception e){
-            model.addAttribute("errors",e.getMessage());
+        } catch (Exception e) {
+            model.addAttribute("errors", e.getMessage());
             return "user/add";
         }
 
@@ -60,7 +56,7 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-       User user = service.findById(id);
+        User user = service.findById(id);
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
@@ -68,7 +64,7 @@ public class UserController {
 
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-                             BindingResult result, Model model,RedirectAttributes redirectAttributes) {
+                             BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
             redirectAttributes.addFlashAttribute("errorMessage", errors);

@@ -4,8 +4,6 @@ import com.nnk.domain.BidList;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +20,13 @@ import java.util.List;
 public class BidListController {
 
 
-    private final  CrudService<BidList> service;
+    private final CrudService<BidList> service;
 
     @RequestMapping("/bidList/list")
     public String home(Model model) {
         // TODO: call service find all bids to show to the view
         List<BidList> bidLists = service.findAll();
-        model.addAttribute("bidLists",bidLists);
+        model.addAttribute("bidLists", bidLists);
         return "bidList/list";
     }
 
@@ -44,11 +42,11 @@ public class BidListController {
 
             return "bidList/add";
         }
-        try{
+        try {
             service.create(bid);
             return "redirect:/bidList/list";
         } catch (Exception e) {
-            model.addAttribute("errorMessage",e.getMessage());
+            model.addAttribute("errorMessage", e.getMessage());
             return "bidList/add";
         }
 
@@ -86,14 +84,14 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteBid(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list
         try {
             service.deleteById(id);
 
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "bidList/list";
+        return "redirect:/bidList/list";
     }
 }

@@ -13,8 +13,6 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -92,7 +90,7 @@ public class BidListControllerTest {
                         .param("bidQuantity", "100.0")
                 )
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("bidList","account"));
+                .andExpect(model().attributeHasFieldErrors("bidList", "account"));
 
 
     }
@@ -151,7 +149,7 @@ public class BidListControllerTest {
                         .param("type", "Type1")
                         .param("bidQuantity", "100.0"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("bidList","account"));
+                .andExpect(model().attributeHasFieldErrors("bidList", "account"));
 
     }
 
@@ -182,9 +180,9 @@ public class BidListControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-         mockMvc.perform(get("/bidList/delete/" + 999)
+        mockMvc.perform(get("/bidList/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(model().attributeExists("errorMessage"));
+                .andExpect(flash().attributeExists("errorMessage"));
 
 
     }

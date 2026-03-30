@@ -10,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 @Entity
 @Table(name = "bidlist")
@@ -18,7 +17,7 @@ import java.util.HashMap;
 @Getter
 @Setter
 public class BidList implements DomainEntity<BidList> {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
@@ -124,15 +123,15 @@ public class BidList implements DomainEntity<BidList> {
         this.bidQuantity = bidQuantity;
     }
 
-    public Integer getId(){
+    public Integer getId() {
         return bidListId;
     }
 
-    public BidList update( BidList domainEntity){
+    public BidList update(BidList domainEntity) {
 
-        account=domainEntity.getAccount();
-        type=domainEntity.getType();
-        bidQuantity=domainEntity.getBidQuantity();
+        account = domainEntity.getAccount();
+        type = domainEntity.getType();
+        bidQuantity = domainEntity.getBidQuantity();
 
         return this;
 

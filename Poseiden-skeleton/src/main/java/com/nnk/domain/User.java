@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 @RequiredArgsConstructor
-public class User implements DomainEntity <User>{
+public class User implements DomainEntity<User> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
@@ -31,7 +31,7 @@ public class User implements DomainEntity <User>{
     @Column(name = "password")
     @Size(max = 125, message = "Password must not exceed 125 characters")
     @Pattern(
-            regexp= "^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,}$",
+            regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z\\d]).{8,}$",
             message = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un chiffre et un symbole."
     )
     private String password;

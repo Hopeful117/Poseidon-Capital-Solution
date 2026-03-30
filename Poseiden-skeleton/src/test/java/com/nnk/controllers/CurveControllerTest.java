@@ -41,7 +41,7 @@ public class CurveControllerTest {
         User user = new User("user", "Motdep@sse1", "User", "USER");
         userRepository.save(user);
 
-        CurvePoint curvePoint = new CurvePoint(10,BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));
+        CurvePoint curvePoint = new CurvePoint(10, BigDecimal.valueOf(1.0), BigDecimal.valueOf(1.0));
         savedCurvePoint = curvePointRepository.save(curvePoint);
     }
 
@@ -85,7 +85,7 @@ public class CurveControllerTest {
                         .param("term", "a")
                         .param("value", "1.0"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("curvePoint","term"));
+                .andExpect(model().attributeHasFieldErrors("curvePoint", "term"));
     }
 
     @Test
@@ -153,8 +153,8 @@ public class CurveControllerTest {
         int id = savedCurvePoint.getId();
         mockMvc.perform(get("/curvePoint/delete/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("curvePoint/list"));
+                .andExpect(status().is3xxRedirection());
+
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CurveControllerTest {
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
         mockMvc.perform(get("/curvePoint/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(model().attributeExists("errorMessage"))
-                .andExpect(view().name("curvePoint/list"));
+                .andExpect(flash().attributeExists("errorMessage"));
+
     }
 }

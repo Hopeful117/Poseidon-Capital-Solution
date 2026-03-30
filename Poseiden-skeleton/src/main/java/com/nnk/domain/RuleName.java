@@ -2,8 +2,8 @@ package com.nnk.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class RuleName implements DomainEntity<RuleName>{
+public class RuleName implements DomainEntity<RuleName> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -62,12 +62,12 @@ public class RuleName implements DomainEntity<RuleName>{
 
     @Override
     public RuleName update(RuleName domainEntity) {
-        name=domainEntity.getName();
-        description=domainEntity.getDescription();
-        json=domainEntity.getJson();
-        template=domainEntity.getTemplate();
-        sqlStr=domainEntity.getSqlStr();
-        sqlPart=domainEntity.getSqlPart();
+        name = domainEntity.getName();
+        description = domainEntity.getDescription();
+        json = domainEntity.getJson();
+        template = domainEntity.getTemplate();
+        sqlStr = domainEntity.getSqlStr();
+        sqlPart = domainEntity.getSqlPart();
         return this;
     }
 }

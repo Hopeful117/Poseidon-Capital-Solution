@@ -4,7 +4,6 @@ import com.nnk.domain.CurvePoint;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +63,7 @@ public class CurveController {
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateCurve(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
-                            BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+                              BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
             redirectAttributes.addFlashAttribute("errorMessage", errors);
@@ -81,12 +80,12 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteCurve(@PathVariable("id") Integer id, Model model) {
+    public String deleteCurve(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
         try {
             service.deleteById(id);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "curvePoint/list";
+        return "redirect:/curvePoint/list";
     }
 }

@@ -14,7 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,6 @@ public class RatingServiceTest {
     }
 
 
-
     @Test
     public void testGetRatingByIdShouldThrowExceptionWhenRatingNotFound() {
         // Given
@@ -107,19 +107,19 @@ public class RatingServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'Aaa', 'AAA', 'AAA', 10, 'Updated Aaa', 'Updated AAA', 'Updated AAA'",
-        "2, 'Baa', 'BBB', 'BBB', 20, 'Updated Baa', 'Updated BBB', 'Updated BBB'",
-        "3, 'Caa', 'CCC', 'CCC', 30, 'Updated Caa', 'Updated CCC', 'Updated CCC'"
+            "1, 'Aaa', 'AAA', 'AAA', 10, 'Updated Aaa', 'Updated AAA', 'Updated AAA'",
+            "2, 'Baa', 'BBB', 'BBB', 20, 'Updated Baa', 'Updated BBB', 'Updated BBB'",
+            "3, 'Caa', 'CCC', 'CCC', 30, 'Updated Caa', 'Updated CCC', 'Updated CCC'"
     })
-    public void testUpdateRating(int id, String originalMoodys, String originalSandP, String originalFitch, 
-                                int newOrderNumber, String newMoodys, String newSandP, String newFitch) {
+    public void testUpdateRating(int id, String originalMoodys, String originalSandP, String originalFitch,
+                                 int newOrderNumber, String newMoodys, String newSandP, String newFitch) {
         // Given
         Rating existingRating = new Rating(originalMoodys, originalSandP, originalFitch, 5);
         existingRating.setId(id);
-        
+
         Rating updatedRating = new Rating(newMoodys, newSandP, newFitch, newOrderNumber);
         updatedRating.setId(id);
-        
+
         when(ratingRepository.findById(id)).thenReturn(java.util.Optional.of(existingRating));
 
         // When
@@ -129,7 +129,7 @@ public class RatingServiceTest {
         ArgumentCaptor<Rating> captor = ArgumentCaptor.forClass(Rating.class);
         verify(ratingRepository).save(captor.capture());
         Rating savedRating = captor.getValue();
-        
+
         assertEquals(newMoodys, savedRating.getMoodysRating());
         assertEquals(newSandP, savedRating.getSandPRating());
         assertEquals(newFitch, savedRating.getFitchRating());
@@ -142,7 +142,7 @@ public class RatingServiceTest {
         // Given
         Rating ratingToUpdate = new Rating("Aaa", "AAA", "AAA", 1);
         ratingToUpdate.setId(999);
-        
+
         when(ratingRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>messages</title>
@@ -20,7 +20,7 @@
         <a th:href="@{/ruleName/list}">Rule</a>
     </div>
     <div class="col-6 d-flex flex-column align-items-end">
-        <div> Logged in user: <span style="font-weight:bold" sec:authentication="name"></span></div>
+        <div> Logged in user: <span sec:authentication="name" style="font-weight:bold"></span></div>
         <form method="POST" th:action="@{/app/logout}">
             <input type="submit" value="Logout"/>
         </form>

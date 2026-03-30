@@ -15,7 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,6 @@ public class TradeServiceTest {
     }
 
 
-
     @Test
     public void testGetTradeByIdShouldThrowExceptionWhenTradeNotFound() {
         // Given
@@ -107,19 +107,19 @@ public class TradeServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'Account1', 'Type1', 100.50, 'UpdatedAccount', 'UpdatedType', 150.75",
-        "2, 'Account2', 'Type2', 200.75, 'UpdatedAccount2', 'UpdatedType2', 250.85",
-        "3, 'Account3', 'Type3', 300.25, 'UpdatedAccount3', 'UpdatedType3', 350.95"
+            "1, 'Account1', 'Type1', 100.50, 'UpdatedAccount', 'UpdatedType', 150.75",
+            "2, 'Account2', 'Type2', 200.75, 'UpdatedAccount2', 'UpdatedType2', 250.85",
+            "3, 'Account3', 'Type3', 300.25, 'UpdatedAccount3', 'UpdatedType3', 350.95"
     })
-    public void testUpdateTrade(int id, String originalAccount, String originalType, BigDecimal originalBuyQuantity, 
+    public void testUpdateTrade(int id, String originalAccount, String originalType, BigDecimal originalBuyQuantity,
                                 String newAccount, String newType, BigDecimal newBuyQuantity) {
         // Given
         Trade existingTrade = new Trade(originalAccount, originalType, originalBuyQuantity);
         existingTrade.setTradeId(id);
-        
+
         Trade updatedTrade = new Trade(newAccount, newType, newBuyQuantity);
         updatedTrade.setTradeId(id);
-        
+
         when(tradeRepository.findById(id)).thenReturn(java.util.Optional.of(existingTrade));
 
         // When
@@ -129,7 +129,7 @@ public class TradeServiceTest {
         ArgumentCaptor<Trade> captor = ArgumentCaptor.forClass(Trade.class);
         verify(tradeRepository).save(captor.capture());
         Trade savedTrade = captor.getValue();
-        
+
         assertEquals(newAccount, savedTrade.getAccount());
         assertEquals(newType, savedTrade.getType());
         assertEquals(newBuyQuantity, savedTrade.getBuyQuantity());
@@ -141,7 +141,7 @@ public class TradeServiceTest {
         // Given
         Trade tradeToUpdate = new Trade("Account1", "Type1", BigDecimal.valueOf(100.50));
         tradeToUpdate.setTradeId(999);
-        
+
         when(tradeRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

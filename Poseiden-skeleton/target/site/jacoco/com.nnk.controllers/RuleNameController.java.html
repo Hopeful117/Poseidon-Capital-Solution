@@ -4,7 +4,6 @@ import com.nnk.domain.RuleName;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,70 +25,70 @@ public class RuleNameController {
 
     @RequestMapping(&quot;/ruleName/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L29">        List&lt;RuleName&gt; ruleNames = service.findAll();</span>
-<span class="fc" id="L30">        model.addAttribute(&quot;ruleNames&quot;, ruleNames);</span>
-<span class="fc" id="L31">        return &quot;ruleName/list&quot;;</span>
+<span class="fc" id="L28">        List&lt;RuleName&gt; ruleNames = service.findAll();</span>
+<span class="fc" id="L29">        model.addAttribute(&quot;ruleNames&quot;, ruleNames);</span>
+<span class="fc" id="L30">        return &quot;ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/add&quot;)
     public String addRuleForm(RuleName ruleName) {
-<span class="fc" id="L36">        return &quot;ruleName/add&quot;;</span>
+<span class="fc" id="L35">        return &quot;ruleName/add&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L42">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
-<span class="fc" id="L43">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
-<span class="fc" id="L44">            return &quot;redirect:/ruleName/add&quot;;</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L41">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
+<span class="fc" id="L42">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
+<span class="fc" id="L43">            return &quot;redirect:/ruleName/add&quot;;</span>
         }
         try {
-<span class="fc" id="L47">            service.create(ruleName);</span>
-<span class="fc" id="L48">            return &quot;redirect:/ruleName/list&quot;;</span>
-<span class="nc" id="L49">        } catch (Exception e) {</span>
-<span class="nc" id="L50">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L51">            return &quot;ruleName/add&quot;;</span>
+<span class="fc" id="L46">            service.create(ruleName);</span>
+<span class="fc" id="L47">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="nc" id="L48">        } catch (Exception e) {</span>
+<span class="nc" id="L49">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L50">            return &quot;ruleName/add&quot;;</span>
         }
     }
 
     @GetMapping(&quot;/ruleName/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
-<span class="fc" id="L58">            RuleName ruleName = service.findById(id);</span>
-<span class="fc" id="L59">            model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
-<span class="fc" id="L60">            return &quot;ruleName/update&quot;;</span>
-<span class="fc" id="L61">        } catch (Exception e) {</span>
-<span class="fc" id="L62">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L63">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L57">            RuleName ruleName = service.findById(id);</span>
+<span class="fc" id="L58">            model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
+<span class="fc" id="L59">            return &quot;ruleName/update&quot;;</span>
+<span class="fc" id="L60">        } catch (Exception e) {</span>
+<span class="fc" id="L61">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L62">            return &quot;redirect:/ruleName/list&quot;;</span>
         }
     }
 
     @PostMapping(&quot;/ruleName/update/{id}&quot;)
     public String updateRuleName(@PathVariable(&quot;id&quot;) Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L71">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
-<span class="fc" id="L72">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
-<span class="fc" id="L73">            return &quot;redirect:/ruleName/update/&quot; + id;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc" id="L70">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
+<span class="fc" id="L71">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
+<span class="fc" id="L72">            return &quot;redirect:/ruleName/update/&quot; + id;</span>
         }
         try {
-<span class="fc" id="L76">            ruleName.setId(id);</span>
-<span class="fc" id="L77">            service.update(ruleName);</span>
-<span class="fc" id="L78">            return &quot;redirect:/ruleName/list&quot;;</span>
-<span class="fc" id="L79">        } catch (Exception e) {</span>
-<span class="fc" id="L80">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L81">            return &quot;ruleName/update&quot;;</span>
+<span class="fc" id="L75">            ruleName.setId(id);</span>
+<span class="fc" id="L76">            service.update(ruleName);</span>
+<span class="fc" id="L77">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L78">        } catch (Exception e) {</span>
+<span class="fc" id="L79">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L80">            return &quot;ruleName/update&quot;;</span>
         }
     }
 
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
         try {
-<span class="fc" id="L88">            service.deleteById(id);</span>
-<span class="fc" id="L89">        } catch (Exception e) {</span>
-<span class="fc" id="L90">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L91">        }</span>
-<span class="fc" id="L92">        return &quot;ruleName/list&quot;;</span>
+<span class="fc" id="L87">            service.deleteById(id);</span>
+<span class="fc" id="L88">        } catch (Exception e) {</span>
+<span class="fc" id="L89">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L90">        }</span>
+<span class="fc" id="L91">        return &quot;ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

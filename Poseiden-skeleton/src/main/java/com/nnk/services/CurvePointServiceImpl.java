@@ -5,7 +5,7 @@ import com.nnk.repositories.CurvePointRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CurvePointServiceImpl extends AbstractCrudService<CurvePoint>{
+public class CurvePointServiceImpl extends AbstractCrudService<CurvePoint> {
 
     protected CurvePointServiceImpl(CurvePointRepository repository) {
         super(repository);

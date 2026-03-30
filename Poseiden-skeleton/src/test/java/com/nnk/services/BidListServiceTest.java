@@ -15,7 +15,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,6 @@ public class BidListServiceTest {
     }
 
 
-
     @Test
     public void testGetBidListByIdShouldThrowExceptionWhenBidListNotFound() {
         // Given
@@ -108,19 +108,19 @@ public class BidListServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'Account1', 'Type1', 100.0, 'UpdatedAccount', 'UpdatedType', 150.0",
-        "2, 'Account2', 'Type2', 200.0, 'UpdatedAccount2', 'UpdatedType2', 250.0",
-        "3, 'Account3', 'Type3', 300.0, 'UpdatedAccount3', 'UpdatedType3', 350.0"
+            "1, 'Account1', 'Type1', 100.0, 'UpdatedAccount', 'UpdatedType', 150.0",
+            "2, 'Account2', 'Type2', 200.0, 'UpdatedAccount2', 'UpdatedType2', 250.0",
+            "3, 'Account3', 'Type3', 300.0, 'UpdatedAccount3', 'UpdatedType3', 350.0"
     })
     public void testUpdateBidList(int id, String originalAccount, String originalType, BigDecimal originalBidQuantity,
-                                 String newAccount, String newType, BigDecimal newBidQuantity) {
+                                  String newAccount, String newType, BigDecimal newBidQuantity) {
         // Given
         BidList existingBidList = new BidList(originalAccount, originalType, originalBidQuantity);
         existingBidList.setBidListId(id);
-        
+
         BidList updatedBidList = new BidList(newAccount, newType, newBidQuantity);
         updatedBidList.setBidListId(id);
-        
+
         when(bidListRepository.findById(id)).thenReturn(java.util.Optional.of(existingBidList));
 
         // When
@@ -130,7 +130,7 @@ public class BidListServiceTest {
         ArgumentCaptor<BidList> captor = ArgumentCaptor.forClass(BidList.class);
         verify(bidListRepository).save(captor.capture());
         BidList savedBidList = captor.getValue();
-        
+
         assertEquals(newAccount, savedBidList.getAccount());
         assertEquals(newType, savedBidList.getType());
         assertEquals(newBidQuantity, savedBidList.getBidQuantity());
@@ -142,7 +142,7 @@ public class BidListServiceTest {
         // Given
         BidList bidListToUpdate = new BidList("Account", "Type", BigDecimal.valueOf(100));
         bidListToUpdate.setBidListId(999);
-        
+
         when(bidListRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

@@ -2,8 +2,8 @@
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class RuleName implements DomainEntity&lt;RuleName&gt;{
+public class RuleName implements DomainEntity&lt;RuleName&gt; {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = &quot;id&quot;, nullable = false)
@@ -62,12 +62,12 @@ public class RuleName implements DomainEntity&lt;RuleName&gt;{
 
     @Override
     public RuleName update(RuleName domainEntity) {
-<span class="fc" id="L65">        name=domainEntity.getName();</span>
-<span class="fc" id="L66">        description=domainEntity.getDescription();</span>
-<span class="fc" id="L67">        json=domainEntity.getJson();</span>
-<span class="fc" id="L68">        template=domainEntity.getTemplate();</span>
-<span class="fc" id="L69">        sqlStr=domainEntity.getSqlStr();</span>
-<span class="fc" id="L70">        sqlPart=domainEntity.getSqlPart();</span>
+<span class="fc" id="L65">        name = domainEntity.getName();</span>
+<span class="fc" id="L66">        description = domainEntity.getDescription();</span>
+<span class="fc" id="L67">        json = domainEntity.getJson();</span>
+<span class="fc" id="L68">        template = domainEntity.getTemplate();</span>
+<span class="fc" id="L69">        sqlStr = domainEntity.getSqlStr();</span>
+<span class="fc" id="L70">        sqlPart = domainEntity.getSqlPart();</span>
 <span class="fc" id="L71">        return this;</span>
     }
 }

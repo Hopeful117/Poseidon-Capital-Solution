@@ -1,9 +1,7 @@
 package com.nnk.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class Rating implements DomainEntity<Rating>{
+public class Rating implements DomainEntity<Rating> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,18 +20,22 @@ public class Rating implements DomainEntity<Rating>{
     Integer id;
 
     @Column(name = " moodysRating")
+    @NotBlank
     @Size(max = 125, message = "Moody's Rating must not exceed 125 characters")
     String moodysRating;
 
     @Column(name = " sandPRating")
+    @NotBlank
     @Size(max = 125, message = "S&P Rating must not exceed 125 characters")
     String sandPRating;
 
     @Column(name = "fitchRating")
+    @NotBlank
     @Size(max = 125, message = "Fitch Rating must not exceed 125 characters")
     String fitchRating;
 
     @Column(name = "orderNumber")
+    @NotNull
     @Positive(message = "Order Number must be positive")
     Integer orderNumber;
 
@@ -45,11 +47,11 @@ public class Rating implements DomainEntity<Rating>{
     }
 
     @Override
-    public Rating update(Rating domainEntity){
-        moodysRating=domainEntity.getMoodysRating();
-        sandPRating=domainEntity.getSandPRating();
-        fitchRating=domainEntity.getFitchRating();
-        orderNumber=domainEntity.getOrderNumber();
+    public Rating update(Rating domainEntity) {
+        moodysRating = domainEntity.getMoodysRating();
+        sandPRating = domainEntity.getSandPRating();
+        fitchRating = domainEntity.getFitchRating();
+        orderNumber = domainEntity.getOrderNumber();
 
         return this;
     }

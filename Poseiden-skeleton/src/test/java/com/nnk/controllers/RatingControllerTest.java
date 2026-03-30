@@ -77,8 +77,8 @@ public class RatingControllerTest {
                         .param("fitchRating", "1")
                         .param("orderNumber", "5")
                 )
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"));
+                .andExpect(status().is3xxRedirection());
+
 
 
     }
@@ -93,8 +93,8 @@ public class RatingControllerTest {
                         .param("fitchRating", "1")
                         .param("orderNumber", "-1")
                 )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("rating","orderNumber"));
 
 
     }
@@ -138,8 +138,8 @@ public class RatingControllerTest {
                         .param("sandPRating", "1")
                         .param("fitchRating", "1")
                         .param("orderNumber", "1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"));
+                .andExpect(status().is3xxRedirection());
+
 
     }
 
@@ -154,8 +154,8 @@ public class RatingControllerTest {
                         .param("sandPRating", "1")
                         .param("fitchRating", "1")
                         .param("orderNumber", "-1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("rating","orderNumber"));
 
     }
 
@@ -190,7 +190,7 @@ public class RatingControllerTest {
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
         mockMvc.perform(get("/rating/delete/" + 111)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(model().attributeExists("errorMessage"));
+                .andExpect(flash().attributeExists("errorMessage"));
 
     }
 

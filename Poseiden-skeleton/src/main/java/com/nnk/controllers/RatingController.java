@@ -4,8 +4,6 @@ import com.nnk.domain.Rating;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,14 +39,13 @@ public class RatingController {
     public String validate(@Valid Rating rating, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check data valid and save to db, after saving return Rating list
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/rating/add";
+
+            return "rating/add";
         }
         try {
 
             service.create(rating);
-            return "rating/list";
+            return "redirect:/rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/add";
@@ -74,15 +71,14 @@ public class RatingController {
                                BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         // TODO: check required fields, if valid call service to update Rating and return Rating list
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/update";
+
+            return "rating/update";
         }
         try {
 
             rating.setId(id);
             service.update(rating);
-            return "rating/list";
+            return "redirect:/rating/list";
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/update";
@@ -90,14 +86,14 @@ public class RatingController {
     }
 
     @GetMapping("/rating/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model) {
+    public String deleteRating(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         try {
             service.deleteById(id);
 
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "rating/list";
+        return "redirect:/rating/list";
     }
 }

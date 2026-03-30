@@ -38,31 +38,35 @@ public class SpringSecurityConfig {
 <span class="fc" id="L38">                        .usernameParameter(&quot;username&quot;)</span>
 <span class="fc" id="L39">                        .successHandler(successHandler)</span>
 <span class="fc" id="L40">                        .permitAll()</span>
-<span class="fc" id="L41">                ).logout((logout)-&gt;logout</span>
+<span class="fc" id="L41">                ).logout((logout) -&gt; logout</span>
 <span class="fc" id="L42">                        .logoutUrl(&quot;/app/logout&quot;)</span>
 <span class="fc" id="L43">                        .logoutSuccessUrl(&quot;/app/login?logout&quot;)</span>
 <span class="fc" id="L44">                        .permitAll()</span>
-<span class="fc" id="L45">                ).exceptionHandling((ex-&gt;</span>
+<span class="fc" id="L45">                ).exceptionHandling((ex -&gt;</span>
 <span class="fc" id="L46">                        ex.authenticationEntryPoint((request, response, authException) -&gt;</span>
-<span class="pc" id="L47">                        {response.sendRedirect(&quot;/app/login&quot;);}).accessDeniedHandler(((request, response, accessDeniedException) -&gt;</span>
-<span class="nc" id="L48">                        {response.sendRedirect(&quot;/403&quot;);}))</span>
-                        ));
+                        {
+<span class="nc" id="L48">                            response.sendRedirect(&quot;/app/login&quot;);</span>
+<span class="pc" id="L49">                        }).accessDeniedHandler(((request, response, accessDeniedException) -&gt;</span>
+                        {
+<span class="nc" id="L51">                            response.sendRedirect(&quot;/403&quot;);</span>
+<span class="nc" id="L52">                        }))</span>
+                ));
 
 
-<span class="fc" id="L52">        return http.build();</span>
+<span class="fc" id="L56">        return http.build();</span>
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-<span class="fc" id="L57">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L61">        return new BCryptPasswordEncoder();</span>
     }
 
 
     @Bean
     public AuthenticationManager authentificationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
-<span class="fc" id="L63">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
-<span class="fc" id="L64">        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);</span>
-<span class="fc" id="L65">        return authenticationManagerBuilder.build();</span>
+<span class="fc" id="L67">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
+<span class="fc" id="L68">        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);</span>
+<span class="fc" id="L69">        return authenticationManagerBuilder.build();</span>
 
 
     }

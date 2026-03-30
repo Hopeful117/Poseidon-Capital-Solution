@@ -95,7 +95,6 @@ public class UserServiceTest {
     }
 
 
-
     @Test
     public void testGetUserByIdShouldThrowExceptionWhenUserNotFound() {
         // Given
@@ -108,19 +107,19 @@ public class UserServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-        "1, 'user1', 'Passw0rd!', 'John Doe', 'ADMIN', 'updatedUser', 'NewPass1!', 'Jane Doe', 'USER'",
-        "2, 'user2', 'Secret1!', 'Jane Smith', 'USER', 'updatedUser2', 'Another2@', 'Bob Smith', 'MODERATOR'",
-        "3, 'user3', 'MyPass123#', 'Bob Johnson', 'MODERATOR', 'updatedUser3', 'Final3$', 'Alice Johnson', 'ADMIN'"
+            "1, 'user1', 'Passw0rd!', 'John Doe', 'ADMIN', 'updatedUser', 'NewPass1!', 'Jane Doe', 'USER'",
+            "2, 'user2', 'Secret1!', 'Jane Smith', 'USER', 'updatedUser2', 'Another2@', 'Bob Smith', 'MODERATOR'",
+            "3, 'user3', 'MyPass123#', 'Bob Johnson', 'MODERATOR', 'updatedUser3', 'Final3$', 'Alice Johnson', 'ADMIN'"
     })
     public void testUpdateUser(int id, String originalUsername, String originalPassword, String originalFullname, String originalRole,
-                                String newUsername, String newPassword, String newFullname, String newRole) {
+                               String newUsername, String newPassword, String newFullname, String newRole) {
         // Given
         User existingUser = new User(originalUsername, originalPassword, originalFullname, originalRole);
         existingUser.setId(id);
-        
+
         User updatedUser = new User(newUsername, newPassword, newFullname, newRole);
         updatedUser.setId(id);
-        
+
         when(userRepository.findById(id)).thenReturn(java.util.Optional.of(existingUser));
 
         // When
@@ -130,7 +129,7 @@ public class UserServiceTest {
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(captor.capture());
         User savedUser = captor.getValue();
-        
+
         assertEquals(newUsername, savedUser.getUsername());
         assertNotEquals(newPassword, savedUser.getPassword()); // Password is encoded
         assertEquals(newFullname, savedUser.getFullname());
@@ -143,7 +142,7 @@ public class UserServiceTest {
         // Given
         User userToUpdate = new User("user1", "Passw0rd!", "John Doe", "ADMIN");
         userToUpdate.setId(999);
-        
+
         when(userRepository.findById(999)).thenReturn(java.util.Optional.empty());
 
         // When & Then

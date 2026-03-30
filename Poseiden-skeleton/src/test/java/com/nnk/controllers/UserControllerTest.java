@@ -61,9 +61,9 @@ public class UserControllerTest {
 
     @ParameterizedTest
     @CsvSource({
-        "'newuser1', 'ValidPass1!', 'New User One', 'USER'",
-        "'newuser2', 'Another2@', 'New User Two', 'ADMIN'",
-        "'newuser3', 'ThirdPass3#', 'New User Three', 'MODERATOR'"
+            "'newuser1', 'ValidPass1!', 'New User One', 'USER'",
+            "'newuser2', 'Another2@', 'New User Two', 'ADMIN'",
+            "'newuser3', 'ThirdPass3#', 'New User Three', 'MODERATOR'"
     })
     @WithMockUser(username = "admin")
     void shouldValidateUser(String username, String password, String fullname, String role) throws Exception {
@@ -80,14 +80,14 @@ public class UserControllerTest {
 
     @ParameterizedTest
     @CsvSource({
-        "'', 'ValidPass1!', 'User', 'USER'",  // empty username
-        "'user', '', 'User', 'USER'",  // empty password
-        "'user', 'short', 'User', 'USER'",  // invalid password (too short, no upper, no digit, no symbol)
-        "'user', 'nouppercase1!', 'User', 'USER'",  // no uppercase
-        "'user', 'NODIGIT!', 'User', 'USER'",  // no digit
-        "'user', 'NoSymbol1', 'User', 'USER'",  // no symbol
-        "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
-        "'user', 'ValidPass1!', 'User', ''"  // empty role
+            "'', 'ValidPass1!', 'User', 'USER'",  // empty username
+            "'user', '', 'User', 'USER'",  // empty password
+            "'user', 'short', 'User', 'USER'",  // invalid password (too short, no upper, no digit, no symbol)
+            "'user', 'nouppercase1!', 'User', 'USER'",  // no uppercase
+            "'user', 'NODIGIT!', 'User', 'USER'",  // no digit
+            "'user', 'NoSymbol1', 'User', 'USER'",  // no symbol
+            "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
+            "'user', 'ValidPass1!', 'User', ''"  // empty role
     })
     @WithMockUser(username = "admin")
     void shouldReturnFormWithErrorIfBindingFails(String username, String password, String fullname, String role) throws Exception {
@@ -128,8 +128,8 @@ public class UserControllerTest {
 
     @ParameterizedTest
     @CsvSource({
-        "'updateduser1', 'Updated1!', 'Updated User One', 'USER'",
-        "'updateduser2', 'Changed2@', 'Updated User Two', 'ADMIN'"
+            "'updateduser1', 'Updated1!', 'Updated User One', 'USER'",
+            "'updateduser2', 'Changed2@', 'Updated User Two', 'ADMIN'"
     })
     @WithMockUser(username = "admin")
     void shouldUpdateUser(String newUsername, String newPassword, String newFullname, String newRole) throws Exception {
@@ -148,11 +148,11 @@ public class UserControllerTest {
 
     @ParameterizedTest
     @CsvSource({
-        "'', 'ValidPass1!', 'User', 'USER'",  // empty username
-        "'user', '', 'User', 'USER'",  // empty password
-        "'user', 'short', 'User', 'USER'",  // invalid password
-        "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
-        "'user', 'ValidPass1!', 'User', ''"  // empty role
+            "'', 'ValidPass1!', 'User', 'USER'",  // empty username
+            "'user', '', 'User', 'USER'",  // empty password
+            "'user', 'short', 'User', 'USER'",  // invalid password
+            "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
+            "'user', 'ValidPass1!', 'User', ''"  // empty role
     })
     @WithMockUser(username = "admin")
     void shouldRedirectWithErrorIfBindingFailsOnUpdate(String username, String password, String fullname, String role) throws Exception {

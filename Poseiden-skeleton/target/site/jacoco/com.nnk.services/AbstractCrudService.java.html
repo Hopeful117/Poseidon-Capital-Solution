@@ -2,58 +2,56 @@
 
 import com.nnk.domain.DomainEntity;
 import com.nnk.exceptions.EntityNotFoundException;
-import jakarta.validation.constraints.AssertTrue;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Optional;
 
 public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt; implements CrudService&lt;M&gt; {
 
     protected final JpaRepository&lt;M, Integer&gt; repository;
-    
-<span class="fc" id="L16">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository ){</span>
-<span class="fc" id="L17">        this.repository= repository;</span>
-<span class="fc" id="L18">    }</span>
+
+<span class="fc" id="L14">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository) {</span>
+<span class="fc" id="L15">        this.repository = repository;</span>
+<span class="fc" id="L16">    }</span>
 
     @Override
     public M findById(final Integer id) {
-<span class="fc" id="L22">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
+<span class="fc" id="L20">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
     }
 
     @Override
     public List&lt;M&gt; findAll() {
-<span class="fc" id="L27">        return repository.findAll();</span>
+<span class="fc" id="L25">        return repository.findAll();</span>
     }
 
     @Override
     public void deleteById(final Integer id) {
-<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (!repository.existsById(id)){</span>
-<span class="fc" id="L33">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (!repository.existsById(id)) {</span>
+<span class="fc" id="L31">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
         }
 
-<span class="fc" id="L36">        repository.deleteById(id);</span>
-<span class="fc" id="L37">    }</span>
+<span class="fc" id="L34">        repository.deleteById(id);</span>
+<span class="fc" id="L35">    }</span>
 
     @Override
     public void create(final M model) {
-<span class="fc" id="L41">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L42">        Assert.isNull(model.getId() , &quot;Id can not be defined&quot;);</span>
+<span class="fc" id="L39">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L40">        Assert.isNull(model.getId(), &quot;Id can not be defined&quot;);</span>
 
-<span class="fc" id="L44">        repository.save(model);</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L42">        repository.save(model);</span>
+<span class="fc" id="L43">    }</span>
 
     @Override
     public void update(final M model) {
-<span class="fc" id="L49">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L50">        Assert.notNull(model.getId() , &quot;Id can not be null&quot;);</span>
+<span class="fc" id="L47">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L48">        Assert.notNull(model.getId(), &quot;Id can not be null&quot;);</span>
 
-<span class="fc" id="L52">        final M updatedModel = repository.findById(model.getId())</span>
-<span class="fc" id="L53">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
-<span class="fc" id="L54">                .update(model);</span>
+<span class="fc" id="L50">        final M updatedModel = repository.findById(model.getId())</span>
+<span class="fc" id="L51">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
+<span class="fc" id="L52">                .update(model);</span>
 
-<span class="fc" id="L56">        repository.save(updatedModel);</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L54">        repository.save(updatedModel);</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

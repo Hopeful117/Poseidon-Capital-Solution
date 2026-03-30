@@ -2,10 +2,7 @@
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,7 +10,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 @Entity
 @Table(name = &quot;bidlist&quot;)
@@ -21,10 +17,11 @@ import java.util.HashMap;
 @Getter
 @Setter
 public class BidList implements DomainEntity&lt;BidList&gt; {
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = &quot;BidListId&quot;)
+    @Positive
     @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     Integer bidListId;
 
@@ -41,18 +38,22 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     String type;
 
     @Column(name = &quot;bidQuantity&quot;)
+    @Positive
     @Digits(integer = 10, fraction = 2, message = &quot;Bid Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
     BigDecimal bidQuantity;
 
     @Column(name = &quot;askQuantity&quot;)
+    @Positive
     @Digits(integer = 10, fraction = 2, message = &quot;Ask Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
     BigDecimal askQuantity;
 
     @Column(name = &quot;bid&quot;)
+    @Positive
     @Digits(integer = 10, fraction = 2, message = &quot;Bid must be a valid number with up to 10 digits and 2 decimal places&quot;)
     BigDecimal bid;
 
     @Column(name = &quot;ask&quot;)
+    @Positive
     @Digits(integer = 10, fraction = 2, message = &quot;Ask must be a valid number with up to 10 digits and 2 decimal places&quot;)
     BigDecimal ask;
 
@@ -116,23 +117,23 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
     String sid;
 
-<span class="fc" id="L119">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
-<span class="fc" id="L120">        this.account = account;</span>
-<span class="fc" id="L121">        this.type = type;</span>
-<span class="fc" id="L122">        this.bidQuantity = bidQuantity;</span>
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L120">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
+<span class="fc" id="L121">        this.account = account;</span>
+<span class="fc" id="L122">        this.type = type;</span>
+<span class="fc" id="L123">        this.bidQuantity = bidQuantity;</span>
+<span class="fc" id="L124">    }</span>
 
-    public Integer getId(){
-<span class="fc" id="L126">        return bidListId;</span>
+    public Integer getId() {
+<span class="fc" id="L127">        return bidListId;</span>
     }
 
-    public BidList update( BidList domainEntity){
+    public BidList update(BidList domainEntity) {
 
-<span class="fc" id="L131">        account=domainEntity.getAccount();</span>
-<span class="fc" id="L132">        type=domainEntity.getType();</span>
-<span class="fc" id="L133">        bidQuantity=domainEntity.getBidQuantity();</span>
+<span class="fc" id="L132">        account = domainEntity.getAccount();</span>
+<span class="fc" id="L133">        type = domainEntity.getType();</span>
+<span class="fc" id="L134">        bidQuantity = domainEntity.getBidQuantity();</span>
 
-<span class="fc" id="L135">        return this;</span>
+<span class="fc" id="L136">        return this;</span>
 
     }
 }
