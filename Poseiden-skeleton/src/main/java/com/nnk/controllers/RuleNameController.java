@@ -38,9 +38,8 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/ruleName/add";
+
+            return "ruleName/add";
         }
         try {
             service.create(ruleName);
@@ -65,11 +64,10 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                                 BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+                                 BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/ruleName/update/" + id;
+
+            return "ruleName/update";
         }
         try {
             ruleName.setId(id);
@@ -82,12 +80,12 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/delete/{id}")
-    public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
+    public String deleteRuleName(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
         try {
             service.deleteById(id);
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
-        return "ruleName/list";
+        return "redirect:/ruleName/list";
     }
 }

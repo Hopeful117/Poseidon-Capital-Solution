@@ -88,8 +88,8 @@ public class RuleNameControllerTest {
                         .param("template", "template1")
                         .param("sqlStr", "sql1")
                         .param("sqlPart", "part1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("ruleName","name"));
     }
 
     @Test
@@ -141,8 +141,8 @@ public class RuleNameControllerTest {
                         .param("template", "template1")
                         .param("sqlStr", "sql1")
                         .param("sqlPart", "part1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("ruleName","name"));
     }
 
     @Test
@@ -166,8 +166,8 @@ public class RuleNameControllerTest {
         int id = savedRuleName.getId();
         mockMvc.perform(get("/ruleName/delete/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("ruleName/list"));
+                .andExpect(status().is3xxRedirection());
+
     }
 
     @Test
@@ -175,7 +175,7 @@ public class RuleNameControllerTest {
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
         mockMvc.perform(get("/ruleName/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(model().attributeExists("errorMessage"))
-                .andExpect(view().name("ruleName/list"));
+                .andExpect(flash().attributeExists("errorMessage"));
+
     }
 }
