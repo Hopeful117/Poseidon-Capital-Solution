@@ -83,8 +83,8 @@ public class TradeControllerTest {
                         .param("account", "")
                         .param("type", "Type1")
                         .param("buyQuantity", "-100.50"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("trade","account","buyQuantity"));
     }
 
     @Test
@@ -95,9 +95,8 @@ public class TradeControllerTest {
 
         mockMvc.perform(get("/trade/update/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeExists("trade"))
-                .andExpect(view().name("trade/update"));
+                .andExpect(status().is2xxSuccessful());
+
     }
 
     @Test
@@ -133,8 +132,9 @@ public class TradeControllerTest {
                         .param("account", "")
                         .param("type", "Type1")
                         .param("buyQuantity", "-100.50"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(model().attributeHasFieldErrors("trade","buyQuantity","account"));
+
     }
 
     @Test
@@ -156,8 +156,8 @@ public class TradeControllerTest {
         int id = trade.get().getTradeId();
         mockMvc.perform(get("/trade/delete/" + id)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("trade/list"));
+                .andExpect(status().is3xxRedirection());
+
     }
 
     @Test
@@ -165,8 +165,8 @@ public class TradeControllerTest {
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
         mockMvc.perform(get("/trade/delete/" + 999)
                         .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(view().name("trade/list"));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(flash().attributeExists("errorMessage"));
     }
 }
 

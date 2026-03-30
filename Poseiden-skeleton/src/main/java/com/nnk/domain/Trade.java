@@ -1,10 +1,7 @@
 package com.nnk.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -40,18 +37,23 @@ public class Trade implements DomainEntity<Trade> {
     String type;
 
     @Column(name = "buyQuantity")
+    @Positive
+    @NotNull
     @Digits(integer = 10, fraction = 2, message = "Buy Quantity must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal buyQuantity;
 
     @Column(name = "sellQuantity")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Sell Quantity must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal sellQuantity;
 
     @Column(name = "buyPrice")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Buy Price must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal buyPrice;
 
     @Column(name = "sellPrice")
+    @Positive
     @Digits(integer = 10, fraction = 2, message = "Sell Price must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal sellPrice;
 
@@ -116,7 +118,7 @@ public class Trade implements DomainEntity<Trade> {
         this.type = type;
         this.buyQuantity = buyQuantity;
     }
-    // TODO: Map columns in data table TRADE with corresponding java fields
+
 
 
     public Integer getId() {

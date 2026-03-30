@@ -38,6 +38,7 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     String type;
 
     @Column(name = &quot;bidQuantity&quot;)
+    @NotNull
     @Positive
     @Digits(integer = 10, fraction = 2, message = &quot;Bid Quantity must be a valid number with up to 10 digits and 2 decimal places&quot;)
     BigDecimal bidQuantity;
@@ -117,23 +118,23 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
     String sid;
 
-<span class="fc" id="L120">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
-<span class="fc" id="L121">        this.account = account;</span>
-<span class="fc" id="L122">        this.type = type;</span>
-<span class="fc" id="L123">        this.bidQuantity = bidQuantity;</span>
-<span class="fc" id="L124">    }</span>
+<span class="fc" id="L121">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
+<span class="fc" id="L122">        this.account = account;</span>
+<span class="fc" id="L123">        this.type = type;</span>
+<span class="fc" id="L124">        this.bidQuantity = bidQuantity;</span>
+<span class="fc" id="L125">    }</span>
 
     public Integer getId() {
-<span class="fc" id="L127">        return bidListId;</span>
+<span class="fc" id="L128">        return bidListId;</span>
     }
 
     public BidList update(BidList domainEntity) {
 
-<span class="fc" id="L132">        account = domainEntity.getAccount();</span>
-<span class="fc" id="L133">        type = domainEntity.getType();</span>
-<span class="fc" id="L134">        bidQuantity = domainEntity.getBidQuantity();</span>
+<span class="fc" id="L133">        account = domainEntity.getAccount();</span>
+<span class="fc" id="L134">        type = domainEntity.getType();</span>
+<span class="fc" id="L135">        bidQuantity = domainEntity.getBidQuantity();</span>
 
-<span class="fc" id="L136">        return this;</span>
+<span class="fc" id="L137">        return this;</span>
 
     }
 }

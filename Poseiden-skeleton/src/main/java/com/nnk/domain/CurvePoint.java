@@ -36,11 +36,13 @@ public class CurvePoint implements DomainEntity<CurvePoint> {
     Timestamp asOfDate;
 
     @Column(name = "term")
+    @NotNull
     @Positive
     @Digits(integer = 10, fraction = 2, message = "Term must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal term;
 
     @Column(name = "curveValue")
+    @NotNull
     @Digits(integer = 10, fraction = 2, message = "Value must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal value;
 

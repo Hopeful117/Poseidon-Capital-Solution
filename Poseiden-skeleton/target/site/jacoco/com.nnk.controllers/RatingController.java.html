@@ -68,8 +68,8 @@ public class RatingController {
 
     @PostMapping(&quot;/rating/update/{id}&quot;)
     public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,
-                               BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
+                               BindingResult result, Model model) {
+
 <span class="fc bfc" id="L73" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
 <span class="fc" id="L75">            return &quot;rating/update&quot;;</span>

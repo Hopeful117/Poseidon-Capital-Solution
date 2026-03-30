@@ -38,6 +38,7 @@ public class BidList implements DomainEntity<BidList> {
     String type;
 
     @Column(name = "bidQuantity")
+    @NotNull
     @Positive
     @Digits(integer = 10, fraction = 2, message = "Bid Quantity must be a valid number with up to 10 digits and 2 decimal places")
     BigDecimal bidQuantity;
