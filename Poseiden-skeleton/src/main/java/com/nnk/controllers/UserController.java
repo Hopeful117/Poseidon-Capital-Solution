@@ -4,7 +4,6 @@ import com.nnk.domain.User;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,16 +32,14 @@ public class UserController {
     }
 
     @PostMapping("/user/validate")
-    public String validate(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
-            return "redirect:/user/add";
+
+            return "user/add";
         }
         try {
 
             service.create(user);
-            model.addAttribute("users", service.findAll());
             return "redirect:/user/list";
         } catch (Exception e) {
             model.addAttribute("errors", e.getMessage());
@@ -55,19 +50,23 @@ public class UserController {
     }
 
     @GetMapping("/user/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = service.findById(id);
-        user.setPassword("");
-        model.addAttribute("user", user);
-        return "user/update";
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            User user = service.findById(id);
+            user.setPassword("");
+            model.addAttribute("user", user);
+            return "user/update";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/user/list";
+        }
     }
 
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-                             BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+                             BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
+
             return "user/update";
         }
 
@@ -75,25 +74,24 @@ public class UserController {
 
             user.setId(id);
             service.update(user);
-            model.addAttribute("users", service.findAll());
+
             return "redirect:/user/list";
         } catch (Exception e) {
-            List<String> errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();
-            redirectAttributes.addFlashAttribute("errorMessage", errors);
+            model.addAttribute("errorMessage", e.getMessage());
             return "user/update";
         }
     }
 
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    public String deleteUser(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
             service.deleteById(id);
-            model.addAttribute("users", service.findAll());
+
 
         } catch (Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
 
         }
-        return "/user/list";
+        return "redirect:/user/list";
     }
 }

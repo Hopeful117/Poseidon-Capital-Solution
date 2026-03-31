@@ -120,7 +120,6 @@ public class Trade implements DomainEntity<Trade> {
     }
 
 
-
     public Integer getId() {
         return tradeId;
     }

@@ -27,9 +27,9 @@ public class SpringSecurityConfig {
 <span class="fc" id="L27">        http</span>
 <span class="fc" id="L28">                .csrf(AbstractHttpConfigurer::disable)</span>
 <span class="fc" id="L29">                .authorizeHttpRequests(auth -&gt; auth</span>
-<span class="fc" id="L30">                        .requestMatchers(&quot;/app/login&quot;, &quot;/css/**&quot;, &quot;/js/**&quot;, &quot;/images/**&quot;, &quot;/&quot;).permitAll()</span>
+<span class="fc" id="L30">                        .requestMatchers(&quot;/app/login&quot;, &quot;/css/**&quot;, &quot;/js/**&quot;, &quot;/images/**&quot;, &quot;/&quot;,&quot;/error&quot;).permitAll()</span>
 <span class="fc" id="L31">                        .requestMatchers(&quot;/admin/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
-<span class="fc" id="L32">                        .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;USER&quot;)</span>
+<span class="fc" id="L32">                        .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
 <span class="fc" id="L33">                        .anyRequest().authenticated()</span>
 
                 )
@@ -48,7 +48,7 @@ public class SpringSecurityConfig {
 <span class="nc" id="L48">                            response.sendRedirect(&quot;/app/login&quot;);</span>
 <span class="pc" id="L49">                        }).accessDeniedHandler(((request, response, accessDeniedException) -&gt;</span>
                         {
-<span class="nc" id="L51">                            response.sendRedirect(&quot;/403&quot;);</span>
+<span class="nc" id="L51">                            response.sendRedirect(&quot;/app/error&quot;);</span>
 <span class="nc" id="L52">                        }))</span>
                 ));
 

@@ -36,7 +36,7 @@ public class RatingController {
     }
 
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid Rating rating, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Rating list
         if (result.hasErrors()) {
 
@@ -86,7 +86,7 @@ public class RatingController {
     }
 
     @GetMapping("/rating/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
+    public String deleteRating(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         // TODO: Find Rating by Id and delete the Rating, return to Rating list
         try {
             service.deleteById(id);

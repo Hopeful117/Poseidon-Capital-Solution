@@ -46,8 +46,7 @@ public class RuleNameControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnRuleNameList() throws Exception {
-        mockMvc.perform(get("/ruleName/list")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/list"))
                 .andExpect(model().attributeExists("ruleNames"));
@@ -56,8 +55,7 @@ public class RuleNameControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnAddRuleForm() throws Exception {
-        mockMvc.perform(get("/ruleName/add")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/add"));
     }
@@ -66,7 +64,6 @@ public class RuleNameControllerTest {
     @WithMockUser(username = "user")
     void shouldValidateRuleName() throws Exception {
         mockMvc.perform(post("/ruleName/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("name", "Rule1")
                         .param("description", "Description1")
                         .param("json", "json1")
@@ -81,7 +78,6 @@ public class RuleNameControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfBindingFails() throws Exception {
         mockMvc.perform(post("/ruleName/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("name", "")
                         .param("description", "Description1")
                         .param("json", "json1")
@@ -89,7 +85,7 @@ public class RuleNameControllerTest {
                         .param("sqlStr", "sql1")
                         .param("sqlPart", "part1"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("ruleName","name"));
+                .andExpect(model().attributeHasFieldErrors("ruleName", "name"));
     }
 
     @Test
@@ -97,8 +93,7 @@ public class RuleNameControllerTest {
     void shouldReturnUpdateForm() throws Exception {
         int id = savedRuleName.getId();
 
-        mockMvc.perform(get("/ruleName/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/update/" + id))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(model().attributeExists("ruleName"))
                 .andExpect(view().name("ruleName/update"));
@@ -107,8 +102,7 @@ public class RuleNameControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/ruleName/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/update/" + 999))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
     }
@@ -118,7 +112,6 @@ public class RuleNameControllerTest {
     void shouldUpdateRuleName() throws Exception {
         int id = savedRuleName.getId();
         mockMvc.perform(post("/ruleName/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("name", "UpdatedRule")
                         .param("description", "UpdatedDescription")
                         .param("json", "updatedJson")
@@ -134,7 +127,6 @@ public class RuleNameControllerTest {
     void shouldRedirectWithErrorIfBindingFails() throws Exception {
         int id = savedRuleName.getId();
         mockMvc.perform(post("/ruleName/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("name", "")
                         .param("description", "Description1")
                         .param("json", "json1")
@@ -142,14 +134,13 @@ public class RuleNameControllerTest {
                         .param("sqlStr", "sql1")
                         .param("sqlPart", "part1"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("ruleName","name"));
+                .andExpect(model().attributeHasFieldErrors("ruleName", "name"));
     }
 
     @Test
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
         mockMvc.perform(post("/ruleName/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("name", "Rule1")
                         .param("description", "Description1")
                         .param("json", "json1")
@@ -164,8 +155,7 @@ public class RuleNameControllerTest {
     @WithMockUser(username = "user")
     void shouldDeleteRuleName() throws Exception {
         int id = savedRuleName.getId();
-        mockMvc.perform(get("/ruleName/delete/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/delete/" + id))
                 .andExpect(status().is3xxRedirection());
 
     }
@@ -173,8 +163,7 @@ public class RuleNameControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/ruleName/delete/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/ruleName/delete/" + 999))
                 .andExpect(flash().attributeExists("errorMessage"));
 
     }

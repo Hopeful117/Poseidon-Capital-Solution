@@ -50,8 +50,7 @@ public class BidListControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnBidListList() throws Exception {
-        mockMvc.perform(get("/bidList/list")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/list"));
 
@@ -60,8 +59,8 @@ public class BidListControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnAddBidListForm() throws Exception {
-        mockMvc.perform(get("/bidList/add")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/add"))
+
                 .andExpect(status().isOk());
 
     }
@@ -70,7 +69,6 @@ public class BidListControllerTest {
     @WithMockUser(username = "user")
     void shouldValidateBidList() throws Exception {
         mockMvc.perform(post("/bidList/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "Account2")
                         .param("type", "Type2")
                         .param("bidQuantity", "200.0")
@@ -84,7 +82,6 @@ public class BidListControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfBindingFails() throws Exception {
         mockMvc.perform(post("/bidList/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "")
                         .param("type", "Type1")
                         .param("bidQuantity", "100.0")
@@ -102,8 +99,8 @@ public class BidListControllerTest {
         Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
         int id = bidList.get().getId();
 
-        mockMvc.perform(get("/bidList/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/update/" + id))
+
 
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(view().name("bidList/update"));
@@ -113,8 +110,8 @@ public class BidListControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/bidList/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/update/" + 999))
+
 
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
@@ -128,7 +125,6 @@ public class BidListControllerTest {
         Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
         int id = bidList.get().getId();
         mockMvc.perform(post("/bidList/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "UpdatedAccount")
                         .param("type", "UpdatedType")
                         .param("bidQuantity", "150.0"))
@@ -144,7 +140,6 @@ public class BidListControllerTest {
         int id = bidList.get().getId();
 
         mockMvc.perform(post("/bidList/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "")
                         .param("type", "Type1")
                         .param("bidQuantity", "100.0"))
@@ -157,7 +152,6 @@ public class BidListControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
         mockMvc.perform(post("/bidList/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "Account")
                         .param("type", "Type")
                         .param("bidQuantity", "100.0"))
@@ -172,16 +166,16 @@ public class BidListControllerTest {
     void shouldDeleteBidList() throws Exception {
         Optional<BidList> bidList = bidListRepository.findAll().stream().findFirst();
         int id = bidList.get().getId();
-        mockMvc.perform(get("/bidList/delete/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/delete/" + id))
+
                 .andExpect(model().attributeDoesNotExist("errorMessage"));
     }
 
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/bidList/delete/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/bidList/delete/" + 999))
+
                 .andExpect(flash().attributeExists("errorMessage"));
 
 

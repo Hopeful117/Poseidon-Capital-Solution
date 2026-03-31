@@ -47,8 +47,7 @@ public class TradeControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnTradeList() throws Exception {
-        mockMvc.perform(get("/trade/list")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/list"))
                 .andExpect(model().attributeExists("trades"));
@@ -57,8 +56,7 @@ public class TradeControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnAddTradeForm() throws Exception {
-        mockMvc.perform(get("/trade/add")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/add"));
     }
@@ -67,7 +65,6 @@ public class TradeControllerTest {
     @WithMockUser(username = "user")
     void shouldValidateTrade() throws Exception {
         mockMvc.perform(post("/trade/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "Account1")
                         .param("type", "Type1")
                         .param("buyQuantity", "100.50"))
@@ -79,12 +76,11 @@ public class TradeControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfBindingFails() throws Exception {
         mockMvc.perform(post("/trade/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "")
                         .param("type", "Type1")
                         .param("buyQuantity", "-100.50"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("trade","account","buyQuantity"));
+                .andExpect(model().attributeHasFieldErrors("trade", "account", "buyQuantity"));
     }
 
     @Test
@@ -93,8 +89,7 @@ public class TradeControllerTest {
         Optional<Trade> trade = tradeRepository.findAll().stream().findFirst();
         int id = trade.get().getTradeId();
 
-        mockMvc.perform(get("/trade/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/update/" + id))
                 .andExpect(status().is2xxSuccessful());
 
     }
@@ -102,8 +97,7 @@ public class TradeControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/trade/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/update/" + 999))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
     }
@@ -114,7 +108,6 @@ public class TradeControllerTest {
         Optional<Trade> trade = tradeRepository.findAll().stream().findFirst();
         int id = trade.get().getTradeId();
         mockMvc.perform(post("/trade/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "UpdatedAccount")
                         .param("type", "UpdatedType")
                         .param("buyQuantity", "200.75"))
@@ -128,12 +121,11 @@ public class TradeControllerTest {
         Optional<Trade> trade = tradeRepository.findAll().stream().findFirst();
         int id = trade.get().getTradeId();
         mockMvc.perform(post("/trade/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "")
                         .param("type", "Type1")
                         .param("buyQuantity", "-100.50"))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(model().attributeHasFieldErrors("trade","buyQuantity","account"));
+                .andExpect(model().attributeHasFieldErrors("trade", "buyQuantity", "account"));
 
     }
 
@@ -141,7 +133,6 @@ public class TradeControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
         mockMvc.perform(post("/trade/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("account", "Account1")
                         .param("type", "Type1")
                         .param("buyQuantity", "100.50"))
@@ -154,8 +145,7 @@ public class TradeControllerTest {
     void shouldDeleteTrade() throws Exception {
         Optional<Trade> trade = tradeRepository.findAll().stream().findFirst();
         int id = trade.get().getTradeId();
-        mockMvc.perform(get("/trade/delete/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/delete/" + id))
                 .andExpect(status().is3xxRedirection());
 
     }
@@ -163,8 +153,7 @@ public class TradeControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/trade/delete/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/trade/delete/" + 999))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
     }

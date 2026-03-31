@@ -4,7 +4,6 @@ import com.nnk.domain.Trade;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +37,7 @@ public class TradeController {
     }
 
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid Trade trade, BindingResult result, Model model) {
         if (result.hasErrors()) {
 
             return "trade/add";
@@ -82,7 +81,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/delete/{id}")
-    public String deleteTrade(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
+    public String deleteTrade(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             service.deleteById(id);
         } catch (Exception e) {

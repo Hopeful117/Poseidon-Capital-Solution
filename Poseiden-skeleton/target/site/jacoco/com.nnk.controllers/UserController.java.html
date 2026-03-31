@@ -35,66 +35,67 @@ public class UserController {
     }
 
     @PostMapping(&quot;/user/validate&quot;)
-    public String validate(@Valid User user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid User user, BindingResult result, Model model) {
 <span class="fc bfc" id="L39" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L40">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
-<span class="fc" id="L41">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
-<span class="fc" id="L42">            return &quot;redirect:/user/add&quot;;</span>
+
+<span class="fc" id="L41">            return &quot;user/add&quot;;</span>
         }
         try {
 
-<span class="fc" id="L46">            service.create(user);</span>
-<span class="fc" id="L47">            model.addAttribute(&quot;users&quot;, service.findAll());</span>
-<span class="fc" id="L48">            return &quot;redirect:/user/list&quot;;</span>
-<span class="nc" id="L49">        } catch (Exception e) {</span>
-<span class="nc" id="L50">            model.addAttribute(&quot;errors&quot;, e.getMessage());</span>
-<span class="nc" id="L51">            return &quot;user/add&quot;;</span>
+<span class="fc" id="L45">            service.create(user);</span>
+<span class="fc" id="L46">            return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L47">        } catch (Exception e) {</span>
+<span class="nc" id="L48">            model.addAttribute(&quot;errors&quot;, e.getMessage());</span>
+<span class="nc" id="L49">            return &quot;user/add&quot;;</span>
         }
 
 
     }
 
     @GetMapping(&quot;/user/update/{id}&quot;)
-    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="fc" id="L59">        User user = service.findById(id);</span>
-<span class="fc" id="L60">        user.setPassword(&quot;&quot;);</span>
-<span class="fc" id="L61">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="fc" id="L62">        return &quot;user/update&quot;;</span>
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+<span class="fc" id="L58">            User user = service.findById(id);</span>
+<span class="fc" id="L59">            user.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L60">            model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L61">            return &quot;user/update&quot;;</span>
+<span class="fc" id="L62">        } catch (Exception e) {</span>
+<span class="fc" id="L63">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L64">            return &quot;redirect:/user/list&quot;;</span>
+        }
     }
 
     @PostMapping(&quot;/user/update/{id}&quot;)
     public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
-                             BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
-<span class="fc" id="L69">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
-<span class="fc" id="L70">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
-<span class="fc" id="L71">            return &quot;user/update&quot;;</span>
+                             BindingResult result, Model model) {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+
+<span class="fc" id="L73">            return &quot;user/update&quot;;</span>
         }
 
         try {
 
-<span class="fc" id="L76">            user.setId(id);</span>
-<span class="fc" id="L77">            service.update(user);</span>
-<span class="fc" id="L78">            model.addAttribute(&quot;users&quot;, service.findAll());</span>
-<span class="fc" id="L79">            return &quot;redirect:/user/list&quot;;</span>
-<span class="fc" id="L80">        } catch (Exception e) {</span>
-<span class="fc" id="L81">            List&lt;String&gt; errors = result.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();</span>
-<span class="fc" id="L82">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, errors);</span>
-<span class="fc" id="L83">            return &quot;user/update&quot;;</span>
+<span class="fc" id="L78">            user.setId(id);</span>
+<span class="fc" id="L79">            service.update(user);</span>
+
+<span class="fc" id="L81">            return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L82">        } catch (Exception e) {</span>
+<span class="fc" id="L83">           model.addAttribute(&quot;errorMessage&quot;,e.getMessage());</span>
+<span class="fc" id="L84">            return &quot;user/update&quot;;</span>
         }
     }
 
     @GetMapping(&quot;/user/delete/{id}&quot;)
-    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model,RedirectAttributes redirectAttributes) {
         try {
-<span class="fc" id="L90">            service.deleteById(id);</span>
-<span class="fc" id="L91">            model.addAttribute(&quot;users&quot;, service.findAll());</span>
+<span class="fc" id="L91">            service.deleteById(id);</span>
 
-<span class="fc" id="L93">        } catch (Exception e) {</span>
-<span class="fc" id="L94">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
 
-<span class="fc" id="L96">        }</span>
-<span class="fc" id="L97">        return &quot;/user/list&quot;;</span>
+<span class="fc" id="L94">        } catch (Exception e) {</span>
+<span class="fc" id="L95">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+
+<span class="fc" id="L97">        }</span>
+<span class="fc" id="L98">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

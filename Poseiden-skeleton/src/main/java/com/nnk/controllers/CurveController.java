@@ -35,7 +35,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         if (result.hasErrors()) {
 
             return "curvePoint/add";
@@ -80,7 +80,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteCurve(@PathVariable("id") Integer id, Model model,RedirectAttributes redirectAttributes) {
+    public String deleteCurve(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {
             service.deleteById(id);
         } catch (Exception e) {

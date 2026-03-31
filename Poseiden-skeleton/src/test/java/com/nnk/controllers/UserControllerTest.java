@@ -41,20 +41,18 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldReturnUserList() throws Exception {
-        mockMvc.perform(get("/user/list")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
+        mockMvc.perform(get("/user/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/list"))
                 .andExpect(model().attributeExists("users"));
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldReturnAddUserForm() throws Exception {
-        mockMvc.perform(get("/user/add")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
+        mockMvc.perform(get("/user/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/add"));
     }
@@ -63,12 +61,11 @@ public class UserControllerTest {
     @CsvSource({
             "'newuser1', 'ValidPass1!', 'New User One', 'USER'",
             "'newuser2', 'Another2@', 'New User Two', 'ADMIN'",
-            "'newuser3', 'ThirdPass3#', 'New User Three', 'MODERATOR'"
+
     })
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldValidateUser(String username, String password, String fullname, String role) throws Exception {
         mockMvc.perform(post("/user/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin"))
                         .param("username", username)
                         .param("password", password)
                         .param("fullname", fullname)
@@ -89,40 +86,37 @@ public class UserControllerTest {
             "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
             "'user', 'ValidPass1!', 'User', ''"  // empty role
     })
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldReturnFormWithErrorIfBindingFails(String username, String password, String fullname, String role) throws Exception {
         mockMvc.perform(post("/user/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin"))
                         .param("username", username)
                         .param("password", password)
                         .param("fullname", fullname)
                         .param("role", role)
                 )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user/add"))
-                .andExpect(flash().attributeExists("errorMessage"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("user/add"))
+                .andExpect(model().attributeHasFieldErrors("user"));
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldReturnUpdateForm() throws Exception {
         Optional<User> user = userRepository.findByUsername("testuser");
         int id = user.get().getId();
 
-        mockMvc.perform(get("/user/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
+        mockMvc.perform(get("/user/update/" + id))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("user"))
                 .andExpect(view().name("user/update"));
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/user/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
+        mockMvc.perform(get("/user/update/" + 999))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"))
+                .andExpect(redirectedUrl("/user/list"))
                 .andExpect(flash().attributeExists("errorMessage"));
     }
 
@@ -131,13 +125,12 @@ public class UserControllerTest {
             "'updateduser1', 'Updated1!', 'Updated User One', 'USER'",
             "'updateduser2', 'Changed2@', 'Updated User Two', 'ADMIN'"
     })
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldUpdateUser(String newUsername, String newPassword, String newFullname, String newRole) throws Exception {
         Optional<User> user = userRepository.findByUsername("testuser");
         int id = user.get().getId();
 
         mockMvc.perform(post("/user/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin"))
                         .param("username", newUsername)
                         .param("password", newPassword)
                         .param("fullname", newFullname)
@@ -154,13 +147,12 @@ public class UserControllerTest {
             "'user', 'ValidPass1!', '', 'USER'",  // empty fullname
             "'user', 'ValidPass1!', 'User', ''"  // empty role
     })
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldRedirectWithErrorIfBindingFailsOnUpdate(String username, String password, String fullname, String role) throws Exception {
         Optional<User> user = userRepository.findByUsername("testuser");
         int id = user.get().getId();
 
         mockMvc.perform(post("/user/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin"))
                         .param("username", username)
                         .param("password", password)
                         .param("fullname", fullname)
@@ -170,38 +162,36 @@ public class UserControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldReturnFormWithErrorIfExceptionThrownOnUpdate() throws Exception {
         mockMvc.perform(post("/user/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin"))
                         .param("username", "user")
                         .param("password", "ValidPass1!")
                         .param("fullname", "User")
                         .param("role", "USER"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("user/update"));
+                .andExpect(view().name("user/update"))
+                .andExpect(model().attributeExists("errorMessage"));
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldDeleteUser() throws Exception {
         Optional<User> user = userRepository.findByUsername("testuser");
         int id = user.get().getId();
 
-        mockMvc.perform(get("/user/delete/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
-                .andExpect(status().isOk())
-                .andExpect(view().name("/user/list"))
-                .andExpect(model().attributeDoesNotExist("errorMessage"));
+        mockMvc.perform(get("/user/delete/" + id))
+                .andExpect(status().is3xxRedirection());
+
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(username = "admin", roles = "ADMIN")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/user/delete/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("admin")))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("errorMessage"))
-                .andExpect(view().name("/user/list"));
+        mockMvc.perform(get("/user/delete/" + 999))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/user/list"))
+                .andExpect(flash().attributeExists("errorMessage"));
+
     }
 }

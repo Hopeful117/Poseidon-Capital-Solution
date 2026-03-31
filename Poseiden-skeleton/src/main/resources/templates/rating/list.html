@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <title>Home</title>
@@ -15,7 +15,7 @@
     <div th:replace="~{header :: header}"></div>
     <div class="row"><h2 style="padding-left:0">Rating List</h2></div>
     <div class="row">
-        <a class="btn btn-primary btn-sm"  style="width:100px" th:href="@{/rating/add}">Add New</a>
+        <a class="btn btn-primary btn-sm" style="width:100px" th:href="@{/rating/add}">Add New</a>
         <table class="table table-bordered">
             <thead>
             <tr>

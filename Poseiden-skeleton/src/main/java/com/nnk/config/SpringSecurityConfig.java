@@ -27,9 +27,9 @@ public class SpringSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/app/login", "/css/**", "/js/**", "/images/**", "/").permitAll()
+                        .requestMatchers("/app/login", "/css/**", "/js/**", "/images/**", "/", "/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/user/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
 
                 )
@@ -48,7 +48,7 @@ public class SpringSecurityConfig {
                             response.sendRedirect("/app/login");
                         }).accessDeniedHandler(((request, response, accessDeniedException) ->
                         {
-                            response.sendRedirect("/403");
+                            response.sendRedirect("/app/error");
                         }))
                 ));
 

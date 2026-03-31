@@ -48,8 +48,7 @@ public class CurveControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnCurvePointList() throws Exception {
-        mockMvc.perform(get("/curvePoint/list")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/list"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/list"))
                 .andExpect(model().attributeExists("curvePoints"));
@@ -58,8 +57,8 @@ public class CurveControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldReturnAddCurveForm() throws Exception {
-        mockMvc.perform(get("/curvePoint/add")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/add"))
+
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/add"));
     }
@@ -68,7 +67,6 @@ public class CurveControllerTest {
     @WithMockUser(username = "user")
     void shouldValidateCurvePoint() throws Exception {
         mockMvc.perform(post("/curvePoint/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("curveId", "1")
                         .param("term", "1.0")
                         .param("value", "1.0"))
@@ -80,7 +78,6 @@ public class CurveControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfBindingFails() throws Exception {
         mockMvc.perform(post("/curvePoint/validate")
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("curveId", "1")
                         .param("term", "a")
                         .param("value", "1.0"))
@@ -93,8 +90,7 @@ public class CurveControllerTest {
     void shouldReturnUpdateForm() throws Exception {
         int id = savedCurvePoint.getId();
 
-        mockMvc.perform(get("/curvePoint/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/update/" + id))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(model().attributeExists("curvePoint"))
                 .andExpect(view().name("curvePoint/update"));
@@ -103,8 +99,7 @@ public class CurveControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectToListIfExceptionThrown() throws Exception {
-        mockMvc.perform(get("/curvePoint/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/update/" + 999))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(flash().attributeExists("errorMessage"));
     }
@@ -114,7 +109,6 @@ public class CurveControllerTest {
     void shouldUpdateCurvePoint() throws Exception {
         int id = savedCurvePoint.getId();
         mockMvc.perform(post("/curvePoint/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("curveId", "5")
                         .param("term", "2.0")
                         .param("value", "3.0"))
@@ -127,7 +121,6 @@ public class CurveControllerTest {
     void shouldRedirectWithErrorIfBindingFails() throws Exception {
         int id = savedCurvePoint.getId();
         mockMvc.perform(post("/curvePoint/update/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("curveId", "1")
                         .param("term", "a")
                         .param("value", "1.0"))
@@ -139,7 +132,6 @@ public class CurveControllerTest {
     @WithMockUser(username = "user")
     void shouldReturnFormWithErrorIfExceptionThrown() throws Exception {
         mockMvc.perform(post("/curvePoint/update/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user"))
                         .param("curveId", "5")
                         .param("term", "2.0")
                         .param("value", "3.0"))
@@ -151,8 +143,7 @@ public class CurveControllerTest {
     @WithMockUser(username = "user")
     void shouldDeleteCurvePoint() throws Exception {
         int id = savedCurvePoint.getId();
-        mockMvc.perform(get("/curvePoint/delete/" + id)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/delete/" + id))
                 .andExpect(status().is3xxRedirection());
 
     }
@@ -160,8 +151,7 @@ public class CurveControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDisplayErrorIfExceptionWhenDeleting() throws Exception {
-        mockMvc.perform(get("/curvePoint/delete/" + 999)
-                        .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user("user")))
+        mockMvc.perform(get("/curvePoint/delete/" + 999))
                 .andExpect(flash().attributeExists("errorMessage"));
 
     }

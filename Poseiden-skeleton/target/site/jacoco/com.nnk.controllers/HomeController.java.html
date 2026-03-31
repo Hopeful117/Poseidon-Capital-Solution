@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 <span class="fc" id="L8">public class HomeController {</span>
     @RequestMapping(&quot;/&quot;)
     public String home(Model model) {
-<span class="nc" id="L11">        return &quot;home&quot;;</span>
+<span class="nc" id="L11">        return &quot;index&quot;;</span>
     }
 
     @RequestMapping(&quot;/admin/home&quot;)
     public String adminHome(Model model) {
-<span class="nc" id="L16">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L16">        return &quot;redirect:/user/list&quot;;</span>
     }
 
 
