@@ -7,7 +7,6 @@ com/nnk/exceptions/EntityNotFoundException.class
 com/nnk/controllers/TradeController.class
 com/nnk/domain/DomainEntity.class
 com/nnk/domain/CurvePoint.class
-com/nnk/config/GlobalExceptionHandler.class
 com/nnk/repositories/TradeRepository.class
 com/nnk/controllers/RuleNameController.class
 com/nnk/Application.class

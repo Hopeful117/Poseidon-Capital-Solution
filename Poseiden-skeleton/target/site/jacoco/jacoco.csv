@@ -15,7 +15,6 @@ Poseidon,com.nnk.domain,Trade,0,29,0,0,0,10,0,3,0,3
 Poseidon,com.nnk.domain,RuleName,0,47,0,0,0,15,0,2,0,2
 Poseidon,com.nnk.domain,BidList,0,29,0,0,0,10,0,3,0,3
 Poseidon,com.nnk.domain,CurvePoint,0,26,0,0,0,9,0,2,0,2
-Poseidon,com.nnk.config,GlobalExceptionHandler,60,3,24,0,15,1,13,1,1,1
 Poseidon,com.nnk.config,SpringSecurityConfig,8,118,0,0,3,24,2,7,2,7
 Poseidon,com.nnk.config,CustomUserDetailsService,30,0,0,0,7,0,2,0,2,0
 Poseidon,com.nnk.config,CustomAuthenticationSuccessHandler,33,3,4,0,9,1,5,1,3,1
