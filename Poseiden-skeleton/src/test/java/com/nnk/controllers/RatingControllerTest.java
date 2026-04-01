@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -138,7 +139,7 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldRedirectWithErrorIfBindingFails() throws Exception {
-        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
+        Optional<Rating> rating = ratingRepository.findAll().stream().findFirst();
         int id = rating.get().getId();
         mockMvc.perform(post("/rating/update/" + id)
                         .param("moodysRating", "5")
@@ -168,7 +169,7 @@ public class RatingControllerTest {
     @Test
     @WithMockUser(username = "user")
     void shouldDeleteRating() throws Exception {
-        Optional<Rating> rating = ratingRepository.findByOrderNumber(1);
+        Optional<Rating> rating = ratingRepository.findAll().stream().findFirst();
         int id = rating.get().getId();
         mockMvc.perform(get("/rating/delete/" + id))
                 .andExpect(model().attributeDoesNotExist("errorMessage"));
