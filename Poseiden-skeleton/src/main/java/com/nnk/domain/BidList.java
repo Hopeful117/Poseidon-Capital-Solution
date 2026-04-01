@@ -25,18 +25,14 @@ public class BidList implements DomainEntity<BidList> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BidListId")
-    @Positive
-    @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer bidListId;
 
     @Column(name = "account")
-    @NotNull(message = "Account is mandatory")
     @NotBlank(message = "Account must not be blank")
     @Size(max = 30, message = "Account must not exceed 30 characters")
     String account;
 
     @Column(name = "type")
-    @NotNull(message = "Type is mandatory")
     @NotBlank(message = "Type must not be blank")
     @Size(max = 30, message = "Type must not exceed 30 characters")
     String type;
@@ -92,6 +88,7 @@ public class BidList implements DomainEntity<BidList> {
     String book;
 
     @Column(name = "creationName")
+    @Size(max = 125, message = "Creation Name must not exceed 125 characters")
     String creationName;
 
     @Column(name = "creationDate")
@@ -120,7 +117,7 @@ public class BidList implements DomainEntity<BidList> {
 
     @Column(name = "side")
     @Size(max = 125, message = "Side must not exceed 125 characters")
-    String sid;
+    String side;
 
     /**
      * Constructeur pour créer une nouvelle liste d'enchères.
@@ -153,7 +150,6 @@ public class BidList implements DomainEntity<BidList> {
      */
     @Override
     public BidList update(BidList domainEntity) {
-
         account = domainEntity.getAccount();
         type = domainEntity.getType();
         bidQuantity = domainEntity.getBidQuantity();

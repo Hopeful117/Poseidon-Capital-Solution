@@ -21,9 +21,8 @@ import lombok.Setter;
 public class User implements DomainEntity<User> {
     /** Identifiant unique de l'utilisateur */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     private Integer id;
 
     /** Nom d'utilisateur unique pour la connexion */
@@ -48,8 +47,7 @@ public class User implements DomainEntity<User> {
     @Size(max = 125, message = "FullName must not exceed 125 characters")
     private String fullname;
 
-    /** Rôle de l'utilisateur (USER, ADMIN, etc.) */
-    /** Le rôle doit faire partie des rôles attendus par Spring Security (ex: ROLE_USER, ROLE_ADMIN) */
+    /** Rôle de l'utilisateur (ex : USER, ADMIN) — doit correspondre au format attendu par Spring Security (ROLE_USER, ROLE_ADMIN) */
     @NotBlank(message = "Role is mandatory")
     @Column(name = "role")
     @Size(max = 125, message = "Role must not exceed 125 characters")

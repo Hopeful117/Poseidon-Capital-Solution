@@ -20,8 +20,7 @@ import lombok.Setter;
 public class RuleName implements DomainEntity<RuleName> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
+    @Column(name = "id")
     Integer id;
 
     @Column(name = "name")

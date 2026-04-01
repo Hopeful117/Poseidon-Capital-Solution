@@ -21,24 +21,23 @@ public class Rating implements DomainEntity<Rating> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
-    @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer id;
 
     /** Notation Moody's */
-    @Column(name = " moodysRating")
-    @NotBlank
+    @Column(name = "moodysRating")
+    @NotBlank(message = "Moody's Rating is mandatory")
     @Size(max = 125, message = "Moody's Rating must not exceed 125 characters")
     String moodysRating;
 
     /** Notation Standard & Poor's */
-    @Column(name = " sandPRating")
-    @NotBlank
+    @Column(name = "sandPRating")
+    @NotBlank(message = "S&P Rating is mandatory")
     @Size(max = 125, message = "S&P Rating must not exceed 125 characters")
     String sandPRating;
 
     /** Notation Fitch */
     @Column(name = "fitchRating")
-    @NotBlank
+    @NotBlank(message = "Fitch Rating is mandatory")
     @Size(max = 125, message = "Fitch Rating must not exceed 125 characters")
     String fitchRating;
 

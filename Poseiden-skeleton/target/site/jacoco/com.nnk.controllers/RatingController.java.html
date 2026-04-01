@@ -33,10 +33,10 @@ public class RatingController {
      */
     @RequestMapping(&quot;/rating/list&quot;)
     public String home(Model model) {
-<span class="nc" id="L36">        List&lt;Rating&gt; ratings = service.findAll();</span>
-<span class="nc" id="L37">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
+<span class="fc" id="L36">        List&lt;Rating&gt; ratings = service.findAll();</span>
+<span class="fc" id="L37">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
 
-<span class="nc" id="L39">        return &quot;rating/list&quot;;</span>
+<span class="fc" id="L39">        return &quot;rating/list&quot;;</span>
     }
 
     /**
@@ -47,7 +47,7 @@ public class RatingController {
      */
     @GetMapping(&quot;/rating/add&quot;)
     public String addRatingForm(Rating rating) {
-<span class="nc" id="L50">        return &quot;rating/add&quot;;</span>
+<span class="fc" id="L50">        return &quot;rating/add&quot;;</span>
     }
 
     /**
@@ -61,14 +61,14 @@ public class RatingController {
     @PostMapping(&quot;/rating/validate&quot;)
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
 
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="nc" id="L66">            return &quot;rating/add&quot;;</span>
+<span class="fc" id="L66">            return &quot;rating/add&quot;;</span>
         }
         try {
 
-<span class="nc" id="L70">            service.create(rating);</span>
-<span class="nc" id="L71">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L70">            service.create(rating);</span>
+<span class="fc" id="L71">            return &quot;redirect:/rating/list&quot;;</span>
 <span class="nc" id="L72">        } catch (Exception e) {</span>
 <span class="nc" id="L73">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
 <span class="nc" id="L74">            return &quot;rating/add&quot;;</span>
@@ -88,12 +88,12 @@ public class RatingController {
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
 
         try {
-<span class="nc" id="L91">            Rating rating = service.findById(id);</span>
-<span class="nc" id="L92">            model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="nc" id="L93">            return &quot;rating/update&quot;;</span>
-<span class="nc" id="L94">        } catch (Exception e) {</span>
-<span class="nc" id="L95">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L96">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L91">            Rating rating = service.findById(id);</span>
+<span class="fc" id="L92">            model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="fc" id="L93">            return &quot;rating/update&quot;;</span>
+<span class="fc" id="L94">        } catch (Exception e) {</span>
+<span class="fc" id="L95">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L96">            return &quot;redirect:/rating/list&quot;;</span>
         }
     }
 
@@ -110,18 +110,18 @@ public class RatingController {
     public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,
                                BindingResult result, Model model) {
 
-<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="nc" id="L115">            return &quot;rating/update&quot;;</span>
+<span class="fc" id="L115">            return &quot;rating/update&quot;;</span>
         }
         try {
 
-<span class="nc" id="L119">            rating.setId(id);</span>
-<span class="nc" id="L120">            service.update(rating);</span>
-<span class="nc" id="L121">            return &quot;redirect:/rating/list&quot;;</span>
-<span class="nc" id="L122">        } catch (Exception e) {</span>
-<span class="nc" id="L123">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L124">            return &quot;rating/update&quot;;</span>
+<span class="fc" id="L119">            rating.setId(id);</span>
+<span class="fc" id="L120">            service.update(rating);</span>
+<span class="fc" id="L121">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L122">        } catch (Exception e) {</span>
+<span class="fc" id="L123">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L124">            return &quot;rating/update&quot;;</span>
         }
     }
 
@@ -136,12 +136,12 @@ public class RatingController {
     public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, RedirectAttributes redirectAttributes) {
 
         try {
-<span class="nc" id="L139">            service.deleteById(id);</span>
+<span class="fc" id="L139">            service.deleteById(id);</span>
 
-<span class="nc" id="L141">        } catch (Exception e) {</span>
-<span class="nc" id="L142">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L143">        }</span>
-<span class="nc" id="L144">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L141">        } catch (Exception e) {</span>
+<span class="fc" id="L142">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L143">        }</span>
+<span class="fc" id="L144">        return &quot;redirect:/rating/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

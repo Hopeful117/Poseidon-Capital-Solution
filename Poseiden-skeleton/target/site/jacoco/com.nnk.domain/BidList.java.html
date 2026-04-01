@@ -25,18 +25,14 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = &quot;BidListId&quot;)
-    @Positive
-    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     Integer bidListId;
 
     @Column(name = &quot;account&quot;)
-    @NotNull(message = &quot;Account is mandatory&quot;)
     @NotBlank(message = &quot;Account must not be blank&quot;)
     @Size(max = 30, message = &quot;Account must not exceed 30 characters&quot;)
     String account;
 
     @Column(name = &quot;type&quot;)
-    @NotNull(message = &quot;Type is mandatory&quot;)
     @NotBlank(message = &quot;Type must not be blank&quot;)
     @Size(max = 30, message = &quot;Type must not exceed 30 characters&quot;)
     String type;
@@ -92,6 +88,7 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
     String book;
 
     @Column(name = &quot;creationName&quot;)
+    @Size(max = 125, message = &quot;Creation Name must not exceed 125 characters&quot;)
     String creationName;
 
     @Column(name = &quot;creationDate&quot;)
@@ -120,7 +117,7 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
 
     @Column(name = &quot;side&quot;)
     @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
-    String sid;
+    String side;
 
     /**
      * Constructeur pour créer une nouvelle liste d'enchères.
@@ -129,11 +126,11 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
      * @param type le type d'enchère
      * @param bidQuantity la quantité d'enchère
      */
-<span class="nc" id="L132">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
-<span class="nc" id="L133">        this.account = account;</span>
-<span class="nc" id="L134">        this.type = type;</span>
-<span class="nc" id="L135">        this.bidQuantity = bidQuantity;</span>
-<span class="nc" id="L136">    }</span>
+<span class="fc" id="L129">    public BidList(String account, String type, BigDecimal bidQuantity) {</span>
+<span class="fc" id="L130">        this.account = account;</span>
+<span class="fc" id="L131">        this.type = type;</span>
+<span class="fc" id="L132">        this.bidQuantity = bidQuantity;</span>
+<span class="fc" id="L133">    }</span>
 
     /**
      * Retourne l'identifiant technique de la bid list.
@@ -142,7 +139,7 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
      */
     @Override
     public Integer getId() {
-<span class="nc" id="L145">        return bidListId;</span>
+<span class="fc" id="L142">        return bidListId;</span>
     }
 
     /**
@@ -153,12 +150,11 @@ public class BidList implements DomainEntity&lt;BidList&gt; {
      */
     @Override
     public BidList update(BidList domainEntity) {
+<span class="fc" id="L153">        account = domainEntity.getAccount();</span>
+<span class="fc" id="L154">        type = domainEntity.getType();</span>
+<span class="fc" id="L155">        bidQuantity = domainEntity.getBidQuantity();</span>
 
-<span class="nc" id="L157">        account = domainEntity.getAccount();</span>
-<span class="nc" id="L158">        type = domainEntity.getType();</span>
-<span class="nc" id="L159">        bidQuantity = domainEntity.getBidQuantity();</span>
-
-<span class="nc" id="L161">        return this;</span>
+<span class="fc" id="L157">        return this;</span>
 
     }
 }

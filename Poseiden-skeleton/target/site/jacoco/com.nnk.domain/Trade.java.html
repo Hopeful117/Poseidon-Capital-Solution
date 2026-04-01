@@ -24,17 +24,14 @@ public class Trade implements DomainEntity&lt;Trade&gt; {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = &quot;trade_id&quot;)
-    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     Integer tradeId;
 
     @Column(name = &quot;account&quot;)
-    @NotNull(message = &quot;Account must not be null&quot;)
     @NotBlank(message = &quot;Account must not be blank&quot;)
     @Size(max = 30, message = &quot;Account must not exceed 30 characters&quot;)
     String account;
 
     @Column(name = &quot;type&quot;)
-    @NotNull(message = &quot;Type must not be null&quot;)
     @NotBlank(message = &quot;Type must not be blank&quot;)
     @Size(max = 30, message = &quot;Type must not exceed 30 characters&quot;)
     String type;
@@ -123,11 +120,11 @@ public class Trade implements DomainEntity&lt;Trade&gt; {
      * @param type type de transaction
      * @param buyQuantity quantite achetee
      */
-<span class="nc" id="L126">    public Trade(String account, String type, BigDecimal buyQuantity) {</span>
-<span class="nc" id="L127">        this.account = account;</span>
-<span class="nc" id="L128">        this.type = type;</span>
-<span class="nc" id="L129">        this.buyQuantity = buyQuantity;</span>
-<span class="nc" id="L130">    }</span>
+<span class="fc" id="L123">    public Trade(String account, String type, BigDecimal buyQuantity) {</span>
+<span class="fc" id="L124">        this.account = account;</span>
+<span class="fc" id="L125">        this.type = type;</span>
+<span class="fc" id="L126">        this.buyQuantity = buyQuantity;</span>
+<span class="fc" id="L127">    }</span>
 
 
     /**
@@ -137,7 +134,7 @@ public class Trade implements DomainEntity&lt;Trade&gt; {
      */
     @Override
     public Integer getId() {
-<span class="nc" id="L140">        return tradeId;</span>
+<span class="fc" id="L137">        return tradeId;</span>
     }
 
     /**
@@ -148,14 +145,13 @@ public class Trade implements DomainEntity&lt;Trade&gt; {
      */
     @Override
     public Trade update(Trade domainEntity) {
-<span class="nc" id="L151">        account = domainEntity.getAccount();</span>
-<span class="nc" id="L152">        type = domainEntity.getType();</span>
-<span class="nc" id="L153">        buyQuantity = domainEntity.buyQuantity;</span>
+<span class="fc" id="L148">        account = domainEntity.getAccount();</span>
+<span class="fc" id="L149">        type = domainEntity.getType();</span>
+<span class="fc" id="L150">        buyQuantity = domainEntity.buyQuantity;</span>
 
 
-<span class="nc" id="L156">        return this;</span>
+<span class="fc" id="L153">        return this;</span>
     }
-
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

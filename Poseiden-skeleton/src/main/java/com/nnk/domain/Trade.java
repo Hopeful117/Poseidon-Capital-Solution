@@ -24,17 +24,14 @@ public class Trade implements DomainEntity<Trade> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "trade_id")
-    @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     Integer tradeId;
 
     @Column(name = "account")
-    @NotNull(message = "Account must not be null")
     @NotBlank(message = "Account must not be blank")
     @Size(max = 30, message = "Account must not exceed 30 characters")
     String account;
 
     @Column(name = "type")
-    @NotNull(message = "Type must not be null")
     @NotBlank(message = "Type must not be blank")
     @Size(max = 30, message = "Type must not exceed 30 characters")
     String type;
@@ -155,6 +152,5 @@ public class Trade implements DomainEntity<Trade> {
 
         return this;
     }
-
 
 }

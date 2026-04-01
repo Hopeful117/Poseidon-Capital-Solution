@@ -25,8 +25,6 @@ public class CurvePoint implements DomainEntity&lt;CurvePoint&gt; {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = &quot;Id&quot;)
-    @Positive
-    @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     Integer id;
 
     @Column(name = &quot;CurveId&quot;)
@@ -60,11 +58,11 @@ public class CurvePoint implements DomainEntity&lt;CurvePoint&gt; {
      * @param term maturite du point
      * @param value valeur du point
      */
-<span class="nc" id="L63">    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {</span>
-<span class="nc" id="L64">        this.curveId = curveId;</span>
-<span class="nc" id="L65">        this.term = term;</span>
-<span class="nc" id="L66">        this.value = value;</span>
-<span class="nc" id="L67">    }</span>
+<span class="fc" id="L61">    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {</span>
+<span class="fc" id="L62">        this.curveId = curveId;</span>
+<span class="fc" id="L63">        this.term = term;</span>
+<span class="fc" id="L64">        this.value = value;</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * Met a jour les informations principales du point de courbe.
@@ -74,11 +72,11 @@ public class CurvePoint implements DomainEntity&lt;CurvePoint&gt; {
      */
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
-<span class="nc" id="L77">        curveId = domainEntity.getCurveId();</span>
-<span class="nc" id="L78">        term = domainEntity.getTerm();</span>
-<span class="nc" id="L79">        value = domainEntity.getValue();</span>
+<span class="fc" id="L75">        curveId = domainEntity.getCurveId();</span>
+<span class="fc" id="L76">        term = domainEntity.getTerm();</span>
+<span class="fc" id="L77">        value = domainEntity.getValue();</span>
 
-<span class="nc" id="L81">        return this;</span>
+<span class="fc" id="L79">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
