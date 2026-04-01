@@ -9,8 +9,19 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Redirige l'utilisateur apres connexion selon son role.
+ */
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+    /**
+     * Redirection post-authentification vers l'espace admin ou utilisateur.
+     *
+     * @param request requete HTTP
+     * @param response reponse HTTP
+     * @param authentication contexte d'authentification
+     * @throws IOException en cas d'erreur d'ecriture de la reponse
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,

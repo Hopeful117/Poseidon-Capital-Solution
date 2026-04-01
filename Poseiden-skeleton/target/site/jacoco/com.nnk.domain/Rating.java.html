@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Représente une notation de risque pour les obligations.
+ * Gère les différentes agences de notation (Moody's, S&amp;P, Fitch) et le numéro d'ordre.
+ */
 @Entity
 @Table(name = &quot;rating&quot;)
 @Getter
@@ -13,47 +17,66 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Rating implements DomainEntity&lt;Rating&gt; {
 
+    /** Identifiant unique de la notation */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = &quot;Id&quot;)
     @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     Integer id;
 
+    /** Notation Moody's */
     @Column(name = &quot; moodysRating&quot;)
     @NotBlank
     @Size(max = 125, message = &quot;Moody's Rating must not exceed 125 characters&quot;)
     String moodysRating;
 
+    /** Notation Standard &amp; Poor's */
     @Column(name = &quot; sandPRating&quot;)
     @NotBlank
     @Size(max = 125, message = &quot;S&amp;P Rating must not exceed 125 characters&quot;)
     String sandPRating;
 
+    /** Notation Fitch */
     @Column(name = &quot;fitchRating&quot;)
     @NotBlank
     @Size(max = 125, message = &quot;Fitch Rating must not exceed 125 characters&quot;)
     String fitchRating;
 
+    /** Numéro d'ordre de la notation */
     @Column(name = &quot;orderNumber&quot;)
     @NotNull
     @Positive(message = &quot;Order Number must be positive&quot;)
     Integer orderNumber;
 
-<span class="fc" id="L42">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
-<span class="fc" id="L43">        this.moodysRating = moodysRating;</span>
-<span class="fc" id="L44">        this.sandPRating = sandPRating;</span>
-<span class="fc" id="L45">        this.fitchRating = fitchRating;</span>
-<span class="fc" id="L46">        this.orderNumber = orderNumber;</span>
-<span class="fc" id="L47">    }</span>
+    /**
+     * Constructeur pour créer une nouvelle notation.
+     *
+     * @param moodysRating la notation Moody's
+     * @param sandPRating la notation S&amp;P
+     * @param fitchRating la notation Fitch
+     * @param orderNumber le numéro d'ordre
+     */
+<span class="nc" id="L59">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
+<span class="nc" id="L60">        this.moodysRating = moodysRating;</span>
+<span class="nc" id="L61">        this.sandPRating = sandPRating;</span>
+<span class="nc" id="L62">        this.fitchRating = fitchRating;</span>
+<span class="nc" id="L63">        this.orderNumber = orderNumber;</span>
+<span class="nc" id="L64">    }</span>
 
+    /**
+     * Met à jour la notation avec les données d'une autre instance.
+     *
+     * @param domainEntity la notation contenant les nouvelles données
+     * @return la notation mise à jour
+     */
     @Override
     public Rating update(Rating domainEntity) {
-<span class="fc" id="L51">        moodysRating = domainEntity.getMoodysRating();</span>
-<span class="fc" id="L52">        sandPRating = domainEntity.getSandPRating();</span>
-<span class="fc" id="L53">        fitchRating = domainEntity.getFitchRating();</span>
-<span class="fc" id="L54">        orderNumber = domainEntity.getOrderNumber();</span>
+<span class="nc" id="L74">        moodysRating = domainEntity.getMoodysRating();</span>
+<span class="nc" id="L75">        sandPRating = domainEntity.getSandPRating();</span>
+<span class="nc" id="L76">        fitchRating = domainEntity.getFitchRating();</span>
+<span class="nc" id="L77">        orderNumber = domainEntity.getOrderNumber();</span>
 
-<span class="fc" id="L56">        return this;</span>
+<span class="nc" id="L79">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

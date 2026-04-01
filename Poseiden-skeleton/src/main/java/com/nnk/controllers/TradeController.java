@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des trades.
+ */
 @RequiredArgsConstructor
 @Controller
 public class TradeController {
@@ -24,6 +27,12 @@ public class TradeController {
 
     // TODO: Inject Trade service
 
+    /**
+     * Affiche la liste des trades.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping("/trade/list")
     public String home(Model model) {
         List<Trade> trades = service.findAll();
@@ -31,11 +40,25 @@ public class TradeController {
         return "trade/list";
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'un trade.
+     *
+     * @param bid objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping("/trade/add")
     public String addUser(Trade bid) {
         return "trade/add";
     }
 
+    /**
+     * Valide et cree un trade.
+     *
+     * @param trade donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -51,6 +74,14 @@ public class TradeController {
         }
     }
 
+    /**
+     * Affiche le formulaire de mise a jour d'un trade.
+     *
+     * @param id identifiant du trade
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -63,6 +94,15 @@ public class TradeController {
         }
     }
 
+    /**
+     * Met a jour un trade existant.
+     *
+     * @param id identifiant du trade
+     * @param trade donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                               BindingResult result, Model model) {
@@ -80,6 +120,13 @@ public class TradeController {
         }
     }
 
+    /**
+     * Supprime un trade.
+     *
+     * @param id identifiant du trade
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {

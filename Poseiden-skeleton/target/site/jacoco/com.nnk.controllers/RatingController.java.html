@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des ratings.
+ */
 @Controller
 @RequiredArgsConstructor
 public class RatingController {
@@ -22,79 +25,123 @@ public class RatingController {
 
     private final CrudService&lt;Rating&gt; service;
 
+    /**
+     * Affiche la liste des ratings.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping(&quot;/rating/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L27">        List&lt;Rating&gt; ratings = service.findAll();</span>
-<span class="fc" id="L28">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
+<span class="nc" id="L36">        List&lt;Rating&gt; ratings = service.findAll();</span>
+<span class="nc" id="L37">        model.addAttribute(&quot;ratings&quot;, ratings);</span>
 
-<span class="fc" id="L30">        return &quot;rating/list&quot;;</span>
+<span class="nc" id="L39">        return &quot;rating/list&quot;;</span>
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'un rating.
+     *
+     * @param rating objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping(&quot;/rating/add&quot;)
     public String addRatingForm(Rating rating) {
-<span class="fc" id="L35">        return &quot;rating/add&quot;;</span>
+<span class="nc" id="L50">        return &quot;rating/add&quot;;</span>
     }
 
+    /**
+     * Valide et cree un rating.
+     *
+     * @param rating donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping(&quot;/rating/validate&quot;)
-    public String validate(@Valid Rating rating, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: check data valid and save to db, after saving return Rating list
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+    public String validate(@Valid Rating rating, BindingResult result, Model model) {
 
-<span class="fc" id="L43">            return &quot;rating/add&quot;;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+
+<span class="nc" id="L66">            return &quot;rating/add&quot;;</span>
         }
         try {
 
-<span class="fc" id="L47">            service.create(rating);</span>
-<span class="fc" id="L48">            return &quot;redirect:/rating/list&quot;;</span>
-<span class="nc" id="L49">        } catch (Exception e) {</span>
-<span class="nc" id="L50">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L51">            return &quot;rating/add&quot;;</span>
+<span class="nc" id="L70">            service.create(rating);</span>
+<span class="nc" id="L71">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L72">        } catch (Exception e) {</span>
+<span class="nc" id="L73">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L74">            return &quot;rating/add&quot;;</span>
         }
 
     }
 
+    /**
+     * Affiche le formulaire de mise a jour d'un rating.
+     *
+     * @param id identifiant du rating
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping(&quot;/rating/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: get Rating by Id and to model then show to the form
+
         try {
-<span class="fc" id="L60">            Rating rating = service.findById(id);</span>
-<span class="fc" id="L61">            model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="fc" id="L62">            return &quot;rating/update&quot;;</span>
-<span class="fc" id="L63">        } catch (Exception e) {</span>
-<span class="fc" id="L64">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L65">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L91">            Rating rating = service.findById(id);</span>
+<span class="nc" id="L92">            model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="nc" id="L93">            return &quot;rating/update&quot;;</span>
+<span class="nc" id="L94">        } catch (Exception e) {</span>
+<span class="nc" id="L95">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L96">            return &quot;redirect:/rating/list&quot;;</span>
         }
     }
 
+    /**
+     * Met a jour un rating existant.
+     *
+     * @param id identifiant du rating
+     * @param rating donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping(&quot;/rating/update/{id}&quot;)
     public String updateRating(@PathVariable(&quot;id&quot;) Integer id, @Valid Rating rating,
                                BindingResult result, Model model) {
 
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L75">            return &quot;rating/update&quot;;</span>
+<span class="nc" id="L115">            return &quot;rating/update&quot;;</span>
         }
         try {
 
-<span class="fc" id="L79">            rating.setId(id);</span>
-<span class="fc" id="L80">            service.update(rating);</span>
-<span class="fc" id="L81">            return &quot;redirect:/rating/list&quot;;</span>
-<span class="fc" id="L82">        } catch (Exception e) {</span>
-<span class="fc" id="L83">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L84">            return &quot;rating/update&quot;;</span>
+<span class="nc" id="L119">            rating.setId(id);</span>
+<span class="nc" id="L120">            service.update(rating);</span>
+<span class="nc" id="L121">            return &quot;redirect:/rating/list&quot;;</span>
+<span class="nc" id="L122">        } catch (Exception e) {</span>
+<span class="nc" id="L123">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L124">            return &quot;rating/update&quot;;</span>
         }
     }
 
+    /**
+     * Supprime un rating.
+     *
+     * @param id identifiant du rating
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping(&quot;/rating/delete/{id}&quot;)
-    public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model,RedirectAttributes redirectAttributes) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
-        try {
-<span class="fc" id="L92">            service.deleteById(id);</span>
+    public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, RedirectAttributes redirectAttributes) {
 
-<span class="fc" id="L94">        } catch (Exception e) {</span>
-<span class="fc" id="L95">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L96">        }</span>
-<span class="fc" id="L97">        return &quot;redirect:/rating/list&quot;;</span>
+        try {
+<span class="nc" id="L139">            service.deleteById(id);</span>
+
+<span class="nc" id="L141">        } catch (Exception e) {</span>
+<span class="nc" id="L142">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L143">        }</span>
+<span class="nc" id="L144">        return &quot;redirect:/rating/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

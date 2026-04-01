@@ -7,51 +7,94 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
+/**
+ * Service CRUD abstrait qui fournit les opérations de base sur les entités.
+ * Cette classe générique gère la persistance des données via un repository JPA.
+ *
+ * @param &lt;M&gt; le type d'entité gérée (doit implémenter DomainEntity)
+ */
 public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt; implements CrudService&lt;M&gt; {
 
+    /** Repository JPA pour accéder à la base de données */
     protected final JpaRepository&lt;M, Integer&gt; repository;
 
-<span class="fc" id="L14">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository) {</span>
-<span class="fc" id="L15">        this.repository = repository;</span>
-<span class="fc" id="L16">    }</span>
+    /**
+     * Constructeur protégé pour initialiser le repository.
+     *
+     * @param repository le repository JPA pour l'entité
+     */
+<span class="fc" id="L26">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository) {</span>
+<span class="fc" id="L27">        this.repository = repository;</span>
+<span class="fc" id="L28">    }</span>
 
+    /**
+     * Récupère une entité par son identifiant.
+     *
+     * @param id l'identifiant de l'entité
+     * @return l'entité trouvée
+     * @throws EntityNotFoundException si l'entité n'existe pas
+     */
     @Override
     public M findById(final Integer id) {
-<span class="fc" id="L20">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
+<span class="fc" id="L39">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
     }
 
+    /**
+     * Récupère toutes les entités.
+     *
+     * @return la liste de toutes les entités
+     */
     @Override
     public List&lt;M&gt; findAll() {
-<span class="fc" id="L25">        return repository.findAll();</span>
+<span class="fc" id="L49">        return repository.findAll();</span>
     }
 
+    /**
+     * Supprime une entité par son identifiant.
+     *
+     * @param id l'identifiant de l'entité à supprimer
+     * @throws EntityNotFoundException si l'entité n'existe pas
+     */
     @Override
     public void deleteById(final Integer id) {
-<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (!repository.existsById(id)) {</span>
-<span class="fc" id="L31">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!repository.existsById(id)) {</span>
+<span class="fc" id="L61">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
         }
 
-<span class="fc" id="L34">        repository.deleteById(id);</span>
-<span class="fc" id="L35">    }</span>
+<span class="fc" id="L64">        repository.deleteById(id);</span>
+<span class="fc" id="L65">    }</span>
 
+    /**
+     * Crée une nouvelle entité.
+     *
+     * @param model l'entité à créer (ne doit pas avoir d'id)
+     * @throws IllegalArgumentException si l'objet est null ou possède un id
+     */
     @Override
     public void create(final M model) {
-<span class="fc" id="L39">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L40">        Assert.isNull(model.getId(), &quot;Id can not be defined&quot;);</span>
+<span class="fc" id="L75">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L76">        Assert.isNull(model.getId(), &quot;Id can not be defined&quot;);</span>
 
-<span class="fc" id="L42">        repository.save(model);</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L78">        repository.save(model);</span>
+<span class="fc" id="L79">    }</span>
 
+    /**
+     * Met à jour une entité existante.
+     *
+     * @param model l'entité à mettre à jour (doit avoir un id)
+     * @throws IllegalArgumentException si l'objet est null ou n'a pas d'id
+     * @throws EntityNotFoundException si l'entité n'existe pas
+     */
     @Override
     public void update(final M model) {
-<span class="fc" id="L47">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L48">        Assert.notNull(model.getId(), &quot;Id can not be null&quot;);</span>
+<span class="fc" id="L90">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L91">        Assert.notNull(model.getId(), &quot;Id can not be null&quot;);</span>
 
-<span class="fc" id="L50">        final M updatedModel = repository.findById(model.getId())</span>
-<span class="fc" id="L51">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
-<span class="fc" id="L52">                .update(model);</span>
+<span class="fc" id="L93">        final M updatedModel = repository.findById(model.getId())</span>
+<span class="fc" id="L94">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
+<span class="fc" id="L95">                .update(model);</span>
 
-<span class="fc" id="L54">        repository.save(updatedModel);</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L97">        repository.save(updatedModel);</span>
+<span class="fc" id="L98">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

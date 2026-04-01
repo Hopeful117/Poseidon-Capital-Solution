@@ -12,7 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
+/**
+ * Représente un point sur une courbe de taux d'intérêt.
+ * Gère les informations des points de courbe avec les termes et les valeurs.
+ */
 @Entity
 @Table(name = "curvepoint")
 @Getter
@@ -50,12 +53,25 @@ public class CurvePoint implements DomainEntity<CurvePoint> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     Timestamp creationDate;
 
+    /**
+     * Construit un point de courbe minimal.
+     *
+     * @param curveId identifiant de la courbe
+     * @param term maturite du point
+     * @param value valeur du point
+     */
     public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {
         this.curveId = curveId;
         this.term = term;
         this.value = value;
     }
 
+    /**
+     * Met a jour les informations principales du point de courbe.
+     *
+     * @param domainEntity point source
+     * @return instance courante mise a jour
+     */
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
         curveId = domainEntity.getCurveId();

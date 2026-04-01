@@ -10,7 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
+/**
+ * Représente une transaction commerciale (Trade).
+ * Gère les informations d'achat, de vente et les métadonnées associées aux transactions.
+ */
 @Entity
 @Table(name = "trade")
 @Getter
@@ -113,6 +116,13 @@ public class Trade implements DomainEntity<Trade> {
     @Size(max = 125, message = "Side must not exceed 125 characters")
     String side;
 
+    /**
+     * Construit un trade minimal.
+     *
+     * @param account compte associe
+     * @param type type de transaction
+     * @param buyQuantity quantite achetee
+     */
     public Trade(String account, String type, BigDecimal buyQuantity) {
         this.account = account;
         this.type = type;
@@ -120,10 +130,22 @@ public class Trade implements DomainEntity<Trade> {
     }
 
 
+    /**
+     * Retourne l'identifiant technique du trade.
+     *
+     * @return identifiant du trade
+     */
+    @Override
     public Integer getId() {
         return tradeId;
     }
 
+    /**
+     * Met a jour les champs metier principaux du trade.
+     *
+     * @param domainEntity trade source
+     * @return instance courante mise a jour
+     */
     @Override
     public Trade update(Trade domainEntity) {
         account = domainEntity.getAccount();

@@ -8,14 +8,20 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * Gestionnaire global d'exceptions pour l'application
+ * Gestionnaire global d'exceptions pour l'application.
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
-     * Gère les exceptions EntityNotFoundException
-     * Redirige avec un message d'erreur
+     * Gere les exceptions de type EntityNotFoundException.
+     * Ajoute un message flash puis redirige selon l'origine de la requete.
+     *
+     * @param ex exception interceptee
+     * @param redirectAttributes attributs flash pour la redirection
+     * @param model modele de vue
+     * @param request requete HTTP courante
+     * @return redirection vers la liste concernee ou vers l'accueil
      */
     @ExceptionHandler(EntityNotFoundException.class)
     public String handleEntityNotFoundException(EntityNotFoundException ex, RedirectAttributes redirectAttributes, Model model, HttpServletRequest request) {

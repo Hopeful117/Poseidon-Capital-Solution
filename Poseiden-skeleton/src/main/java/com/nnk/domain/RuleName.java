@@ -8,6 +8,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Représente une règle de risque d'entreprise (Business Rule).
+ * Gère les informations des règles d'évaluation de risque avec JSON et SQL.
+ */
 @Entity
 @Table(name = "rulename")
 @Getter
@@ -50,6 +54,16 @@ public class RuleName implements DomainEntity<RuleName> {
     @Size(max = 125, message = "SqlPart must not exceed 125 characters")
     String sqlPart;
 
+    /**
+     * Construit une regle metier complete.
+     *
+     * @param name nom fonctionnel de la regle
+     * @param description description de la regle
+     * @param json expression JSON associee
+     * @param template template de la regle
+     * @param sqlStr expression SQL complete
+     * @param sqlPart fragment SQL
+     */
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
         this.name = name;
         this.description = description;
@@ -60,6 +74,12 @@ public class RuleName implements DomainEntity<RuleName> {
     }
 
 
+    /**
+     * Met a jour la regle a partir d'une autre instance.
+     *
+     * @param domainEntity regle source
+     * @return instance courante mise a jour
+     */
     @Override
     public RuleName update(RuleName domainEntity) {
         name = domainEntity.getName();

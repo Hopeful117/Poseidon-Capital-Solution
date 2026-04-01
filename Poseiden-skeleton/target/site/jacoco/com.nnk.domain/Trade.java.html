@@ -10,7 +10,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
+/**
+ * Représente une transaction commerciale (Trade).
+ * Gère les informations d'achat, de vente et les métadonnées associées aux transactions.
+ */
 @Entity
 @Table(name = &quot;trade&quot;)
 @Getter
@@ -113,26 +116,44 @@ public class Trade implements DomainEntity&lt;Trade&gt; {
     @Size(max = 125, message = &quot;Side must not exceed 125 characters&quot;)
     String side;
 
-<span class="fc" id="L116">    public Trade(String account, String type, BigDecimal buyQuantity) {</span>
-<span class="fc" id="L117">        this.account = account;</span>
-<span class="fc" id="L118">        this.type = type;</span>
-<span class="fc" id="L119">        this.buyQuantity = buyQuantity;</span>
-<span class="fc" id="L120">    }</span>
+    /**
+     * Construit un trade minimal.
+     *
+     * @param account compte associe
+     * @param type type de transaction
+     * @param buyQuantity quantite achetee
+     */
+<span class="nc" id="L126">    public Trade(String account, String type, BigDecimal buyQuantity) {</span>
+<span class="nc" id="L127">        this.account = account;</span>
+<span class="nc" id="L128">        this.type = type;</span>
+<span class="nc" id="L129">        this.buyQuantity = buyQuantity;</span>
+<span class="nc" id="L130">    }</span>
 
 
-
+    /**
+     * Retourne l'identifiant technique du trade.
+     *
+     * @return identifiant du trade
+     */
+    @Override
     public Integer getId() {
-<span class="fc" id="L125">        return tradeId;</span>
+<span class="nc" id="L140">        return tradeId;</span>
     }
 
+    /**
+     * Met a jour les champs metier principaux du trade.
+     *
+     * @param domainEntity trade source
+     * @return instance courante mise a jour
+     */
     @Override
     public Trade update(Trade domainEntity) {
-<span class="fc" id="L130">        account = domainEntity.getAccount();</span>
-<span class="fc" id="L131">        type = domainEntity.getType();</span>
-<span class="fc" id="L132">        buyQuantity = domainEntity.buyQuantity;</span>
+<span class="nc" id="L151">        account = domainEntity.getAccount();</span>
+<span class="nc" id="L152">        type = domainEntity.getType();</span>
+<span class="nc" id="L153">        buyQuantity = domainEntity.buyQuantity;</span>
 
 
-<span class="fc" id="L135">        return this;</span>
+<span class="nc" id="L156">        return this;</span>
     }
 
 

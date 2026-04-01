@@ -16,57 +16,82 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+/**
+ * Configuration Spring Security de l'application.
+ * Definit les regles d'acces, la page de connexion et les composants d'authentification.
+ */
 public class SpringSecurityConfig {
 
     @Autowired
     private final CustomUserDetailsService userDetailsService;
 
 
+    /**
+     * Configure la chaine de filtres HTTP securisee.
+     *
+     * @param http configuration HTTP
+     * @param successHandler gestionnaire appele apres une connexion reussie
+     * @return la chaine de filtres de securite
+     * @throws Exception en cas d'erreur de configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, CustomAuthenticationSuccessHandler successHandler) throws Exception {
-<span class="fc" id="L27">        http</span>
-<span class="fc" id="L28">                .csrf(AbstractHttpConfigurer::disable)</span>
-<span class="fc" id="L29">                .authorizeHttpRequests(auth -&gt; auth</span>
-<span class="fc" id="L30">                        .requestMatchers(&quot;/app/login&quot;, &quot;/css/**&quot;, &quot;/js/**&quot;, &quot;/images/**&quot;, &quot;/&quot;,&quot;/error&quot;).permitAll()</span>
-<span class="fc" id="L31">                        .requestMatchers(&quot;/admin/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
-<span class="fc" id="L32">                        .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
-<span class="fc" id="L33">                        .anyRequest().authenticated()</span>
+<span class="fc" id="L39">        http</span>
+<span class="fc" id="L40">                .csrf(AbstractHttpConfigurer::disable)</span>
+<span class="fc" id="L41">                .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="fc" id="L42">                        .requestMatchers(&quot;/app/login&quot;, &quot;/css/**&quot;, &quot;/js/**&quot;, &quot;/images/**&quot;, &quot;/&quot;, &quot;/error&quot;).permitAll()</span>
+<span class="fc" id="L43">                        .requestMatchers(&quot;/admin/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
+<span class="fc" id="L44">                        .requestMatchers(&quot;/user/**&quot;).hasRole(&quot;ADMIN&quot;)</span>
+<span class="fc" id="L45">                        .anyRequest().authenticated()</span>
 
                 )
-<span class="fc" id="L36">                .formLogin(form -&gt; form</span>
-<span class="fc" id="L37">                        .loginPage(&quot;/app/login&quot;)</span>
-<span class="fc" id="L38">                        .usernameParameter(&quot;username&quot;)</span>
-<span class="fc" id="L39">                        .successHandler(successHandler)</span>
-<span class="fc" id="L40">                        .permitAll()</span>
-<span class="fc" id="L41">                ).logout((logout) -&gt; logout</span>
-<span class="fc" id="L42">                        .logoutUrl(&quot;/app/logout&quot;)</span>
-<span class="fc" id="L43">                        .logoutSuccessUrl(&quot;/app/login?logout&quot;)</span>
-<span class="fc" id="L44">                        .permitAll()</span>
-<span class="fc" id="L45">                ).exceptionHandling((ex -&gt;</span>
-<span class="fc" id="L46">                        ex.authenticationEntryPoint((request, response, authException) -&gt;</span>
+<span class="fc" id="L48">                .formLogin(form -&gt; form</span>
+<span class="fc" id="L49">                        .loginPage(&quot;/app/login&quot;)</span>
+<span class="fc" id="L50">                        .usernameParameter(&quot;username&quot;)</span>
+<span class="fc" id="L51">                        .successHandler(successHandler)</span>
+<span class="fc" id="L52">                        .permitAll()</span>
+<span class="fc" id="L53">                ).logout((logout) -&gt; logout</span>
+<span class="fc" id="L54">                        .logoutUrl(&quot;/app/logout&quot;)</span>
+<span class="fc" id="L55">                        .logoutSuccessUrl(&quot;/app/login?logout&quot;)</span>
+<span class="fc" id="L56">                        .permitAll()</span>
+<span class="fc" id="L57">                ).exceptionHandling((ex -&gt;</span>
+<span class="fc" id="L58">                        ex.authenticationEntryPoint((request, response, authException) -&gt;</span>
                         {
-<span class="nc" id="L48">                            response.sendRedirect(&quot;/app/login&quot;);</span>
-<span class="pc" id="L49">                        }).accessDeniedHandler(((request, response, accessDeniedException) -&gt;</span>
+<span class="nc" id="L60">                            response.sendRedirect(&quot;/app/login&quot;);</span>
+<span class="pc" id="L61">                        }).accessDeniedHandler(((request, response, accessDeniedException) -&gt;</span>
                         {
-<span class="nc" id="L51">                            response.sendRedirect(&quot;/app/error&quot;);</span>
-<span class="nc" id="L52">                        }))</span>
+<span class="nc" id="L63">                            response.sendRedirect(&quot;/app/error&quot;);</span>
+<span class="nc" id="L64">                        }))</span>
                 ));
 
 
-<span class="fc" id="L56">        return http.build();</span>
+<span class="fc" id="L68">        return http.build();</span>
     }
 
+    /**
+     * Expose l'encodeur de mot de passe BCrypt.
+     *
+     * @return l'encodeur BCrypt
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
-<span class="fc" id="L61">        return new BCryptPasswordEncoder();</span>
+<span class="fc" id="L78">        return new BCryptPasswordEncoder();</span>
     }
 
 
+    /**
+     * Cree le gestionnaire d'authentification base sur le service utilisateur et BCrypt.
+     *
+     * @param http configuration HTTP
+     * @param passwordEncoder encodeur de mot de passe
+     * @return le gestionnaire d'authentification
+     * @throws Exception en cas d'erreur d'initialisation
+     */
     @Bean
     public AuthenticationManager authentificationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
-<span class="fc" id="L67">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
-<span class="fc" id="L68">        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);</span>
-<span class="fc" id="L69">        return authenticationManagerBuilder.build();</span>
+<span class="fc" id="L92">        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);</span>
+<span class="fc" id="L93">        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);</span>
+<span class="fc" id="L94">        return authenticationManagerBuilder.build();</span>
 
 
     }

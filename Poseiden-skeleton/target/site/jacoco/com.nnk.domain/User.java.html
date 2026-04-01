@@ -9,24 +9,30 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-
+/**
+ * Représente un utilisateur de l'application.
+ * Cette classe gère les informations d'authentification et d'autorisation.
+ */
 @Setter
 @Getter
 @Entity
 @Table(name = &quot;users&quot;)
 @RequiredArgsConstructor
 public class User implements DomainEntity&lt;User&gt; {
+    /** Identifiant unique de l'utilisateur */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = &quot;Id&quot;)
     @Digits(integer = 4, fraction = 0, message = &quot;Id must be a valid integer with up to 4 digits&quot;)
     private Integer id;
 
+    /** Nom d'utilisateur unique pour la connexion */
     @NotBlank(message = &quot;Username is mandatory&quot;)
     @Column(name = &quot;username&quot;, unique = true)
     @Size(max = 125, message = &quot;Username must not exceed 125 characters&quot;)
     private String username;
 
+    /** Mot de passe encrypté (au moins 8 caractères, 1 majuscule, 1 chiffre, 1 symbole) */
     @NotBlank(message = &quot;Password is mandatory&quot;)
     @Column(name = &quot;password&quot;)
     @Size(max = 125, message = &quot;Password must not exceed 125 characters&quot;)
@@ -36,31 +42,46 @@ public class User implements DomainEntity&lt;User&gt; {
     )
     private String password;
 
-
+    /** Nom complet de l'utilisateur */
     @NotBlank(message = &quot;FullName is mandatory&quot;)
     @Column(name = &quot;fullname&quot;)
     @Size(max = 125, message = &quot;FullName must not exceed 125 characters&quot;)
     private String fullname;
 
+    /** Rôle de l'utilisateur (USER, ADMIN, etc.) */
     @NotBlank(message = &quot;Role is mandatory&quot;)
     @Column(name = &quot;role&quot;)
     @Size(max = 125, message = &quot;Role must not exceed 125 characters&quot;)
     private String role;
 
-<span class="fc" id="L50">    public User(String username, String password, String fullname, String role) {</span>
-<span class="fc" id="L51">        this.username = username;</span>
-<span class="fc" id="L52">        this.password = password;</span>
-<span class="fc" id="L53">        this.fullname = fullname;</span>
-<span class="fc" id="L54">        this.role = role;</span>
-<span class="fc" id="L55">    }</span>
+    /**
+     * Constructeur pour créer un nouvel utilisateur.
+     *
+     * @param username  le nom d'utilisateur
+     * @param password  le mot de passe
+     * @param fullname  le nom complet
+     * @param role      le rôle de l'utilisateur
+     */
+<span class="fc" id="L65">    public User(String username, String password, String fullname, String role) {</span>
+<span class="fc" id="L66">        this.username = username;</span>
+<span class="fc" id="L67">        this.password = password;</span>
+<span class="fc" id="L68">        this.fullname = fullname;</span>
+<span class="fc" id="L69">        this.role = role;</span>
+<span class="fc" id="L70">    }</span>
 
+    /**
+     * Met à jour l'utilisateur avec les données d'une autre instance.
+     *
+     * @param domainEntity l'utilisateur contenant les nouvelles données
+     * @return l'utilisateur mis à jour
+     */
     @Override
     public User update(User domainEntity) {
-<span class="fc" id="L59">        fullname = domainEntity.getFullname();</span>
-<span class="fc" id="L60">        password = domainEntity.getPassword();</span>
-<span class="fc" id="L61">        username = domainEntity.getUsername();</span>
-<span class="fc" id="L62">        role = domainEntity.getRole();</span>
-<span class="fc" id="L63">        return this;</span>
+<span class="fc" id="L80">        fullname = domainEntity.getFullname();</span>
+<span class="fc" id="L81">        password = domainEntity.getPassword();</span>
+<span class="fc" id="L82">        username = domainEntity.getUsername();</span>
+<span class="fc" id="L83">        role = domainEntity.getRole();</span>
+<span class="fc" id="L84">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

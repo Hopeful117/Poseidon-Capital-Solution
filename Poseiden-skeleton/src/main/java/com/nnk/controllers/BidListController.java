@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des bid lists.
+ */
 @RequiredArgsConstructor
 @Controller
 public class BidListController {
@@ -22,22 +25,42 @@ public class BidListController {
 
     private final CrudService<BidList> service;
 
+    /**
+     * Affiche la liste des bid lists.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping("/bidList/list")
     public String home(Model model) {
-        // TODO: call service find all bids to show to the view
+
         List<BidList> bidLists = service.findAll();
         model.addAttribute("bidLists", bidLists);
         return "bidList/list";
     }
 
+    /**
+     * Affiche le formulaire d'ajout.
+     *
+     * @param bid objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
         return "bidList/add";
     }
 
+    /**
+     * Valide et cree une bid list.
+     *
+     * @param bid donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
+
         if (result.hasErrors()) {
 
             return "bidList/add";
@@ -52,9 +75,17 @@ public class BidListController {
 
     }
 
+    /**
+     * Affiche le formulaire de modification d'une bid list.
+     *
+     * @param id identifiant de la bid list
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: get Bid by Id and to model then show to the form
+
         try {
             BidList bidList = service.findById(id);
             model.addAttribute("bidList", bidList);
@@ -65,10 +96,19 @@ public class BidListController {
         }
     }
 
+    /**
+     * Met a jour une bid list existante.
+     *
+     * @param id identifiant de la bid list
+     * @param bidList donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+
         if (result.hasErrors()) {
 
             return "bidList/update";
@@ -83,9 +123,16 @@ public class BidListController {
         }
     }
 
+    /**
+     * Supprime une bid list.
+     *
+     * @param id identifiant de la bid list
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+
         try {
             service.deleteById(id);
 

@@ -4,11 +4,15 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/config/GlobalExceptionHandler.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/config/SpringSecurityConfig.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/BidListController.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/BidListRestController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/CurveController.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/CurvePointRestController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/HomeController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/LoginController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/RatingController.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/RatingRestController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/RuleNameController.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/RuleNameRestController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/TradeController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/controllers/UserController.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/domain/BidList.java

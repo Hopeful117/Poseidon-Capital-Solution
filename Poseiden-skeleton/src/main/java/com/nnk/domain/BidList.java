@@ -11,6 +11,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
+/**
+ * Représente une liste d'enchères (Bid List) pour le trading.
+ * Gère les informations d'enchères, de demandes, de transactions et leurs métadonnées.
+ */
 @Entity
 @Table(name = "bidlist")
 @RequiredArgsConstructor
@@ -118,16 +122,36 @@ public class BidList implements DomainEntity<BidList> {
     @Size(max = 125, message = "Side must not exceed 125 characters")
     String sid;
 
+    /**
+     * Constructeur pour créer une nouvelle liste d'enchères.
+     *
+     * @param account la compte d'enchère
+     * @param type le type d'enchère
+     * @param bidQuantity la quantité d'enchère
+     */
     public BidList(String account, String type, BigDecimal bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
     }
 
+    /**
+     * Retourne l'identifiant technique de la bid list.
+     *
+     * @return identifiant de la bid list
+     */
+    @Override
     public Integer getId() {
         return bidListId;
     }
 
+    /**
+     * Met a jour les champs metier modifiables depuis une autre instance.
+     *
+     * @param domainEntity bid list source
+     * @return instance courante mise a jour
+     */
+    @Override
     public BidList update(BidList domainEntity) {
 
         account = domainEntity.getAccount();

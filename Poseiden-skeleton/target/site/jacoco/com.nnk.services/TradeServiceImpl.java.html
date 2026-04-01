@@ -4,12 +4,20 @@ import com.nnk.domain.Trade;
 import com.nnk.repositories.TradeRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service CRUD pour les entites Trade.
+ */
 @Service
 public class TradeServiceImpl extends AbstractCrudService&lt;Trade&gt; {
 
+    /**
+     * Construit le service a partir du repository Trade.
+     *
+     * @param repository repository JPA Trade
+     */
     protected TradeServiceImpl(TradeRepository repository) {
-<span class="fc" id="L11">        super(repository);</span>
-<span class="fc" id="L12">    }</span>
+<span class="fc" id="L19">        super(repository);</span>
+<span class="fc" id="L20">    }</span>
 
 
 }

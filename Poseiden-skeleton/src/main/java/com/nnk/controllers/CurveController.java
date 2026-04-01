@@ -16,12 +16,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des points de courbe.
+ */
 @Controller
 @RequiredArgsConstructor
 public class CurveController {
 
     private final CrudService<CurvePoint> service;
 
+    /**
+     * Affiche la liste des points de courbe.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
         List<CurvePoint> curvePoints = service.findAll();
@@ -29,11 +38,25 @@ public class CurveController {
         return "curvePoint/list";
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'un point de courbe.
+     *
+     * @param curvePoint objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping("/curvePoint/add")
     public String addCurveForm(CurvePoint curvePoint) {
         return "curvePoint/add";
     }
 
+    /**
+     * Valide et cree un point de courbe.
+     *
+     * @param curvePoint donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -49,6 +72,14 @@ public class CurveController {
         }
     }
 
+    /**
+     * Affiche le formulaire de mise a jour.
+     *
+     * @param id identifiant du point
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -61,6 +92,16 @@ public class CurveController {
         }
     }
 
+    /**
+     * Met a jour un point de courbe existant.
+     *
+     * @param id identifiant du point
+     * @param curvePoint donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash pour erreurs de validation
+     * @return redirection vers la liste ou vers le formulaire de mise a jour
+     */
     @PostMapping("/curvePoint/update/{id}")
     public String updateCurve(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                               BindingResult result, Model model, RedirectAttributes redirectAttributes) {
@@ -79,6 +120,13 @@ public class CurveController {
         }
     }
 
+    /**
+     * Supprime un point de courbe.
+     *
+     * @param id identifiant du point
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteCurve(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {

@@ -15,9 +15,11 @@ com/nnk/config/CustomAuthenticationSuccessHandler.class
 com/nnk/domain/BidList.class
 com/nnk/repositories/BidListRepository.class
 com/nnk/repositories/RuleNameRepository.class
+com/nnk/controllers/RuleNameRestController.class
 com/nnk/repositories/UserRepository.class
 com/nnk/controllers/CurveController.class
 com/nnk/controllers/HomeController.class
+com/nnk/controllers/CurvePointRestController.class
 com/nnk/services/TradeServiceImpl.class
 com/nnk/services/AbstractCrudService.class
 com/nnk/domain/User.class
@@ -25,6 +27,8 @@ com/nnk/services/CurvePointServiceImpl.class
 com/nnk/services/UserServiceImpl.class
 com/nnk/controllers/RatingController.class
 com/nnk/repositories/CurvePointRepository.class
+com/nnk/controllers/BidListRestController.class
+com/nnk/controllers/RatingRestController.class
 com/nnk/controllers/LoginController.class
 com/nnk/config/CustomUserDetailsService.class
 com/nnk/repositories/RatingRepository.class

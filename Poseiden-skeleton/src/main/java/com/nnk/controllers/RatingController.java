@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des ratings.
+ */
 @Controller
 @RequiredArgsConstructor
 public class RatingController {
@@ -22,6 +25,12 @@ public class RatingController {
 
     private final CrudService<Rating> service;
 
+    /**
+     * Affiche la liste des ratings.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping("/rating/list")
     public String home(Model model) {
         List<Rating> ratings = service.findAll();
@@ -30,14 +39,28 @@ public class RatingController {
         return "rating/list";
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'un rating.
+     *
+     * @param rating objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
         return "rating/add";
     }
 
+    /**
+     * Valide et cree un rating.
+     *
+     * @param rating donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
+
         if (result.hasErrors()) {
 
             return "rating/add";
@@ -53,9 +76,17 @@ public class RatingController {
 
     }
 
+    /**
+     * Affiche le formulaire de mise a jour d'un rating.
+     *
+     * @param id identifiant du rating
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: get Rating by Id and to model then show to the form
+
         try {
             Rating rating = service.findById(id);
             model.addAttribute("rating", rating);
@@ -66,6 +97,15 @@ public class RatingController {
         }
     }
 
+    /**
+     * Met a jour un rating existant.
+     *
+     * @param id identifiant du rating
+     * @param rating donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                                BindingResult result, Model model) {
@@ -85,9 +125,16 @@ public class RatingController {
         }
     }
 
+    /**
+     * Supprime un rating.
+     *
+     * @param id identifiant du rating
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
+
         try {
             service.deleteById(id);
 

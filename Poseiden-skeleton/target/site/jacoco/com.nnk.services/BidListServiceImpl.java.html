@@ -4,11 +4,19 @@ import com.nnk.domain.BidList;
 import com.nnk.repositories.BidListRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service CRUD pour les entites BidList.
+ */
 @Service
 public class BidListServiceImpl extends AbstractCrudService&lt;BidList&gt; {
 
+    /**
+     * Construit le service a partir du repository BidList.
+     *
+     * @param repository repository JPA BidList
+     */
     protected BidListServiceImpl(BidListRepository repository) {
-<span class="fc" id="L11">        super(repository);</span>
-<span class="fc" id="L12">    }</span>
+<span class="fc" id="L19">        super(repository);</span>
+<span class="fc" id="L20">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

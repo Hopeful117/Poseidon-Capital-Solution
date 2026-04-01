@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des regles metier.
+ */
 @Controller
 @RequiredArgsConstructor
 public class RuleNameController {
@@ -22,6 +25,12 @@ public class RuleNameController {
 
     private final CrudService<RuleName> service;
 
+    /**
+     * Affiche la liste des regles.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
         List<RuleName> ruleNames = service.findAll();
@@ -29,11 +38,25 @@ public class RuleNameController {
         return "ruleName/list";
     }
 
+    /**
+     * Affiche le formulaire d'ajout d'une regle.
+     *
+     * @param ruleName objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName ruleName) {
         return "ruleName/add";
     }
 
+    /**
+     * Valide et cree une regle.
+     *
+     * @param ruleName donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -49,6 +72,14 @@ public class RuleNameController {
         }
     }
 
+    /**
+     * Affiche le formulaire de mise a jour d'une regle.
+     *
+     * @param id identifiant de la regle
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -61,6 +92,15 @@ public class RuleNameController {
         }
     }
 
+    /**
+     * Met a jour une regle existante.
+     *
+     * @param id identifiant de la regle
+     * @param ruleName donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model) {
@@ -78,6 +118,13 @@ public class RuleNameController {
         }
     }
 
+    /**
+     * Supprime une regle.
+     *
+     * @param id identifiant de la regle
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
         try {

@@ -16,12 +16,24 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+/**
+ * Configuration Spring Security de l'application.
+ * Definit les regles d'acces, la page de connexion et les composants d'authentification.
+ */
 public class SpringSecurityConfig {
 
     @Autowired
     private final CustomUserDetailsService userDetailsService;
 
 
+    /**
+     * Configure la chaine de filtres HTTP securisee.
+     *
+     * @param http configuration HTTP
+     * @param successHandler gestionnaire appele apres une connexion reussie
+     * @return la chaine de filtres de securite
+     * @throws Exception en cas d'erreur de configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, CustomAuthenticationSuccessHandler successHandler) throws Exception {
         http
@@ -56,12 +68,25 @@ public class SpringSecurityConfig {
         return http.build();
     }
 
+    /**
+     * Expose l'encodeur de mot de passe BCrypt.
+     *
+     * @return l'encodeur BCrypt
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 
+    /**
+     * Cree le gestionnaire d'authentification base sur le service utilisateur et BCrypt.
+     *
+     * @param http configuration HTTP
+     * @param passwordEncoder encodeur de mot de passe
+     * @return le gestionnaire d'authentification
+     * @throws Exception en cas d'erreur d'initialisation
+     */
     @Bean
     public AuthenticationManager authentificationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);

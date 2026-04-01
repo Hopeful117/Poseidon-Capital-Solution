@@ -12,7 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-
+/**
+ * Représente un point sur une courbe de taux d'intérêt.
+ * Gère les informations des points de courbe avec les termes et les valeurs.
+ */
 @Entity
 @Table(name = &quot;curvepoint&quot;)
 @Getter
@@ -50,19 +53,32 @@ public class CurvePoint implements DomainEntity&lt;CurvePoint&gt; {
     @DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)
     Timestamp creationDate;
 
-<span class="fc" id="L53">    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {</span>
-<span class="fc" id="L54">        this.curveId = curveId;</span>
-<span class="fc" id="L55">        this.term = term;</span>
-<span class="fc" id="L56">        this.value = value;</span>
-<span class="fc" id="L57">    }</span>
+    /**
+     * Construit un point de courbe minimal.
+     *
+     * @param curveId identifiant de la courbe
+     * @param term maturite du point
+     * @param value valeur du point
+     */
+<span class="nc" id="L63">    public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {</span>
+<span class="nc" id="L64">        this.curveId = curveId;</span>
+<span class="nc" id="L65">        this.term = term;</span>
+<span class="nc" id="L66">        this.value = value;</span>
+<span class="nc" id="L67">    }</span>
 
+    /**
+     * Met a jour les informations principales du point de courbe.
+     *
+     * @param domainEntity point source
+     * @return instance courante mise a jour
+     */
     @Override
     public CurvePoint update(CurvePoint domainEntity) {
-<span class="fc" id="L61">        curveId = domainEntity.getCurveId();</span>
-<span class="fc" id="L62">        term = domainEntity.getTerm();</span>
-<span class="fc" id="L63">        value = domainEntity.getValue();</span>
+<span class="nc" id="L77">        curveId = domainEntity.getCurveId();</span>
+<span class="nc" id="L78">        term = domainEntity.getTerm();</span>
+<span class="nc" id="L79">        value = domainEntity.getValue();</span>
 
-<span class="fc" id="L65">        return this;</span>
+<span class="nc" id="L81">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

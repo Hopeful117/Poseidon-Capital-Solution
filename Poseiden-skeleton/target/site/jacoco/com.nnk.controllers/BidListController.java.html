@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Controleur MVC pour la gestion des bid lists.
+ */
 @RequiredArgsConstructor
 @Controller
 public class BidListController {
@@ -22,77 +25,121 @@ public class BidListController {
 
     private final CrudService&lt;BidList&gt; service;
 
+    /**
+     * Affiche la liste des bid lists.
+     *
+     * @param model modele de vue
+     * @return vue de liste
+     */
     @RequestMapping(&quot;/bidList/list&quot;)
     public String home(Model model) {
-        // TODO: call service find all bids to show to the view
-<span class="fc" id="L28">        List&lt;BidList&gt; bidLists = service.findAll();</span>
-<span class="fc" id="L29">        model.addAttribute(&quot;bidLists&quot;, bidLists);</span>
-<span class="fc" id="L30">        return &quot;bidList/list&quot;;</span>
+
+<span class="nc" id="L37">        List&lt;BidList&gt; bidLists = service.findAll();</span>
+<span class="nc" id="L38">        model.addAttribute(&quot;bidLists&quot;, bidLists);</span>
+<span class="nc" id="L39">        return &quot;bidList/list&quot;;</span>
     }
 
+    /**
+     * Affiche le formulaire d'ajout.
+     *
+     * @param bid objet de formulaire
+     * @return vue d'ajout
+     */
     @GetMapping(&quot;/bidList/add&quot;)
     public String addBidForm(BidList bid) {
-<span class="fc" id="L35">        return &quot;bidList/add&quot;;</span>
+<span class="nc" id="L50">        return &quot;bidList/add&quot;;</span>
     }
 
+    /**
+     * Valide et cree une bid list.
+     *
+     * @param bid donnees soumises
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping(&quot;/bidList/validate&quot;)
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L43">            return &quot;bidList/add&quot;;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+
+<span class="nc" id="L66">            return &quot;bidList/add&quot;;</span>
         }
         try {
-<span class="fc" id="L46">            service.create(bid);</span>
-<span class="fc" id="L47">            return &quot;redirect:/bidList/list&quot;;</span>
-<span class="nc" id="L48">        } catch (Exception e) {</span>
-<span class="nc" id="L49">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="nc" id="L50">            return &quot;bidList/add&quot;;</span>
+<span class="nc" id="L69">            service.create(bid);</span>
+<span class="nc" id="L70">            return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L73">            return &quot;bidList/add&quot;;</span>
         }
 
     }
 
+    /**
+     * Affiche le formulaire de modification d'une bid list.
+     *
+     * @param id identifiant de la bid list
+     * @param model modele de vue
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return vue de mise a jour ou redirection
+     */
     @GetMapping(&quot;/bidList/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: get Bid by Id and to model then show to the form
+
         try {
-<span class="fc" id="L59">            BidList bidList = service.findById(id);</span>
-<span class="fc" id="L60">            model.addAttribute(&quot;bidList&quot;, bidList);</span>
-<span class="fc" id="L61">            return &quot;bidList/update&quot;;</span>
-<span class="fc" id="L62">        } catch (Exception e) {</span>
-<span class="fc" id="L63">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L64">            return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L90">            BidList bidList = service.findById(id);</span>
+<span class="nc" id="L91">            model.addAttribute(&quot;bidList&quot;, bidList);</span>
+<span class="nc" id="L92">            return &quot;bidList/update&quot;;</span>
+<span class="nc" id="L93">        } catch (Exception e) {</span>
+<span class="nc" id="L94">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L95">            return &quot;redirect:/bidList/list&quot;;</span>
         }
     }
 
+    /**
+     * Met a jour une bid list existante.
+     *
+     * @param id identifiant de la bid list
+     * @param bidList donnees mises a jour
+     * @param result resultat de validation
+     * @param model modele de vue
+     * @return redirection vers la liste ou retour formulaire
+     */
     @PostMapping(&quot;/bidList/update/{id}&quot;)
     public String updateBid(@PathVariable(&quot;id&quot;) Integer id, @Valid BidList bidList,
-                            BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+                            BindingResult result, Model model) {
 
-<span class="fc" id="L74">            return &quot;bidList/update&quot;;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+
+<span class="nc" id="L114">            return &quot;bidList/update&quot;;</span>
         }
         try {
-<span class="fc" id="L77">            bidList.setBidListId(id);</span>
-<span class="fc" id="L78">            service.update(bidList);</span>
-<span class="fc" id="L79">            return &quot;redirect:/bidList/list&quot;;</span>
-<span class="fc" id="L80">        } catch (Exception e) {</span>
-<span class="fc" id="L81">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L82">            return &quot;bidList/update&quot;;</span>
+<span class="nc" id="L117">            bidList.setBidListId(id);</span>
+<span class="nc" id="L118">            service.update(bidList);</span>
+<span class="nc" id="L119">            return &quot;redirect:/bidList/list&quot;;</span>
+<span class="nc" id="L120">        } catch (Exception e) {</span>
+<span class="nc" id="L121">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L122">            return &quot;bidList/update&quot;;</span>
         }
     }
 
+    /**
+     * Supprime une bid list.
+     *
+     * @param id identifiant de la bid list
+     * @param redirectAttributes attributs flash en cas d'erreur
+     * @return redirection vers la liste
+     */
     @GetMapping(&quot;/bidList/delete/{id}&quot;)
-    public String deleteBid(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
-        try {
-<span class="fc" id="L90">            service.deleteById(id);</span>
+    public String deleteBid(@PathVariable(&quot;id&quot;) Integer id, RedirectAttributes redirectAttributes) {
 
-<span class="fc" id="L92">        } catch (Exception e) {</span>
-<span class="fc" id="L93">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L94">        }</span>
-<span class="fc" id="L95">        return &quot;redirect:/bidList/list&quot;;</span>
+        try {
+<span class="nc" id="L137">            service.deleteById(id);</span>
+
+<span class="nc" id="L139">        } catch (Exception e) {</span>
+<span class="nc" id="L140">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="nc" id="L141">        }</span>
+<span class="nc" id="L142">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

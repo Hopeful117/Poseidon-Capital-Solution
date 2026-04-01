@@ -9,24 +9,30 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-
+/**
+ * Représente un utilisateur de l'application.
+ * Cette classe gère les informations d'authentification et d'autorisation.
+ */
 @Setter
 @Getter
 @Entity
 @Table(name = "users")
 @RequiredArgsConstructor
 public class User implements DomainEntity<User> {
+    /** Identifiant unique de l'utilisateur */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
     @Digits(integer = 4, fraction = 0, message = "Id must be a valid integer with up to 4 digits")
     private Integer id;
 
+    /** Nom d'utilisateur unique pour la connexion */
     @NotBlank(message = "Username is mandatory")
     @Column(name = "username", unique = true)
     @Size(max = 125, message = "Username must not exceed 125 characters")
     private String username;
 
+    /** Mot de passe encrypté (au moins 8 caractères, 1 majuscule, 1 chiffre, 1 symbole) */
     @NotBlank(message = "Password is mandatory")
     @Column(name = "password")
     @Size(max = 125, message = "Password must not exceed 125 characters")
@@ -36,17 +42,27 @@ public class User implements DomainEntity<User> {
     )
     private String password;
 
-
+    /** Nom complet de l'utilisateur */
     @NotBlank(message = "FullName is mandatory")
     @Column(name = "fullname")
     @Size(max = 125, message = "FullName must not exceed 125 characters")
     private String fullname;
 
+    /** Rôle de l'utilisateur (USER, ADMIN, etc.) */
+    /** Le rôle doit faire partie des rôles attendus par Spring Security (ex: ROLE_USER, ROLE_ADMIN) */
     @NotBlank(message = "Role is mandatory")
     @Column(name = "role")
     @Size(max = 125, message = "Role must not exceed 125 characters")
     private String role;
 
+    /**
+     * Constructeur pour créer un nouvel utilisateur.
+     *
+     * @param username  le nom d'utilisateur
+     * @param password  le mot de passe
+     * @param fullname  le nom complet
+     * @param role      le rôle de l'utilisateur
+     */
     public User(String username, String password, String fullname, String role) {
         this.username = username;
         this.password = password;
@@ -54,6 +70,12 @@ public class User implements DomainEntity<User> {
         this.role = role;
     }
 
+    /**
+     * Met à jour l'utilisateur avec les données d'une autre instance.
+     *
+     * @param domainEntity l'utilisateur contenant les nouvelles données
+     * @return l'utilisateur mis à jour
+     */
     @Override
     public User update(User domainEntity) {
         fullname = domainEntity.getFullname();

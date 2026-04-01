@@ -11,23 +11,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-
+/**
+ * Service de chargement des utilisateurs pour Spring Security.
+ */
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private final UserRepository userRepository; // ton repository User
 
 
+    /**
+     * Charge un utilisateur par son nom pour l'authentification.
+     *
+     * @param username nom d'utilisateur de connexion
+     * @return les informations de securite de l'utilisateur
+     * @throws UsernameNotFoundException si l'utilisateur n'existe pas
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="nc" id="L23">        com.nnk.domain.User user = userRepository.findByUsername(username)</span>
-<span class="nc" id="L24">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
+<span class="nc" id="L32">        com.nnk.domain.User user = userRepository.findByUsername(username)</span>
+<span class="nc" id="L33">                .orElseThrow(() -&gt; new UsernameNotFoundException(&quot;User not found&quot;));</span>
 
-<span class="nc" id="L26">        return User.builder()</span>
-<span class="nc" id="L27">                .username(user.getUsername())</span>
-<span class="nc" id="L28">                .password(user.getPassword())</span>
-<span class="nc" id="L29">                .roles(user.getRole())</span>
-<span class="nc" id="L30">                .build();</span>
+<span class="nc" id="L35">        return User.builder()</span>
+<span class="nc" id="L36">                .username(user.getUsername())</span>
+<span class="nc" id="L37">                .password(user.getPassword())</span>
+<span class="nc" id="L38">                .roles(user.getRole())</span>
+<span class="nc" id="L39">                .build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

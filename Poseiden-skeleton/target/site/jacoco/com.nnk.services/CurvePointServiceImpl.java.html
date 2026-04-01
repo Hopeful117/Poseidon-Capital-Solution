@@ -4,12 +4,20 @@ import com.nnk.domain.CurvePoint;
 import com.nnk.repositories.CurvePointRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service CRUD pour les entites CurvePoint.
+ */
 @Service
 public class CurvePointServiceImpl extends AbstractCrudService&lt;CurvePoint&gt; {
 
+    /**
+     * Construit le service a partir du repository CurvePoint.
+     *
+     * @param repository repository JPA CurvePoint
+     */
     protected CurvePointServiceImpl(CurvePointRepository repository) {
-<span class="fc" id="L11">        super(repository);</span>
-<span class="fc" id="L12">    }</span>
+<span class="fc" id="L19">        super(repository);</span>
+<span class="fc" id="L20">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
