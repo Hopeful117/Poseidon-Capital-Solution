@@ -116,8 +116,8 @@ public class Trade implements DomainEntity<Trade> {
     /**
      * Construit un trade minimal.
      *
-     * @param account compte associe
-     * @param type type de transaction
+     * @param account     compte associe
+     * @param type        type de transaction
      * @param buyQuantity quantite achetee
      */
     public Trade(String account, String type, BigDecimal buyQuantity) {

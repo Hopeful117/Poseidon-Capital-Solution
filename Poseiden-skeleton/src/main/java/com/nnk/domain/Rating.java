@@ -1,7 +1,10 @@
 package com.nnk.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,31 +20,41 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Rating implements DomainEntity<Rating> {
 
-    /** Identifiant unique de la notation */
+    /**
+     * Identifiant unique de la notation
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     Integer id;
 
-    /** Notation Moody's */
+    /**
+     * Notation Moody's
+     */
     @Column(name = "moodysRating")
     @NotBlank(message = "Moody's Rating is mandatory")
     @Size(max = 125, message = "Moody's Rating must not exceed 125 characters")
     String moodysRating;
 
-    /** Notation Standard & Poor's */
+    /**
+     * Notation Standard & Poor's
+     */
     @Column(name = "sandPRating")
     @NotBlank(message = "S&P Rating is mandatory")
     @Size(max = 125, message = "S&P Rating must not exceed 125 characters")
     String sandPRating;
 
-    /** Notation Fitch */
+    /**
+     * Notation Fitch
+     */
     @Column(name = "fitchRating")
     @NotBlank(message = "Fitch Rating is mandatory")
     @Size(max = 125, message = "Fitch Rating must not exceed 125 characters")
     String fitchRating;
 
-    /** Numéro d'ordre de la notation */
+    /**
+     * Numéro d'ordre de la notation
+     */
     @Column(name = "orderNumber")
     @NotNull
     @Positive(message = "Order Number must be positive")
@@ -51,9 +64,9 @@ public class Rating implements DomainEntity<Rating> {
      * Constructeur pour créer une nouvelle notation.
      *
      * @param moodysRating la notation Moody's
-     * @param sandPRating la notation S&P
-     * @param fitchRating la notation Fitch
-     * @param orderNumber le numéro d'ordre
+     * @param sandPRating  la notation S&P
+     * @param fitchRating  la notation Fitch
+     * @param orderNumber  le numéro d'ordre
      */
     public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
         this.moodysRating = moodysRating;

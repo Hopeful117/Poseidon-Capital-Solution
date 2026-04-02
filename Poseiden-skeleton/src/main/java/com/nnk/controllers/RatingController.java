@@ -4,13 +4,13 @@ import com.nnk.domain.Rating;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class RatingController {
 
 
@@ -31,7 +32,7 @@ public class RatingController {
      * @param model modele de vue
      * @return vue de liste
      */
-    @RequestMapping("/rating/list")
+    @GetMapping("/rating/list")
     public String home(Model model) {
         List<Rating> ratings = service.findAll();
         model.addAttribute("ratings", ratings);
@@ -55,7 +56,7 @@ public class RatingController {
      *
      * @param rating donnees soumises
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/rating/validate")
@@ -70,6 +71,7 @@ public class RatingController {
             service.create(rating);
             return "redirect:/rating/list";
         } catch (Exception e) {
+            log.error("Echec creation rating orderNumber={}", rating.getOrderNumber(), e);
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/add";
         }
@@ -79,8 +81,8 @@ public class RatingController {
     /**
      * Affiche le formulaire de mise a jour d'un rating.
      *
-     * @param id identifiant du rating
-     * @param model modele de vue
+     * @param id                 identifiant du rating
+     * @param model              modele de vue
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return vue de mise a jour ou redirection
      */
@@ -92,6 +94,7 @@ public class RatingController {
             model.addAttribute("rating", rating);
             return "rating/update";
         } catch (Exception e) {
+            log.warn("Impossible de charger rating id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/rating/list";
         }
@@ -100,10 +103,10 @@ public class RatingController {
     /**
      * Met a jour un rating existant.
      *
-     * @param id identifiant du rating
+     * @param id     identifiant du rating
      * @param rating donnees mises a jour
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/rating/update/{id}")
@@ -120,6 +123,7 @@ public class RatingController {
             service.update(rating);
             return "redirect:/rating/list";
         } catch (Exception e) {
+            log.error("Echec mise a jour rating id={}", id, e);
             model.addAttribute("errorMessage", e.getMessage());
             return "rating/update";
         }
@@ -128,7 +132,7 @@ public class RatingController {
     /**
      * Supprime un rating.
      *
-     * @param id identifiant du rating
+     * @param id                 identifiant du rating
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return redirection vers la liste
      */
@@ -139,6 +143,7 @@ public class RatingController {
             service.deleteById(id);
 
         } catch (Exception e) {
+            log.warn("Echec suppression rating id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/rating/list";

@@ -4,13 +4,13 @@ import com.nnk.domain.RuleName;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class RuleNameController {
 
 
@@ -31,7 +32,7 @@ public class RuleNameController {
      * @param model modele de vue
      * @return vue de liste
      */
-    @RequestMapping("/ruleName/list")
+    @GetMapping("/ruleName/list")
     public String home(Model model) {
         List<RuleName> ruleNames = service.findAll();
         model.addAttribute("ruleNames", ruleNames);
@@ -53,8 +54,8 @@ public class RuleNameController {
      * Valide et cree une regle.
      *
      * @param ruleName donnees soumises
-     * @param result resultat de validation
-     * @param model modele de vue
+     * @param result   resultat de validation
+     * @param model    modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/ruleName/validate")
@@ -67,6 +68,7 @@ public class RuleNameController {
             service.create(ruleName);
             return "redirect:/ruleName/list";
         } catch (Exception e) {
+            log.error("Echec creation ruleName name={}", ruleName.getName(), e);
             model.addAttribute("errorMessage", e.getMessage());
             return "ruleName/add";
         }
@@ -75,8 +77,8 @@ public class RuleNameController {
     /**
      * Affiche le formulaire de mise a jour d'une regle.
      *
-     * @param id identifiant de la regle
-     * @param model modele de vue
+     * @param id                 identifiant de la regle
+     * @param model              modele de vue
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return vue de mise a jour ou redirection
      */
@@ -87,6 +89,7 @@ public class RuleNameController {
             model.addAttribute("ruleName", ruleName);
             return "ruleName/update";
         } catch (Exception e) {
+            log.warn("Impossible de charger ruleName id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/ruleName/list";
         }
@@ -95,10 +98,10 @@ public class RuleNameController {
     /**
      * Met a jour une regle existante.
      *
-     * @param id identifiant de la regle
+     * @param id       identifiant de la regle
      * @param ruleName donnees mises a jour
-     * @param result resultat de validation
-     * @param model modele de vue
+     * @param result   resultat de validation
+     * @param model    modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/ruleName/update/{id}")
@@ -113,6 +116,7 @@ public class RuleNameController {
             service.update(ruleName);
             return "redirect:/ruleName/list";
         } catch (Exception e) {
+            log.error("Echec mise a jour ruleName id={}", id, e);
             model.addAttribute("errorMessage", e.getMessage());
             return "ruleName/update";
         }
@@ -121,7 +125,7 @@ public class RuleNameController {
     /**
      * Supprime une regle.
      *
-     * @param id identifiant de la regle
+     * @param id                 identifiant de la regle
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return redirection vers la liste
      */
@@ -130,6 +134,7 @@ public class RuleNameController {
         try {
             service.deleteById(id);
         } catch (Exception e) {
+            log.warn("Echec suppression ruleName id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/ruleName/list";

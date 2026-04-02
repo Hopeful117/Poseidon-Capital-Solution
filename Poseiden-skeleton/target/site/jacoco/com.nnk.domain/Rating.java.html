@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rating.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.domain</a> &gt; <span class="el_source">Rating.java</span></div><h1>Rating.java</h1><pre class="source lang-java linenums">package com.nnk.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,31 +20,41 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Rating implements DomainEntity&lt;Rating&gt; {
 
-    /** Identifiant unique de la notation */
+    /**
+     * Identifiant unique de la notation
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = &quot;Id&quot;)
     Integer id;
 
-    /** Notation Moody's */
+    /**
+     * Notation Moody's
+     */
     @Column(name = &quot;moodysRating&quot;)
     @NotBlank(message = &quot;Moody's Rating is mandatory&quot;)
     @Size(max = 125, message = &quot;Moody's Rating must not exceed 125 characters&quot;)
     String moodysRating;
 
-    /** Notation Standard &amp; Poor's */
+    /**
+     * Notation Standard &amp; Poor's
+     */
     @Column(name = &quot;sandPRating&quot;)
     @NotBlank(message = &quot;S&amp;P Rating is mandatory&quot;)
     @Size(max = 125, message = &quot;S&amp;P Rating must not exceed 125 characters&quot;)
     String sandPRating;
 
-    /** Notation Fitch */
+    /**
+     * Notation Fitch
+     */
     @Column(name = &quot;fitchRating&quot;)
     @NotBlank(message = &quot;Fitch Rating is mandatory&quot;)
     @Size(max = 125, message = &quot;Fitch Rating must not exceed 125 characters&quot;)
     String fitchRating;
 
-    /** Numéro d'ordre de la notation */
+    /**
+     * Numéro d'ordre de la notation
+     */
     @Column(name = &quot;orderNumber&quot;)
     @NotNull
     @Positive(message = &quot;Order Number must be positive&quot;)
@@ -51,16 +64,16 @@ public class Rating implements DomainEntity&lt;Rating&gt; {
      * Constructeur pour créer une nouvelle notation.
      *
      * @param moodysRating la notation Moody's
-     * @param sandPRating la notation S&amp;P
-     * @param fitchRating la notation Fitch
-     * @param orderNumber le numéro d'ordre
+     * @param sandPRating  la notation S&amp;P
+     * @param fitchRating  la notation Fitch
+     * @param orderNumber  le numéro d'ordre
      */
-<span class="fc" id="L58">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
-<span class="fc" id="L59">        this.moodysRating = moodysRating;</span>
-<span class="fc" id="L60">        this.sandPRating = sandPRating;</span>
-<span class="fc" id="L61">        this.fitchRating = fitchRating;</span>
-<span class="fc" id="L62">        this.orderNumber = orderNumber;</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L71">    public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {</span>
+<span class="fc" id="L72">        this.moodysRating = moodysRating;</span>
+<span class="fc" id="L73">        this.sandPRating = sandPRating;</span>
+<span class="fc" id="L74">        this.fitchRating = fitchRating;</span>
+<span class="fc" id="L75">        this.orderNumber = orderNumber;</span>
+<span class="fc" id="L76">    }</span>
 
     /**
      * Met à jour la notation avec les données d'une autre instance.
@@ -70,12 +83,12 @@ public class Rating implements DomainEntity&lt;Rating&gt; {
      */
     @Override
     public Rating update(Rating domainEntity) {
-<span class="fc" id="L73">        moodysRating = domainEntity.getMoodysRating();</span>
-<span class="fc" id="L74">        sandPRating = domainEntity.getSandPRating();</span>
-<span class="fc" id="L75">        fitchRating = domainEntity.getFitchRating();</span>
-<span class="fc" id="L76">        orderNumber = domainEntity.getOrderNumber();</span>
+<span class="fc" id="L86">        moodysRating = domainEntity.getMoodysRating();</span>
+<span class="fc" id="L87">        sandPRating = domainEntity.getSandPRating();</span>
+<span class="fc" id="L88">        fitchRating = domainEntity.getFitchRating();</span>
+<span class="fc" id="L89">        orderNumber = domainEntity.getOrderNumber();</span>
 
-<span class="fc" id="L78">        return this;</span>
+<span class="fc" id="L91">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

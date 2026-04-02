@@ -19,7 +19,7 @@ public class EntityNotFoundException extends RuntimeException {
      * Constructeur avec message d'erreur et cause.
      *
      * @param message le message d'erreur décrivant la raison
-     * @param cause la cause originale de l'exception
+     * @param cause   la cause originale de l'exception
      */
     public EntityNotFoundException(String message, Throwable cause) {
         super(message, cause);

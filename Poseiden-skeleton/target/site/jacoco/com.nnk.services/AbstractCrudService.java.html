@@ -15,7 +15,9 @@ import java.util.List;
  */
 public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt; implements CrudService&lt;M&gt; {
 
-    /** Repository JPA pour accéder à la base de données */
+    /**
+     * Repository JPA pour accéder à la base de données
+     */
     protected final JpaRepository&lt;M, Integer&gt; repository;
 
     /**
@@ -23,9 +25,9 @@ public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt;
      *
      * @param repository le repository JPA pour l'entité
      */
-<span class="fc" id="L26">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository) {</span>
-<span class="fc" id="L27">        this.repository = repository;</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L28">    protected AbstractCrudService(JpaRepository&lt;M, Integer&gt; repository) {</span>
+<span class="fc" id="L29">        this.repository = repository;</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Récupère une entité par son identifiant.
@@ -36,7 +38,7 @@ public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt;
      */
     @Override
     public M findById(final Integer id) {
-<span class="fc" id="L39">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
+<span class="fc" id="L41">        return repository.findById(id).orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;));</span>
     }
 
     /**
@@ -46,7 +48,7 @@ public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt;
      */
     @Override
     public List&lt;M&gt; findAll() {
-<span class="fc" id="L49">        return repository.findAll();</span>
+<span class="fc" id="L51">        return repository.findAll();</span>
     }
 
     /**
@@ -57,12 +59,12 @@ public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt;
      */
     @Override
     public void deleteById(final Integer id) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (!repository.existsById(id)) {</span>
-<span class="fc" id="L61">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (!repository.existsById(id)) {</span>
+<span class="fc" id="L63">            throw new EntityNotFoundException(&quot;Id not found&quot;);</span>
         }
 
-<span class="fc" id="L64">        repository.deleteById(id);</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L66">        repository.deleteById(id);</span>
+<span class="fc" id="L67">    }</span>
 
     /**
      * Crée une nouvelle entité.
@@ -72,29 +74,29 @@ public abstract class AbstractCrudService&lt;M extends DomainEntity&lt;M&gt;&gt;
      */
     @Override
     public void create(final M model) {
-<span class="fc" id="L75">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L76">        Assert.isNull(model.getId(), &quot;Id can not be defined&quot;);</span>
+<span class="fc" id="L77">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L78">        Assert.isNull(model.getId(), &quot;Id can not be defined&quot;);</span>
 
-<span class="fc" id="L78">        repository.save(model);</span>
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L80">        repository.save(model);</span>
+<span class="fc" id="L81">    }</span>
 
     /**
      * Met à jour une entité existante.
      *
      * @param model l'entité à mettre à jour (doit avoir un id)
      * @throws IllegalArgumentException si l'objet est null ou n'a pas d'id
-     * @throws EntityNotFoundException si l'entité n'existe pas
+     * @throws EntityNotFoundException  si l'entité n'existe pas
      */
     @Override
     public void update(final M model) {
-<span class="fc" id="L90">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L91">        Assert.notNull(model.getId(), &quot;Id can not be null&quot;);</span>
+<span class="fc" id="L92">        Assert.notNull(model, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L93">        Assert.notNull(model.getId(), &quot;Id can not be null&quot;);</span>
 
-<span class="fc" id="L93">        final M updatedModel = repository.findById(model.getId())</span>
-<span class="fc" id="L94">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
-<span class="fc" id="L95">                .update(model);</span>
+<span class="fc" id="L95">        final M updatedModel = repository.findById(model.getId())</span>
+<span class="fc" id="L96">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;Id not found&quot;))</span>
+<span class="fc" id="L97">                .update(model);</span>
 
-<span class="fc" id="L97">        repository.save(updatedModel);</span>
-<span class="fc" id="L98">    }</span>
+<span class="fc" id="L99">        repository.save(updatedModel);</span>
+<span class="fc" id="L100">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

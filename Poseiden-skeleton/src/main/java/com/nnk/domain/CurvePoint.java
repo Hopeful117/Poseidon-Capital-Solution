@@ -55,8 +55,8 @@ public class CurvePoint implements DomainEntity<CurvePoint> {
      * Construit un point de courbe minimal.
      *
      * @param curveId identifiant de la courbe
-     * @param term maturite du point
-     * @param value valeur du point
+     * @param term    maturite du point
+     * @param value   valeur du point
      */
     public CurvePoint(Integer curveId, BigDecimal term, BigDecimal value) {
         this.curveId = curveId;

@@ -4,13 +4,13 @@ import com.nnk.domain.User;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -19,9 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
 
-    /** Service CRUD pour les utilisateurs */
+    /**
+     * Service CRUD pour les utilisateurs
+     */
     private final CrudService<User> service;
 
     /**
@@ -30,7 +33,7 @@ public class UserController {
      * @param model le modèle pour passer les données à la vue
      * @return le nom de la vue "user/list"
      */
-    @RequestMapping("/user/list")
+    @GetMapping("/user/list")
     public String home(Model model) {
         model.addAttribute("users", service.findAll());
         return "user/list";
@@ -50,9 +53,9 @@ public class UserController {
     /**
      * Valide et crée un nouvel utilisateur.
      *
-     * @param user l'utilisateur à créer
+     * @param user   l'utilisateur à créer
      * @param result les erreurs de validation
-     * @param model le modèle pour passer les données à la vue
+     * @param model  le modèle pour passer les données à la vue
      * @return une redirection vers la liste ou le formulaire avec erreurs
      */
     @PostMapping("/user/validate")
@@ -66,6 +69,7 @@ public class UserController {
             service.create(user);
             return "redirect:/user/list";
         } catch (Exception e) {
+            log.error("Echec creation user username={}", user.getUsername(), e);
             model.addAttribute("errors", e.getMessage());
             return "user/add";
         }
@@ -76,8 +80,8 @@ public class UserController {
     /**
      * Affiche le formulaire pour mettre à jour un utilisateur.
      *
-     * @param id l'identifiant de l'utilisateur
-     * @param model le modèle pour passer les données à la vue
+     * @param id                 l'identifiant de l'utilisateur
+     * @param model              le modèle pour passer les données à la vue
      * @param redirectAttributes les attributs de redirection
      * @return le nom de la vue "user/update" ou une redirection si l'utilisateur n'existe pas
      */
@@ -89,6 +93,7 @@ public class UserController {
             model.addAttribute("user", user);
             return "user/update";
         } catch (Exception e) {
+            log.warn("Impossible de charger user id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/user/list";
         }
@@ -97,10 +102,10 @@ public class UserController {
     /**
      * Valide et met à jour un utilisateur existant.
      *
-     * @param id l'identifiant de l'utilisateur
-     * @param user l'utilisateur avec les données mises à jour
+     * @param id     l'identifiant de l'utilisateur
+     * @param user   l'utilisateur avec les données mises à jour
      * @param result les erreurs de validation
-     * @param model le modèle pour passer les données à la vue
+     * @param model  le modèle pour passer les données à la vue
      * @return une redirection vers la liste ou le formulaire avec erreurs
      */
     @PostMapping("/user/update/{id}")
@@ -118,6 +123,7 @@ public class UserController {
 
             return "redirect:/user/list";
         } catch (Exception e) {
+            log.error("Echec mise a jour user id={}", id, e);
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("user", user);
             return "user/update";
@@ -127,8 +133,8 @@ public class UserController {
     /**
      * Supprime un utilisateur.
      *
-     * @param id l'identifiant de l'utilisateur à supprimer
-     * @param model le modèle pour passer les données à la vue
+     * @param id                 l'identifiant de l'utilisateur à supprimer
+     * @param model              le modèle pour passer les données à la vue
      * @param redirectAttributes les attributs de redirection
      * @return une redirection vers la liste des utilisateurs
      */
@@ -139,6 +145,7 @@ public class UserController {
 
 
         } catch (Exception e) {
+            log.warn("Echec suppression user id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
 
         }

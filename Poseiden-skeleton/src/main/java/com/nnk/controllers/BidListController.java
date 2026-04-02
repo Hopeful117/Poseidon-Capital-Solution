@@ -4,13 +4,13 @@ import com.nnk.domain.BidList;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,6 +20,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class BidListController {
 
 
@@ -31,7 +32,7 @@ public class BidListController {
      * @param model modele de vue
      * @return vue de liste
      */
-    @RequestMapping("/bidList/list")
+    @GetMapping("/bidList/list")
     public String home(Model model) {
 
         List<BidList> bidLists = service.findAll();
@@ -53,9 +54,9 @@ public class BidListController {
     /**
      * Valide et cree une bid list.
      *
-     * @param bid donnees soumises
+     * @param bid    donnees soumises
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/bidList/validate")
@@ -69,6 +70,7 @@ public class BidListController {
             service.create(bid);
             return "redirect:/bidList/list";
         } catch (Exception e) {
+            log.error("Echec creation bidList pour account={}", bid.getAccount(), e);
             model.addAttribute("errorMessage", e.getMessage());
             return "bidList/add";
         }
@@ -78,8 +80,8 @@ public class BidListController {
     /**
      * Affiche le formulaire de modification d'une bid list.
      *
-     * @param id identifiant de la bid list
-     * @param model modele de vue
+     * @param id                 identifiant de la bid list
+     * @param model              modele de vue
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return vue de mise a jour ou redirection
      */
@@ -91,6 +93,7 @@ public class BidListController {
             model.addAttribute("bidList", bidList);
             return "bidList/update";
         } catch (Exception e) {
+            log.warn("Impossible de charger bidList id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/bidList/list";
         }
@@ -99,10 +102,10 @@ public class BidListController {
     /**
      * Met a jour une bid list existante.
      *
-     * @param id identifiant de la bid list
+     * @param id      identifiant de la bid list
      * @param bidList donnees mises a jour
-     * @param result resultat de validation
-     * @param model modele de vue
+     * @param result  resultat de validation
+     * @param model   modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/bidList/update/{id}")
@@ -118,6 +121,7 @@ public class BidListController {
             service.update(bidList);
             return "redirect:/bidList/list";
         } catch (Exception e) {
+            log.error("Echec mise a jour bidList id={}", id, e);
             model.addAttribute("errorMessage", e.getMessage());
             return "bidList/update";
         }
@@ -126,7 +130,7 @@ public class BidListController {
     /**
      * Supprime une bid list.
      *
-     * @param id identifiant de la bid list
+     * @param id                 identifiant de la bid list
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return redirection vers la liste
      */
@@ -137,6 +141,7 @@ public class BidListController {
             service.deleteById(id);
 
         } catch (Exception e) {
+            log.warn("Echec suppression bidList id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/bidList/list";

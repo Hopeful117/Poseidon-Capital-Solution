@@ -4,13 +4,13 @@ import com.nnk.domain.User;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -19,9 +19,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequiredArgsConstructor
+<span class="fc" id="L22">@Slf4j</span>
 public class UserController {
 
-    /** Service CRUD pour les utilisateurs */
+    /**
+     * Service CRUD pour les utilisateurs
+     */
     private final CrudService&lt;User&gt; service;
 
     /**
@@ -30,10 +33,10 @@ public class UserController {
      * @param model le modèle pour passer les données à la vue
      * @return le nom de la vue &quot;user/list&quot;
      */
-    @RequestMapping(&quot;/user/list&quot;)
+    @GetMapping(&quot;/user/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L35">        model.addAttribute(&quot;users&quot;, service.findAll());</span>
-<span class="fc" id="L36">        return &quot;user/list&quot;;</span>
+<span class="fc" id="L38">        model.addAttribute(&quot;users&quot;, service.findAll());</span>
+<span class="fc" id="L39">        return &quot;user/list&quot;;</span>
     }
 
     /**
@@ -44,30 +47,31 @@ public class UserController {
      */
     @GetMapping(&quot;/user/add&quot;)
     public String addUser(User bid) {
-<span class="fc" id="L47">        return &quot;user/add&quot;;</span>
+<span class="fc" id="L50">        return &quot;user/add&quot;;</span>
     }
 
     /**
      * Valide et crée un nouvel utilisateur.
      *
-     * @param user l'utilisateur à créer
+     * @param user   l'utilisateur à créer
      * @param result les erreurs de validation
-     * @param model le modèle pour passer les données à la vue
+     * @param model  le modèle pour passer les données à la vue
      * @return une redirection vers la liste ou le formulaire avec erreurs
      */
     @PostMapping(&quot;/user/validate&quot;)
     public String validate(@Valid User user, BindingResult result, Model model) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L62">            return &quot;user/add&quot;;</span>
+<span class="fc" id="L65">            return &quot;user/add&quot;;</span>
         }
         try {
 
-<span class="fc" id="L66">            service.create(user);</span>
-<span class="fc" id="L67">            return &quot;redirect:/user/list&quot;;</span>
-<span class="nc" id="L68">        } catch (Exception e) {</span>
-<span class="nc" id="L69">            model.addAttribute(&quot;errors&quot;, e.getMessage());</span>
-<span class="nc" id="L70">            return &quot;user/add&quot;;</span>
+<span class="fc" id="L69">            service.create(user);</span>
+<span class="fc" id="L70">            return &quot;redirect:/user/list&quot;;</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            log.error(&quot;Echec creation user username={}&quot;, user.getUsername(), e);</span>
+<span class="nc" id="L73">            model.addAttribute(&quot;errors&quot;, e.getMessage());</span>
+<span class="nc" id="L74">            return &quot;user/add&quot;;</span>
         }
 
 
@@ -76,73 +80,76 @@ public class UserController {
     /**
      * Affiche le formulaire pour mettre à jour un utilisateur.
      *
-     * @param id l'identifiant de l'utilisateur
-     * @param model le modèle pour passer les données à la vue
+     * @param id                 l'identifiant de l'utilisateur
+     * @param model              le modèle pour passer les données à la vue
      * @param redirectAttributes les attributs de redirection
      * @return le nom de la vue &quot;user/update&quot; ou une redirection si l'utilisateur n'existe pas
      */
     @GetMapping(&quot;/user/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
-<span class="fc" id="L87">            User user = service.findById(id);</span>
-<span class="fc" id="L88">            user.setPassword(&quot;&quot;);</span>
-<span class="fc" id="L89">            model.addAttribute(&quot;user&quot;, user);</span>
-<span class="fc" id="L90">            return &quot;user/update&quot;;</span>
-<span class="fc" id="L91">        } catch (Exception e) {</span>
-<span class="fc" id="L92">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L93">            return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L91">            User user = service.findById(id);</span>
+<span class="fc" id="L92">            user.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L93">            model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L94">            return &quot;user/update&quot;;</span>
+<span class="fc" id="L95">        } catch (Exception e) {</span>
+<span class="fc" id="L96">            log.warn(&quot;Impossible de charger user id={} - {}&quot;, id, e.getMessage());</span>
+<span class="fc" id="L97">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L98">            return &quot;redirect:/user/list&quot;;</span>
         }
     }
 
     /**
      * Valide et met à jour un utilisateur existant.
      *
-     * @param id l'identifiant de l'utilisateur
-     * @param user l'utilisateur avec les données mises à jour
+     * @param id     l'identifiant de l'utilisateur
+     * @param user   l'utilisateur avec les données mises à jour
      * @param result les erreurs de validation
-     * @param model le modèle pour passer les données à la vue
+     * @param model  le modèle pour passer les données à la vue
      * @return une redirection vers la liste ou le formulaire avec erreurs
      */
     @PostMapping(&quot;/user/update/{id}&quot;)
     public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
                              BindingResult result, Model model) {
-<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L111">            return &quot;user/update&quot;;</span>
+<span class="fc" id="L116">            return &quot;user/update&quot;;</span>
         }
 
         try {
 
-<span class="fc" id="L116">            user.setId(id);</span>
-<span class="fc" id="L117">            service.update(user);</span>
+<span class="fc" id="L121">            user.setId(id);</span>
+<span class="fc" id="L122">            service.update(user);</span>
 
-<span class="fc" id="L119">            return &quot;redirect:/user/list&quot;;</span>
-<span class="fc" id="L120">        } catch (Exception e) {</span>
-<span class="fc" id="L121">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L122">            model.addAttribute(&quot;user&quot;, user);</span>
-<span class="fc" id="L123">            return &quot;user/update&quot;;</span>
+<span class="fc" id="L124">            return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L125">        } catch (Exception e) {</span>
+<span class="fc" id="L126">            log.error(&quot;Echec mise a jour user id={}&quot;, id, e);</span>
+<span class="fc" id="L127">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L128">            model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L129">            return &quot;user/update&quot;;</span>
         }
     }
 
     /**
      * Supprime un utilisateur.
      *
-     * @param id l'identifiant de l'utilisateur à supprimer
-     * @param model le modèle pour passer les données à la vue
+     * @param id                 l'identifiant de l'utilisateur à supprimer
+     * @param model              le modèle pour passer les données à la vue
      * @param redirectAttributes les attributs de redirection
      * @return une redirection vers la liste des utilisateurs
      */
     @GetMapping(&quot;/user/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
-<span class="fc" id="L138">            service.deleteById(id);</span>
+<span class="fc" id="L144">            service.deleteById(id);</span>
 
 
-<span class="fc" id="L141">        } catch (Exception e) {</span>
-<span class="fc" id="L142">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L147">        } catch (Exception e) {</span>
+<span class="fc" id="L148">            log.warn(&quot;Echec suppression user id={} - {}&quot;, id, e.getMessage());</span>
+<span class="fc" id="L149">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
 
-<span class="fc" id="L144">        }</span>
-<span class="fc" id="L145">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L151">        }</span>
+<span class="fc" id="L152">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

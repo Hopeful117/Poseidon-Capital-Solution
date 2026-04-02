@@ -2,6 +2,7 @@ package com.nnk.config;
 
 import com.nnk.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,13 +12,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 /**
  * Service de chargement des utilisateurs pour Spring Security.
  */
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private final UserRepository userRepository; // ton repository User
+    private final UserRepository userRepository;
 
 
     /**
@@ -30,7 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.nnk.domain.User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> {
+                    log.warn("Tentative de connexion avec un utilisateur inconnu username={}", username);
+                    return new UsernameNotFoundException("User not found");
+                });
 
         return User.builder()
                 .username(user.getUsername())

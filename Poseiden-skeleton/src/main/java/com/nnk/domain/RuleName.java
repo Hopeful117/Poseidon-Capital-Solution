@@ -1,7 +1,6 @@
 package com.nnk.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -56,12 +55,12 @@ public class RuleName implements DomainEntity<RuleName> {
     /**
      * Construit une regle metier complete.
      *
-     * @param name nom fonctionnel de la regle
+     * @param name        nom fonctionnel de la regle
      * @param description description de la regle
-     * @param json expression JSON associee
-     * @param template template de la regle
-     * @param sqlStr expression SQL complete
-     * @param sqlPart fragment SQL
+     * @param json        expression JSON associee
+     * @param template    template de la regle
+     * @param sqlStr      expression SQL complete
+     * @param sqlPart     fragment SQL
      */
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
         this.name = name;

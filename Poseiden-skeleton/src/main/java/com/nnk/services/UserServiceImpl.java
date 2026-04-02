@@ -14,7 +14,9 @@ import org.springframework.util.Assert;
 @Service
 public class UserServiceImpl extends AbstractCrudService<User> {
 
-    /** Encoder BCrypt pour sécuriser les mots de passe */
+    /**
+     * Encoder BCrypt pour sécuriser les mots de passe
+     */
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     /**

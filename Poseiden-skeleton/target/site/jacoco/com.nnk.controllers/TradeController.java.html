@@ -4,13 +4,13 @@ import com.nnk.domain.Trade;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,12 +20,11 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Controller
+<span class="fc" id="L23">@Slf4j</span>
 public class TradeController {
 
 
     private final CrudService&lt;Trade&gt; service;
-
-    // TODO: Inject Trade service
 
     /**
      * Affiche la liste des trades.
@@ -33,11 +32,11 @@ public class TradeController {
      * @param model modele de vue
      * @return vue de liste
      */
-    @RequestMapping(&quot;/trade/list&quot;)
+    @GetMapping(&quot;/trade/list&quot;)
     public String home(Model model) {
-<span class="fc" id="L38">        List&lt;Trade&gt; trades = service.findAll();</span>
-<span class="fc" id="L39">        model.addAttribute(&quot;trades&quot;, trades);</span>
-<span class="fc" id="L40">        return &quot;trade/list&quot;;</span>
+<span class="fc" id="L37">        List&lt;Trade&gt; trades = service.findAll();</span>
+<span class="fc" id="L38">        model.addAttribute(&quot;trades&quot;, trades);</span>
+<span class="fc" id="L39">        return &quot;trade/list&quot;;</span>
     }
 
     /**
@@ -48,27 +47,28 @@ public class TradeController {
      */
     @GetMapping(&quot;/trade/add&quot;)
     public String addUser(Trade bid) {
-<span class="fc" id="L51">        return &quot;trade/add&quot;;</span>
+<span class="fc" id="L50">        return &quot;trade/add&quot;;</span>
     }
 
     /**
      * Valide et cree un trade.
      *
-     * @param trade donnees soumises
+     * @param trade  donnees soumises
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping(&quot;/trade/validate&quot;)
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L66">            return &quot;trade/add&quot;;</span>
+<span class="fc" id="L65">            return &quot;trade/add&quot;;</span>
         }
         try {
-<span class="fc" id="L69">            service.create(trade);</span>
-<span class="fc" id="L70">            return &quot;redirect:/trade/list&quot;;</span>
-<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="fc" id="L68">            service.create(trade);</span>
+<span class="fc" id="L69">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="nc" id="L70">        } catch (Exception e) {</span>
+<span class="nc" id="L71">            log.error(&quot;Echec creation trade account={} type={}&quot;, trade.getAccount(), trade.getType(), e);</span>
 <span class="nc" id="L72">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
 <span class="nc" id="L73">            return &quot;trade/add&quot;;</span>
         }
@@ -77,8 +77,8 @@ public class TradeController {
     /**
      * Affiche le formulaire de mise a jour d'un trade.
      *
-     * @param id identifiant du trade
-     * @param model modele de vue
+     * @param id                 identifiant du trade
+     * @param model              modele de vue
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return vue de mise a jour ou redirection
      */
@@ -89,52 +89,55 @@ public class TradeController {
 <span class="fc" id="L89">            model.addAttribute(&quot;trade&quot;, trade);</span>
 <span class="fc" id="L90">            return &quot;trade/update&quot;;</span>
 <span class="fc" id="L91">        } catch (Exception e) {</span>
-<span class="fc" id="L92">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L93">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L92">            log.warn(&quot;Impossible de charger trade id={} - {}&quot;, id, e.getMessage());</span>
+<span class="fc" id="L93">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L94">            return &quot;redirect:/trade/list&quot;;</span>
         }
     }
 
     /**
      * Met a jour un trade existant.
      *
-     * @param id identifiant du trade
-     * @param trade donnees mises a jour
+     * @param id     identifiant du trade
+     * @param trade  donnees mises a jour
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping(&quot;/trade/update/{id}&quot;)
     public String updateTrade(@PathVariable(&quot;id&quot;) Integer id, @Valid Trade trade,
                               BindingResult result, Model model) {
-<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (result.hasErrors()) {</span>
 
-<span class="fc" id="L111">            return &quot;trade/update&quot;;</span>
+<span class="fc" id="L112">            return &quot;trade/update&quot;;</span>
         }
         try {
-<span class="fc" id="L114">            trade.setTradeId(id);</span>
-<span class="fc" id="L115">            service.update(trade);</span>
-<span class="fc" id="L116">            return &quot;redirect:/trade/list&quot;;</span>
-<span class="fc" id="L117">        } catch (Exception e) {</span>
-<span class="fc" id="L118">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L119">            return &quot;trade/update&quot;;</span>
+<span class="fc" id="L115">            trade.setTradeId(id);</span>
+<span class="fc" id="L116">            service.update(trade);</span>
+<span class="fc" id="L117">            return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L118">        } catch (Exception e) {</span>
+<span class="fc" id="L119">            log.error(&quot;Echec mise a jour trade id={}&quot;, id, e);</span>
+<span class="fc" id="L120">            model.addAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L121">            return &quot;trade/update&quot;;</span>
         }
     }
 
     /**
      * Supprime un trade.
      *
-     * @param id identifiant du trade
+     * @param id                 identifiant du trade
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return redirection vers la liste
      */
     @GetMapping(&quot;/trade/delete/{id}&quot;)
     public String deleteTrade(@PathVariable(&quot;id&quot;) Integer id, RedirectAttributes redirectAttributes) {
         try {
-<span class="fc" id="L133">            service.deleteById(id);</span>
-<span class="fc" id="L134">        } catch (Exception e) {</span>
-<span class="fc" id="L135">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
-<span class="fc" id="L136">        }</span>
-<span class="fc" id="L137">        return &quot;redirect:/trade/list&quot;;</span>
+<span class="fc" id="L135">            service.deleteById(id);</span>
+<span class="fc" id="L136">        } catch (Exception e) {</span>
+<span class="fc" id="L137">            log.warn(&quot;Echec suppression trade id={} - {}&quot;, id, e.getMessage());</span>
+<span class="fc" id="L138">            redirectAttributes.addFlashAttribute(&quot;errorMessage&quot;, e.getMessage());</span>
+<span class="fc" id="L139">        }</span>
+<span class="fc" id="L140">        return &quot;redirect:/trade/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -14,8 +14,10 @@ import org.springframework.util.Assert;
 @Service
 public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
 
-    /** Encoder BCrypt pour sécuriser les mots de passe */
-<span class="fc" id="L18">    private final PasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+    /**
+     * Encoder BCrypt pour sécuriser les mots de passe
+     */
+<span class="fc" id="L20">    private final PasswordEncoder encoder = new BCryptPasswordEncoder();</span>
 
     /**
      * Constructeur pour initialiser le service avec le repository des utilisateurs.
@@ -23,9 +25,9 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      * @param repository le repository pour accéder aux données des utilisateurs
      */
     protected UserServiceImpl(UserRepository repository) {
-<span class="fc" id="L26">        super(repository);</span>
+<span class="fc" id="L28">        super(repository);</span>
 
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Crée un nouvel utilisateur avec mot de passe encrypté.
@@ -34,9 +36,9 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      */
     @Override
     public void create(final User user) {
-<span class="fc" id="L37">        encryptPassword(user);</span>
-<span class="fc" id="L38">        super.create(user);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L39">        encryptPassword(user);</span>
+<span class="fc" id="L40">        super.create(user);</span>
+<span class="fc" id="L41">    }</span>
 
     /**
      * Met à jour un utilisateur existant avec mot de passe encrypté.
@@ -45,9 +47,9 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      */
     @Override
     public void update(final User user) {
-<span class="fc" id="L48">        encryptPassword(user);</span>
-<span class="fc" id="L49">        super.update(user);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L50">        encryptPassword(user);</span>
+<span class="fc" id="L51">        super.update(user);</span>
+<span class="fc" id="L52">    }</span>
 
     /**
      * Encrypte le mot de passe d'un utilisateur.
@@ -56,8 +58,8 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      * @throws IllegalArgumentException si l'utilisateur est null
      */
     private void encryptPassword(User user) {
-<span class="fc" id="L59">        Assert.notNull(user, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L60">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L61">        Assert.notNull(user, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L62">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="fc" id="L63">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

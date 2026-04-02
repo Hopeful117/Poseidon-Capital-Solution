@@ -1,7 +1,7 @@
 package com.nnk.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * Controleur des pages d'accueil.
@@ -13,7 +13,7 @@ public class HomeController {
      *
      * @return vue index
      */
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
         return "index";
     }
@@ -23,7 +23,7 @@ public class HomeController {
      *
      * @return redirection vers l'espace admin
      */
-    @RequestMapping("/admin/home")
+    @GetMapping("/admin/home")
     public String adminHome() {
         return "redirect:/user/list";
     }

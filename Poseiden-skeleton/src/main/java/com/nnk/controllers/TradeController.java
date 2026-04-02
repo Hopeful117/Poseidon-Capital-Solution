@@ -4,13 +4,13 @@ import com.nnk.domain.Trade;
 import com.nnk.services.CrudService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -20,12 +20,11 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Controller
+@Slf4j
 public class TradeController {
 
 
     private final CrudService<Trade> service;
-
-    // TODO: Inject Trade service
 
     /**
      * Affiche la liste des trades.
@@ -33,7 +32,7 @@ public class TradeController {
      * @param model modele de vue
      * @return vue de liste
      */
-    @RequestMapping("/trade/list")
+    @GetMapping("/trade/list")
     public String home(Model model) {
         List<Trade> trades = service.findAll();
         model.addAttribute("trades", trades);
@@ -54,9 +53,9 @@ public class TradeController {
     /**
      * Valide et cree un trade.
      *
-     * @param trade donnees soumises
+     * @param trade  donnees soumises
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/trade/validate")
@@ -69,6 +68,7 @@ public class TradeController {
             service.create(trade);
             return "redirect:/trade/list";
         } catch (Exception e) {
+            log.error("Echec creation trade account={} type={}", trade.getAccount(), trade.getType(), e);
             model.addAttribute("errorMessage", e.getMessage());
             return "trade/add";
         }
@@ -77,8 +77,8 @@ public class TradeController {
     /**
      * Affiche le formulaire de mise a jour d'un trade.
      *
-     * @param id identifiant du trade
-     * @param model modele de vue
+     * @param id                 identifiant du trade
+     * @param model              modele de vue
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return vue de mise a jour ou redirection
      */
@@ -89,6 +89,7 @@ public class TradeController {
             model.addAttribute("trade", trade);
             return "trade/update";
         } catch (Exception e) {
+            log.warn("Impossible de charger trade id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/trade/list";
         }
@@ -97,10 +98,10 @@ public class TradeController {
     /**
      * Met a jour un trade existant.
      *
-     * @param id identifiant du trade
-     * @param trade donnees mises a jour
+     * @param id     identifiant du trade
+     * @param trade  donnees mises a jour
      * @param result resultat de validation
-     * @param model modele de vue
+     * @param model  modele de vue
      * @return redirection vers la liste ou retour formulaire
      */
     @PostMapping("/trade/update/{id}")
@@ -115,6 +116,7 @@ public class TradeController {
             service.update(trade);
             return "redirect:/trade/list";
         } catch (Exception e) {
+            log.error("Echec mise a jour trade id={}", id, e);
             model.addAttribute("errorMessage", e.getMessage());
             return "trade/update";
         }
@@ -123,7 +125,7 @@ public class TradeController {
     /**
      * Supprime un trade.
      *
-     * @param id identifiant du trade
+     * @param id                 identifiant du trade
      * @param redirectAttributes attributs flash en cas d'erreur
      * @return redirection vers la liste
      */
@@ -132,6 +134,7 @@ public class TradeController {
         try {
             service.deleteById(id);
         } catch (Exception e) {
+            log.warn("Echec suppression trade id={} - {}", id, e.getMessage());
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
         }
         return "redirect:/trade/list";

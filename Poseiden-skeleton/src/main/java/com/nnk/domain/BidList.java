@@ -122,8 +122,8 @@ public class BidList implements DomainEntity<BidList> {
     /**
      * Constructeur pour créer une nouvelle liste d'enchères.
      *
-     * @param account la compte d'enchère
-     * @param type le type d'enchère
+     * @param account     la compte d'enchère
+     * @param type        le type d'enchère
      * @param bidQuantity la quantité d'enchère
      */
     public BidList(String account, String type, BigDecimal bidQuantity) {

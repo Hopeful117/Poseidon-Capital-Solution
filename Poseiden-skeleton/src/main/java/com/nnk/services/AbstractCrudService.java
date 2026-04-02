@@ -15,7 +15,9 @@ import java.util.List;
  */
 public abstract class AbstractCrudService<M extends DomainEntity<M>> implements CrudService<M> {
 
-    /** Repository JPA pour accéder à la base de données */
+    /**
+     * Repository JPA pour accéder à la base de données
+     */
     protected final JpaRepository<M, Integer> repository;
 
     /**
@@ -83,7 +85,7 @@ public abstract class AbstractCrudService<M extends DomainEntity<M>> implements 
      *
      * @param model l'entité à mettre à jour (doit avoir un id)
      * @throws IllegalArgumentException si l'objet est null ou n'a pas d'id
-     * @throws EntityNotFoundException si l'entité n'existe pas
+     * @throws EntityNotFoundException  si l'entité n'existe pas
      */
     @Override
     public void update(final M model) {

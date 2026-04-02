@@ -2,6 +2,7 @@
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,13 @@ import java.util.Objects;
  * Redirige l'utilisateur apres connexion selon son role.
  */
 @Component
-<span class="fc" id="L16">public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {</span>
+<span class="fc" id="L17">@Slf4j</span>
+<span class="fc" id="L18">public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {</span>
     /**
      * Redirection post-authentification vers l'espace admin ou utilisateur.
      *
-     * @param request requete HTTP
-     * @param response reponse HTTP
+     * @param request        requete HTTP
+     * @param response       reponse HTTP
      * @param authentication contexte d'authentification
      * @throws IOException en cas d'erreur d'ecriture de la reponse
      */
@@ -27,17 +29,18 @@ import java.util.Objects;
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
 
-<span class="nc" id="L30">        String redirectUrl = &quot;/&quot;;</span>
+<span class="nc" id="L32">        String redirectUrl = &quot;/&quot;;</span>
 
-<span class="nc" id="L32">        if (authentication.getAuthorities().stream()</span>
-<span class="nc bnc" id="L33" title="All 2 branches missed.">                .anyMatch(a -&gt; Objects.equals(a.getAuthority(), &quot;ROLE_ADMIN&quot;))) {</span>
-<span class="nc" id="L34">            redirectUrl = &quot;/admin/home&quot;;</span>
-<span class="nc" id="L35">        } else if (authentication.getAuthorities().stream()</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">                .anyMatch(a -&gt; Objects.equals(a.getAuthority(), &quot;ROLE_USER&quot;))) {</span>
-<span class="nc" id="L37">            redirectUrl = &quot;/bidList/list&quot;;</span>
+<span class="nc" id="L34">        if (authentication.getAuthorities().stream()</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                .anyMatch(a -&gt; Objects.equals(a.getAuthority(), &quot;ROLE_ADMIN&quot;))) {</span>
+<span class="nc" id="L36">            redirectUrl = &quot;/admin/home&quot;;</span>
+<span class="nc" id="L37">        } else if (authentication.getAuthorities().stream()</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                .anyMatch(a -&gt; Objects.equals(a.getAuthority(), &quot;ROLE_USER&quot;))) {</span>
+<span class="nc" id="L39">            redirectUrl = &quot;/bidList/list&quot;;</span>
         }
 
-<span class="nc" id="L40">        response.sendRedirect(redirectUrl);</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L42">        log.info(&quot;Connexion reussie user={} redirect={}&quot;, authentication.getName(), redirectUrl);</span>
+<span class="nc" id="L43">        response.sendRedirect(redirectUrl);</span>
+<span class="nc" id="L44">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

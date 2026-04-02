@@ -1,6 +1,7 @@
 package com.nnk.config;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@Slf4j
 /**
  * Configuration Spring Security de l'application.
  * Definit les regles d'acces, la page de connexion et les composants d'authentification.
@@ -29,7 +31,7 @@ public class SpringSecurityConfig {
     /**
      * Configure la chaine de filtres HTTP securisee.
      *
-     * @param http configuration HTTP
+     * @param http           configuration HTTP
      * @param successHandler gestionnaire appele apres une connexion reussie
      * @return la chaine de filtres de securite
      * @throws Exception en cas d'erreur de configuration
@@ -57,9 +59,12 @@ public class SpringSecurityConfig {
                 ).exceptionHandling((ex ->
                         ex.authenticationEntryPoint((request, response, authException) ->
                         {
+                            log.warn("Acces anonyme bloque vers {}", request.getRequestURI());
                             response.sendRedirect("/app/login");
                         }).accessDeniedHandler(((request, response, accessDeniedException) ->
                         {
+                            String username = request.getUserPrincipal() != null ? request.getUserPrincipal().getName() : "anonymous";
+                            log.warn("Acces refuse pour user={} vers {}", username, request.getRequestURI());
                             response.sendRedirect("/app/error");
                         }))
                 ));
@@ -82,7 +87,7 @@ public class SpringSecurityConfig {
     /**
      * Cree le gestionnaire d'authentification base sur le service utilisateur et BCrypt.
      *
-     * @param http configuration HTTP
+     * @param http            configuration HTTP
      * @param passwordEncoder encodeur de mot de passe
      * @return le gestionnaire d'authentification
      * @throws Exception en cas d'erreur d'initialisation
