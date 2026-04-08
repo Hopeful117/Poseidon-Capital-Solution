@@ -150,4 +150,25 @@ public class CurvePointServiceTest {
         assertThrows(EntityNotFoundException.class, () -> curvePointService.update(curvePointToUpdate));
     }
 
+    @Test
+    public void testDeleteCurvePoint() {
+        // Given
+        when(curvePointRepository.existsById(1)).thenReturn(true);
+
+        // When
+        curvePointService.deleteById(1);
+
+        // Then
+        verify(curvePointRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteCurvePointShouldThrowExceptionWhenCurvePointNotFound() {
+        // Given
+        when(curvePointRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> curvePointService.deleteById(999));
+    }
+
 }

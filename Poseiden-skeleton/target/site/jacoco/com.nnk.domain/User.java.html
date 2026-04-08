@@ -29,6 +29,7 @@ public class User implements DomainEntity&lt;User&gt; {
     /**
      * Nom d'utilisateur unique pour la connexion
      */
+
     @NotBlank(message = &quot;Username is mandatory&quot;)
     @Column(name = &quot;username&quot;, unique = true)
     @Size(max = 125, message = &quot;Username must not exceed 125 characters&quot;)
@@ -70,12 +71,12 @@ public class User implements DomainEntity&lt;User&gt; {
      * @param fullname le nom complet
      * @param role     le rôle de l'utilisateur
      */
-<span class="fc" id="L73">    public User(String username, String password, String fullname, String role) {</span>
-<span class="fc" id="L74">        this.username = username;</span>
-<span class="fc" id="L75">        this.password = password;</span>
-<span class="fc" id="L76">        this.fullname = fullname;</span>
-<span class="fc" id="L77">        this.role = role;</span>
-<span class="fc" id="L78">    }</span>
+<span class="fc" id="L74">    public User(String username, String password, String fullname, String role) {</span>
+<span class="fc" id="L75">        this.username = username;</span>
+<span class="fc" id="L76">        this.password = password;</span>
+<span class="fc" id="L77">        this.fullname = fullname;</span>
+<span class="fc" id="L78">        this.role = role;</span>
+<span class="fc" id="L79">    }</span>
 
     /**
      * Met à jour l'utilisateur avec les données d'une autre instance.
@@ -85,11 +86,11 @@ public class User implements DomainEntity&lt;User&gt; {
      */
     @Override
     public User update(User domainEntity) {
-<span class="fc" id="L88">        fullname = domainEntity.getFullname();</span>
-<span class="fc" id="L89">        password = domainEntity.getPassword();</span>
-<span class="fc" id="L90">        username = domainEntity.getUsername();</span>
-<span class="fc" id="L91">        role = domainEntity.getRole();</span>
-<span class="fc" id="L92">        return this;</span>
+<span class="fc" id="L89">        fullname = domainEntity.getFullname();</span>
+<span class="fc" id="L90">        password = domainEntity.getPassword();</span>
+<span class="fc" id="L91">        username = domainEntity.getUsername();</span>
+<span class="fc" id="L92">        role = domainEntity.getRole();</span>
+<span class="fc" id="L93">        return this;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

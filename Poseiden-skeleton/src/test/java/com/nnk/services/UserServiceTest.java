@@ -2,6 +2,7 @@ package com.nnk.services;
 
 import com.nnk.domain.User;
 import com.nnk.exceptions.EntityNotFoundException;
+import com.nnk.exceptions.UsernameAlreadyInUseException;
 import com.nnk.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,6 +53,16 @@ public class UserServiceTest {
         assertEquals(savedUser.getRole(), role);
 
 
+    }
+    @Test
+    public void testAddUserShouldThrowExceptionWhenUsernameAlreadyExists() {
+        // Given
+        when(userRepository.existsByUsername("user1")).thenReturn(true);
+
+        User newUser = new User("user1", "NewPass1!", "Jane Doe", "USER");
+
+        // When & Then
+        assertThrows(UsernameAlreadyInUseException.class, () -> userService.create(newUser));
     }
 
 
@@ -105,6 +116,8 @@ public class UserServiceTest {
 
     }
 
+
+
     @ParameterizedTest
     @CsvSource({
             "1, 'user1', 'Passw0rd!', 'John Doe', 'ADMIN', 'updatedUser', 'NewPass1!', 'Jane Doe', 'USER'",
@@ -148,5 +161,38 @@ public class UserServiceTest {
         // When & Then
         assertThrows(EntityNotFoundException.class, () -> userService.update(userToUpdate));
     }
+    @Test
+    public void testUpdateUserShouldThrowExceptionWhenUsernameAlreadyExists() {
+        // Given
+        User userToUpdate = new User("user2", "NewPass1!", "Jane Doe", "USER");
+        userToUpdate.setId(1);
+
+        when(userRepository.existsByUsername("user2")).thenReturn(true);
+
+        // When & Then
+        assertThrows(UsernameAlreadyInUseException.class, () -> userService.update(userToUpdate));
+    }
+
+    @Test
+    public void testDeleteUser() {
+        // Given
+        when(userRepository.existsById(1)).thenReturn(true);
+
+        // When
+        userService.deleteById(1);
+
+        // Then
+        verify(userRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteUserShouldThrowExceptionWhenUserNotFound() {
+        // Given
+        when(userRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> userService.deleteById(999));
+    }
+
 
 }

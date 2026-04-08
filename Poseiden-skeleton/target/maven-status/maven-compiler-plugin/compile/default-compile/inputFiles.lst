@@ -18,6 +18,7 @@
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/domain/Trade.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/domain/User.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/exceptions/EntityNotFoundException.java
+/home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/exceptions/UsernameAlreadyInUseException.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/BidListRepository.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/CurvePointRepository.java
 /home/ludo/Bureau/JavaDA_PROJECT7_RESTAPI/Poseiden-skeleton/src/main/java/com/nnk/repositories/RatingRepository.java

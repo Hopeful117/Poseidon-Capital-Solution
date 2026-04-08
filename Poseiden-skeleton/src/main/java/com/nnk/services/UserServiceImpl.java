@@ -1,6 +1,7 @@
 package com.nnk.services;
 
 import com.nnk.domain.User;
+import com.nnk.exceptions.UsernameAlreadyInUseException;
 import com.nnk.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,15 +19,18 @@ public class UserServiceImpl extends AbstractCrudService<User> {
      * Encoder BCrypt pour sécuriser les mots de passe
      */
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final UserRepository userRepository;
 
     /**
      * Constructeur pour initialiser le service avec le repository des utilisateurs.
      *
      * @param repository le repository pour accéder aux données des utilisateurs
      */
-    protected UserServiceImpl(UserRepository repository) {
-        super(repository);
+    protected UserServiceImpl(UserRepository userRepository) {
+        super(userRepository);
 
+
+        this.userRepository = userRepository;
     }
 
     /**
@@ -36,6 +40,9 @@ public class UserServiceImpl extends AbstractCrudService<User> {
      */
     @Override
     public void create(final User user) {
+        if(userRepository.existsByUsername(user.getUsername())) {
+            throw new UsernameAlreadyInUseException("Username already in use");
+        }
         encryptPassword(user);
         super.create(user);
     }
@@ -47,6 +54,9 @@ public class UserServiceImpl extends AbstractCrudService<User> {
      */
     @Override
     public void update(final User user) {
+        if(userRepository.existsByUsername(user.getUsername())) {
+            throw new UsernameAlreadyInUseException("Username already in use");
+        }
         encryptPassword(user);
         super.update(user);
     }

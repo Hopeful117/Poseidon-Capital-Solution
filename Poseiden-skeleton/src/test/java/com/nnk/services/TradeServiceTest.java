@@ -148,4 +148,25 @@ public class TradeServiceTest {
         assertThrows(EntityNotFoundException.class, () -> tradeService.update(tradeToUpdate));
     }
 
+    @Test
+    public void testDeleteTrade() {
+        // Given
+        when(tradeRepository.existsById(1)).thenReturn(true);
+
+        // When
+        tradeService.deleteById(1);
+
+        // Then
+        verify(tradeRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteTradeShouldThrowExceptionWhenTradeNotFound() {
+        // Given
+        when(tradeRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> tradeService.deleteById(999));
+    }
+
 }

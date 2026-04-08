@@ -149,4 +149,25 @@ public class RatingServiceTest {
         assertThrows(EntityNotFoundException.class, () -> ratingService.update(ratingToUpdate));
     }
 
+    @Test
+    public void testDeleteRating() {
+        // Given
+        when(ratingRepository.existsById(1)).thenReturn(true);
+
+        // When
+        ratingService.deleteById(1);
+
+        // Then
+        verify(ratingRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteRatingShouldThrowExceptionWhenRatingNotFound() {
+        // Given
+        when(ratingRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> ratingService.deleteById(999));
+    }
+
 }

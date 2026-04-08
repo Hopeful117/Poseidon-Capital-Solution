@@ -29,6 +29,7 @@ public class User implements DomainEntity<User> {
     /**
      * Nom d'utilisateur unique pour la connexion
      */
+
     @NotBlank(message = "Username is mandatory")
     @Column(name = "username", unique = true)
     @Size(max = 125, message = "Username must not exceed 125 characters")

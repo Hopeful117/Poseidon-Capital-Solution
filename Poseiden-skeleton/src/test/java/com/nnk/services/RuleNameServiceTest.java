@@ -156,4 +156,25 @@ public class RuleNameServiceTest {
         assertThrows(EntityNotFoundException.class, () -> ruleNameService.update(ruleNameToUpdate));
     }
 
+    @Test
+    public void testDeleteRuleName() {
+        // Given
+        when(ruleNameRepository.existsById(1)).thenReturn(true);
+
+        // When
+        ruleNameService.deleteById(1);
+
+        // Then
+        verify(ruleNameRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteRuleNameShouldThrowExceptionWhenRuleNameNotFound() {
+        // Given
+        when(ruleNameRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> ruleNameService.deleteById(999));
+    }
+
 }

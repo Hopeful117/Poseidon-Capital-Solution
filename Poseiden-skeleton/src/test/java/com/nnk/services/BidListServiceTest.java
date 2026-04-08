@@ -149,4 +149,25 @@ public class BidListServiceTest {
         assertThrows(EntityNotFoundException.class, () -> bidListService.update(bidListToUpdate));
     }
 
+    @Test
+    public void testDeleteBidList() {
+        // Given
+        when(bidListRepository.existsById(1)).thenReturn(true);
+
+        // When
+        bidListService.deleteById(1);
+
+        // Then
+        verify(bidListRepository).deleteById(1);
+    }
+
+    @Test
+    public void testDeleteBidListShouldThrowExceptionWhenBidListNotFound() {
+        // Given
+        when(bidListRepository.existsById(999)).thenReturn(false);
+
+        // When & Then
+        assertThrows(EntityNotFoundException.class, () -> bidListService.deleteById(999));
+    }
+
 }
