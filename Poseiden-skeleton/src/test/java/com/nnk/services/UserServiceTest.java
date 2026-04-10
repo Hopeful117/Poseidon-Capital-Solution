@@ -54,6 +54,7 @@ public class UserServiceTest {
 
 
     }
+
     @Test
     public void testAddUserShouldThrowExceptionWhenUsernameAlreadyExists() {
         // Given
@@ -117,7 +118,6 @@ public class UserServiceTest {
     }
 
 
-
     @ParameterizedTest
     @CsvSource({
             "1, 'user1', 'Passw0rd!', 'John Doe', 'ADMIN', 'updatedUser', 'NewPass1!', 'Jane Doe', 'USER'",
@@ -134,6 +134,7 @@ public class UserServiceTest {
         updatedUser.setId(id);
 
         when(userRepository.findById(id)).thenReturn(java.util.Optional.of(existingUser));
+        when(userRepository.findByUsername(newUsername)).thenReturn(java.util.Optional.empty());
 
         // When
         userService.update(updatedUser);
@@ -161,13 +162,50 @@ public class UserServiceTest {
         // When & Then
         assertThrows(EntityNotFoundException.class, () -> userService.update(userToUpdate));
     }
-    @Test
-    public void testUpdateUserShouldThrowExceptionWhenUsernameAlreadyExists() {
-        // Given
-        User userToUpdate = new User("user2", "NewPass1!", "Jane Doe", "USER");
-        userToUpdate.setId(1);
 
-        when(userRepository.existsByUsername("user2")).thenReturn(true);
+    @Test
+    public void testUpdateUserShouldAllowExistingUsernameWhenOwnedBySameUser() {
+        // Given
+        User currentUser = new User("user2", "Passw0rd!", "John Doe", "ADMIN");
+        currentUser.setId(2);
+
+        User userToUpdate = new User("user2", "NewPass1!", "Jane Doe", "USER");
+        userToUpdate.setId(2);
+
+        when(userRepository.findById(2)).thenReturn(java.util.Optional.of(currentUser));
+        when(userRepository.findByUsername("user2")).thenReturn(java.util.Optional.of(currentUser));
+
+        // When
+        userService.update(userToUpdate);
+
+        // Then
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+        verify(userRepository).save(captor.capture());
+
+        User savedUser = captor.getValue();
+        assertEquals(2, savedUser.getId());
+        assertEquals("user2", savedUser.getUsername());
+        assertEquals("Jane Doe", savedUser.getFullname());
+        assertEquals("USER", savedUser.getRole());
+        assertNotEquals("NewPass1!", savedUser.getPassword()); // Password is encoded
+    }
+
+    @Test
+    public void testUpdateUserShouldThrowExceptionIfUsernameExistAndUserDoesntOwnUsername() {
+        // Given
+        User currentUser = new User("user1", "Passw0rd!", "John Doe", "ADMIN");
+        currentUser.setId(2);
+        User usernameOwner = new User("user2", "Secret1!", "Alice Doe", "USER");
+        usernameOwner.setId(1);
+
+        User userToUpdate = new User("user2", "NewPass1!", "Jane Doe", "USER");
+        userToUpdate.setId(2);
+
+        when(userRepository.findById(2)).thenReturn(java.util.Optional.of(currentUser));
+        when(userRepository.findByUsername("user2")).thenReturn(java.util.Optional.of(usernameOwner));
+
+
+
 
         // When & Then
         assertThrows(UsernameAlreadyInUseException.class, () -> userService.update(userToUpdate));

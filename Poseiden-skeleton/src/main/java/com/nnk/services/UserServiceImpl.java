@@ -1,12 +1,15 @@
 package com.nnk.services;
 
 import com.nnk.domain.User;
+import com.nnk.exceptions.EntityNotFoundException;
 import com.nnk.exceptions.UsernameAlreadyInUseException;
 import com.nnk.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.Objects;
 
 /**
  * Implémentation du service pour la gestion des utilisateurs.
@@ -24,9 +27,9 @@ public class UserServiceImpl extends AbstractCrudService<User> {
     /**
      * Constructeur pour initialiser le service avec le repository des utilisateurs.
      *
-     * @param repository le repository pour accéder aux données des utilisateurs
+     * @param userRepository le repository pour accéder aux données des utilisateurs
      */
-    protected UserServiceImpl(UserRepository userRepository) {
+    protected UserServiceImpl(UserRepository userRepository, UserRepository userRepository1) {
         super(userRepository);
 
 
@@ -40,7 +43,7 @@ public class UserServiceImpl extends AbstractCrudService<User> {
      */
     @Override
     public void create(final User user) {
-        if(userRepository.existsByUsername(user.getUsername())) {
+        if (userRepository.existsByUsername(user.getUsername())) {
             throw new UsernameAlreadyInUseException("Username already in use");
         }
         encryptPassword(user);
@@ -54,9 +57,15 @@ public class UserServiceImpl extends AbstractCrudService<User> {
      */
     @Override
     public void update(final User user) {
-        if(userRepository.existsByUsername(user.getUsername())) {
-            throw new UsernameAlreadyInUseException("Username already in use");
-        }
+        userRepository.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("user not found"));
+
+        userRepository.findByUsername(user.getUsername())
+                .filter(existingUser -> !Objects.equals(existingUser.getId(), user.getId()))
+                .ifPresent(existingUser -> {
+                    throw new UsernameAlreadyInUseException("Username already in use");
+                });
+
         encryptPassword(user);
         super.update(user);
     }

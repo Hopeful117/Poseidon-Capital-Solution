@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Poseidon</a> &gt; <a href="index.source.html" class="el_package">com.nnk.services</a> &gt; <span class="el_source">UserServiceImpl.java</span></div><h1>UserServiceImpl.java</h1><pre class="source lang-java linenums">package com.nnk.services;
 
 import com.nnk.domain.User;
+import com.nnk.exceptions.EntityNotFoundException;
 import com.nnk.exceptions.UsernameAlreadyInUseException;
 import com.nnk.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.Objects;
 
 /**
  * Implémentation du service pour la gestion des utilisateurs.
@@ -18,20 +21,20 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
     /**
      * Encoder BCrypt pour sécuriser les mots de passe
      */
-<span class="fc" id="L21">    private final PasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="fc" id="L24">    private final PasswordEncoder encoder = new BCryptPasswordEncoder();</span>
     private final UserRepository userRepository;
 
     /**
      * Constructeur pour initialiser le service avec le repository des utilisateurs.
      *
-     * @param repository le repository pour accéder aux données des utilisateurs
+     * @param userRepository le repository pour accéder aux données des utilisateurs
      */
-    protected UserServiceImpl(UserRepository userRepository) {
-<span class="fc" id="L30">        super(userRepository);</span>
+    protected UserServiceImpl(UserRepository userRepository, UserRepository userRepository1) {
+<span class="fc" id="L33">        super(userRepository);</span>
 
 
-<span class="fc" id="L33">        this.userRepository = userRepository;</span>
-<span class="fc" id="L34">    }</span>
+<span class="fc" id="L36">        this.userRepository = userRepository;</span>
+<span class="fc" id="L37">    }</span>
 
     /**
      * Crée un nouvel utilisateur avec mot de passe encrypté.
@@ -40,12 +43,12 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      */
     @Override
     public void create(final User user) {
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(userRepository.existsByUsername(user.getUsername())) {</span>
-<span class="fc" id="L44">            throw new UsernameAlreadyInUseException(&quot;Username already in use&quot;);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (userRepository.existsByUsername(user.getUsername())) {</span>
+<span class="fc" id="L47">            throw new UsernameAlreadyInUseException(&quot;Username already in use&quot;);</span>
         }
-<span class="fc" id="L46">        encryptPassword(user);</span>
-<span class="fc" id="L47">        super.create(user);</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L49">        encryptPassword(user);</span>
+<span class="fc" id="L50">        super.create(user);</span>
+<span class="fc" id="L51">    }</span>
 
     /**
      * Met à jour un utilisateur existant avec mot de passe encrypté.
@@ -54,12 +57,18 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      */
     @Override
     public void update(final User user) {
-<span class="fc bfc" id="L57" title="All 2 branches covered.">        if(userRepository.existsByUsername(user.getUsername())) {</span>
-<span class="fc" id="L58">            throw new UsernameAlreadyInUseException(&quot;Username already in use&quot;);</span>
-        }
-<span class="fc" id="L60">        encryptPassword(user);</span>
-<span class="fc" id="L61">        super.update(user);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L60">        userRepository.findById(user.getId())</span>
+<span class="fc" id="L61">                .orElseThrow(() -&gt; new EntityNotFoundException(&quot;user not found&quot;));</span>
+
+<span class="fc" id="L63">        userRepository.findByUsername(user.getUsername())</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">                .filter(existingUser -&gt; !Objects.equals(existingUser.getId(), user.getId()))</span>
+<span class="fc" id="L65">                .ifPresent(existingUser -&gt; {</span>
+<span class="fc" id="L66">                    throw new UsernameAlreadyInUseException(&quot;Username already in use&quot;);</span>
+                });
+
+<span class="fc" id="L69">        encryptPassword(user);</span>
+<span class="fc" id="L70">        super.update(user);</span>
+<span class="fc" id="L71">    }</span>
 
     /**
      * Encrypte le mot de passe d'un utilisateur.
@@ -68,8 +77,8 @@ public class UserServiceImpl extends AbstractCrudService&lt;User&gt; {
      * @throws IllegalArgumentException si l'utilisateur est null
      */
     private void encryptPassword(User user) {
-<span class="fc" id="L71">        Assert.notNull(user, &quot;Objet is null&quot;);</span>
-<span class="fc" id="L72">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L80">        Assert.notNull(user, &quot;Objet is null&quot;);</span>
+<span class="fc" id="L81">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="fc" id="L82">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
